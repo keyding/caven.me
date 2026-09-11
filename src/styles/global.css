@@ -168,16 +168,67 @@ article {
   padding: 0;
   margin: 0;
 }
-.timeline li {
-  display: grid;
-  grid-template-columns: 80px 1fr 100px;
-  align-items: center;
-  gap: 24px;
-  min-height: 76px;
-  border-top: 1px solid #292d3214;
+.timeline > li {
+  position: relative;
+  padding: 0 0 32px 28px;
+  border-left: 1px solid #b7aa94;
+  margin-left: 4px;
   font-size: 14px;
 }
-.date-slot,
+.timeline > li:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+.timeline > li::before {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  left: -5px;
+  top: 6px;
+  border: 1px solid #9e8e73;
+  border-radius: 50%;
+  background: #f3ebdf;
+}
+.experience-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+}
+.experience-heading h3 {
+  font-size: 16px;
+  margin: 0;
+}
+.experience-period {
+  font-size: 12px;
+  color: #686154;
+}
+.experience-role {
+  margin-top: 6px;
+  color: #686154;
+}
+.contributions {
+  display: grid;
+  gap: 10px;
+  list-style: disc;
+  padding-left: 16px;
+  margin-top: 18px;
+  font-size: 12px;
+  color: #686154;
+}
+.contribution-line {
+  display: block;
+  width: 85%;
+  height: 6px;
+  margin-top: 8px;
+  background: #b2a58e52;
+  border-radius: 2px;
+}
+.contributions li:last-child .contribution-line {
+  width: 60%;
+}
 .detail-slot {
   height: 8px;
   background: #b2a58e52;
@@ -259,11 +310,11 @@ article {
   h2 {
     font-size: 28px;
   }
-  .timeline li {
-    grid-template-columns: 48px 1fr;
-    gap: 16px;
+  .experience-heading {
+    flex-direction: column;
+    gap: 4px;
   }
-  .timeline .detail-slot {
-    display: none;
+  .timeline > li {
+    padding-left: 20px;
   }
 }

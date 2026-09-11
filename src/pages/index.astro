@@ -49,7 +49,17 @@ import "../styles/global.css";
           <div class="section-heading"><h2 id="experience-title">Experience</h2><span class="eyebrow">04 / Timeline</span></div>
           <ol class="timeline" aria-label="Experience placeholders">
             {[1, 2, 3].map((number) => (
-              <li><span class="date-slot" aria-hidden="true"></span><span>Experience {number}</span><span class="detail-slot" aria-hidden="true"></span></li>
+              <li>
+                <div class="experience-heading">
+                  <h3>Company {number}</h3>
+                  <span class="experience-period">Period</span>
+                </div>
+                <p class="experience-role">Role / Position</p>
+                <ul class="contributions" aria-label="Contribution placeholders">
+                  <li><span>Key contribution</span><span class="contribution-line" aria-hidden="true"></span></li>
+                  <li><span>Key contribution</span><span class="contribution-line" aria-hidden="true"></span></li>
+                </ul>
+              </li>
             ))}
           </ol>
         </section>

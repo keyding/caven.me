@@ -12,7 +12,10 @@ Keep the issue open and do not begin the next content ticket until approval is r
 - Six distinguishable, softly colored regions: navigation, introduction,
   selected work, experience, additional work, and footer.
 - A generous introduction followed immediately by three equally weighted project
-  slots. Three concise timeline rows and one additional-work slot follow.
+  slots. Three expanded timeline entries and one additional-work slot follow.
+  Each entry reserves space for company, period, role, and two key contributions;
+  markers and a vertical rule connect the entries. On phones the period stacks
+  below the company. No disclosure interaction is needed.
 - At 640px and below, project cards stack, the portrait moves above the
   introduction, and outer gutters reduce to 16px with 24px section gaps.
 - Warm white background, charcoal labels, subtle borders, and restrained blue
@@ -78,7 +81,8 @@ navigation region did not exist. After implementation, both tests passed.
 
 Revision requested by Caven: introduce a line-based treatment and reconsider the
 960px column. The revised preview caps the column at 768px and adds continuous
-side rules and horizontal section dividers. This request is not final approval.
+side rules and horizontal section dividers. Caven also requested an expanded Experience placeholder preview with company,
+period, role, and two contributions per entry. These requests are not final approval.
 
 Pending. Review the relative width, section spacing, introduction height,
 project-card proportions, and mobile reading order. Record Caven's decision
