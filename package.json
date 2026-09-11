@@ -20,6 +20,8 @@
   "devDependencies": {
     "@astrojs/check": "0.9.10",
     "@playwright/test": "1.63.0",
+    "@tailwindcss/vite": "4.3.3",
+    "tailwindcss": "4.3.3",
     "typescript": "5.9.3",
     "vite": "npm:@voidzero-dev/vite-plus-core@0.3.1",
     "vite-plus": "0.3.1"

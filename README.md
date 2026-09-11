@@ -40,6 +40,21 @@ Use **`vp run dev/build/preview`**, as shown above. The bare `vp dev`, `vp build
 and `vp preview` commands invoke Vite rather than the Astro package scripts.
 See the [Vite+ task documentation](https://viteplus.dev/guide/run).
 
+## Styling
+
+Tailwind CSS 4 is integrated through `@tailwindcss/vite` in `astro.config.mjs`,
+where Astro configures its Vite build. `vite.config.ts` continues to configure
+Vite+ linting and formatting.
+
+Import `src/styles/global.css` from pages (or a shared layout when one exists).
+It loads Tailwind's theme, Preflight reset, and utilities, with class detection
+limited to `src/`. Use complete utility class names in templates; put shared
+theme customizations and custom CSS in this stylesheet.
+
+The placeholder uses `m-2 font-sans` to exercise the integration. No class-merging
+helper is needed yet. Consider [cn](https://github.com/shadcn-ui/cn) when reusable
+components need conditional classes and caller overrides with conflict resolution.
+
 ## Checks and test boundary
 
 ```sh
