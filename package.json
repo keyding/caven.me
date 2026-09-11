@@ -3,17 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "engines": {
-    "node": ">=24.16.0 <25"
-  },
-  "packageManager": "npm@11.19.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "lint": "eslint . --max-warnings 0",
+    "format": "vp fmt",
+    "format:check": "vp fmt --check",
+    "lint": "vp lint --deny-warnings",
     "typecheck": "astro check",
     "test": "playwright test",
     "test:install": "playwright install chromium"
@@ -23,14 +19,13 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
-    "@eslint/js": "10.0.1",
     "@playwright/test": "1.63.0",
-    "eslint": "10.10.0",
-    "eslint-plugin-astro": "3.1.0",
-    "prettier": "3.9.6",
-    "prettier-plugin-astro": "1.0.0",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.70.0",
+    "vite": "npm:@voidzero-dev/vite-plus-core@0.3.1",
     "vite-plus": "0.3.1"
-  }
+  },
+  "engines": {
+    "node": ">=24.16.0 <25"
+  },
+  "packageManager": "pnpm@11.18.0"
 }

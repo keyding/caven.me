@@ -1,0 +1,11 @@
+allowBuilds:
+  esbuild: true
+
+# Keep Vite and Vite+'s bundled Vitest on the same core.
+overrides:
+  vite@*: npm:@voidzero-dev/vite-plus-core@0.3.1
+
+# The pinned core implements Vite 8 but carries Vite+'s version number.
+peerDependencyRules:
+  allowedVersions:
+    vite: "0.3.1"
