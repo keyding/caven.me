@@ -205,9 +205,59 @@ article {
   font-size: 12px;
   color: #686154;
 }
-.experience-role {
-  margin-top: 6px;
+.experience-details {
+  margin-top: 12px;
+}
+.experience-details summary {
+  list-style: none;
+  cursor: pointer;
+  min-height: 44px;
+  padding-block: 8px;
+  border-radius: 4px;
+}
+.experience-details summary::-webkit-details-marker {
+  display: none;
+}
+.experience-details summary:hover {
+  background: #292d3208;
+}
+.experience-details summary:focus-visible {
+  outline: 2px solid #3b64a2;
+  outline-offset: 4px;
+}
+.role-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+.disclosure-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+.experience-details[open] .disclosure-icon {
+  transform: rotate(180deg);
+}
+.experience-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin-top: 16px;
+}
+.experience-tags li {
+  border: 1px solid #b7aa9466;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 12px;
   color: #686154;
+  background: #faf9f680;
 }
 .contributions {
   display: grid;

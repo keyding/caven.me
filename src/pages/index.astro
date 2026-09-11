@@ -52,12 +52,25 @@ import "../styles/global.css";
               <li>
                 <div class="experience-heading">
                   <h3>Company {number}</h3>
-                  <span class="experience-period">Period</span>
+                  <span class="experience-period">Location / Work mode</span>
                 </div>
-                <p class="experience-role">Role / Position</p>
-                <ul class="contributions" aria-label="Contribution placeholders">
-                  <li><span>Key contribution</span><span class="contribution-line" aria-hidden="true"></span></li>
-                  <li><span>Key contribution</span><span class="contribution-line" aria-hidden="true"></span></li>
+                <details class="experience-details" open={number === 1}>
+                  <summary aria-label={`Role / Position — Company ${number}`}>
+                    <span class="role-heading">
+                      <span>Role / Position</span>
+                      <svg class="disclosure-icon" aria-hidden="true" viewBox="0 0 16 16" fill="none">
+                        <path d="m4 6 4 4 4-4" />
+                      </svg>
+                    </span>
+                    <span class="experience-period">Employment type · Period · Duration</span>
+                  </summary>
+                  <ul class="contributions" aria-label={`Company ${number} contributions`}>
+                    <li><span>Key contribution</span><span class="contribution-line" aria-hidden="true"></span></li>
+                    <li><span>Key contribution</span><span class="contribution-line" aria-hidden="true"></span></li>
+                  </ul>
+                </details>
+                <ul class="experience-tags" aria-label={`Company ${number} tags`}>
+                  <li>Skill</li><li>Technology</li><li>Focus area</li>
                 </ul>
               </li>
             ))}

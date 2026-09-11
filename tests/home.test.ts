@@ -31,3 +31,40 @@ test("homepage presents the six layout regions in reading order without overflow
   );
   await page.screenshot({ path: testInfo.outputPath("homepage.png"), fullPage: true });
 });
+
+test("experience contributions toggle independently by pointer and keyboard", async ({
+  page,
+}, testInfo) => {
+  await page.goto("/");
+  const first = page.getByLabel("Role / Position — Company 1", { exact: true });
+  const second = page.getByLabel("Role / Position — Company 2", { exact: true });
+  const firstContributions = page.getByRole("list", {
+    name: "Company 1 contributions",
+    exact: true,
+  });
+  const secondContributions = page.getByRole("list", {
+    name: "Company 2 contributions",
+    exact: true,
+  });
+  await expect(firstContributions).toBeVisible();
+  await expect(secondContributions).toBeHidden();
+  await first.click();
+  await expect(firstContributions).toBeHidden();
+  await expect(page.getByRole("list", { name: "Company 1 tags", exact: true })).toBeVisible();
+  await second.click();
+  await expect(secondContributions).toBeVisible();
+  await expect(firstContributions).toBeHidden();
+  await second.press("Enter");
+  await expect(secondContributions).toBeHidden();
+  await second.press("Space");
+  await expect(secondContributions).toBeVisible();
+  await first.click();
+  await expect(firstContributions).toBeVisible();
+  await expect(secondContributions).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
+    true,
+  );
+  await page
+    .getByRole("region", { name: "Experience", exact: true })
+    .screenshot({ path: testInfo.outputPath("experience-expanded.png") });
+});
