@@ -1,1 +1,265 @@
 @import "tailwindcss" source("../");
+
+:root {
+  color-scheme: light;
+  font-family: "Geist", "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: #292d32;
+  background: #faf9f6;
+  font-synthesis: none;
+}
+
+body {
+  margin: 0;
+}
+.page-shell {
+  width: min(100% - 48px, 960px);
+  margin: 32px auto 64px;
+}
+.preview-note {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  color: #616771;
+  font-size: 12px;
+}
+.block {
+  border: 1px solid #292d3214;
+  border-radius: 12px;
+  padding: 32px;
+}
+main {
+  display: grid;
+  gap: 32px;
+  margin: 32px 0;
+}
+.eyebrow {
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #535d6c;
+}
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 72px;
+  padding-block: 20px;
+  background: #e9edf2;
+}
+.nav-slots,
+.action-slots,
+.footer-slots {
+  display: flex;
+  gap: 12px;
+}
+.nav-slots span {
+  width: 40px;
+  height: 12px;
+  background: #b9c4d2;
+  border-radius: 3px;
+}
+.introduction {
+  background: #e6edf8;
+  padding-block: 40px;
+}
+.intro-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 132px;
+  align-items: center;
+  gap: 48px;
+  margin-top: 32px;
+}
+h1,
+h2 {
+  font-family: "Instrument Serif", "Songti SC", "SimSun", Georgia, serif;
+  font-weight: 400;
+}
+h1 {
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+h2 {
+  font-size: 30px;
+  line-height: 1.2;
+}
+h3 {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.copy-lines {
+  display: grid;
+  gap: 10px;
+}
+.copy-lines i {
+  display: block;
+  height: 8px;
+  border-radius: 2px;
+  background: #a6b5c252;
+}
+.copy-lines i:last-child {
+  width: 65%;
+}
+.action-slots {
+  margin-top: 28px;
+}
+.action-slots span {
+  width: 96px;
+  height: 32px;
+  border-radius: 5px;
+  background: #a4bbdf;
+}
+.action-slots span + span {
+  width: 72px;
+  background: #c4d3e9;
+}
+.portrait-slot {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #c4d3e9;
+  color: #46566e;
+  font-size: 12px;
+}
+.section-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.selected-work {
+  background: #e8eee6;
+}
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+article {
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f8faf5;
+}
+.project-visual {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  background: #cddcc7;
+  color: #53664b;
+  font-family: Georgia, serif;
+  font-size: 36px;
+}
+.project-caption {
+  padding: 20px;
+}
+.experience {
+  background: #f3ebdf;
+}
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.timeline li {
+  display: grid;
+  grid-template-columns: 80px 1fr 100px;
+  align-items: center;
+  gap: 24px;
+  min-height: 76px;
+  border-top: 1px solid #292d3214;
+  font-size: 14px;
+}
+.date-slot,
+.detail-slot {
+  height: 8px;
+  background: #b2a58e52;
+  border-radius: 2px;
+}
+.additional-work {
+  background: #eee8f3;
+}
+.additional-slot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px;
+  border-radius: 6px;
+  background: #e0d6e9;
+  font-size: 14px;
+}
+.additional-slot .detail-slot {
+  width: 25%;
+  background: #baacc7;
+}
+.footer {
+  background: #e4eeed;
+}
+.footer-slots {
+  flex-wrap: wrap;
+}
+.footer-slots span {
+  width: 88px;
+  height: 28px;
+  background: #bdd3d0;
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    width: calc(100% - 32px);
+    margin-top: 20px;
+    margin-bottom: 32px;
+  }
+  .block {
+    padding: 24px;
+  }
+  main {
+    gap: 24px;
+    margin-block: 24px;
+  }
+  .navigation {
+    padding: 20px;
+  }
+  .nav-slots {
+    gap: 8px;
+  }
+  .nav-slots span {
+    width: 20px;
+  }
+  .intro-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+  }
+  .portrait-slot {
+    width: 80px;
+    grid-row: 1;
+  }
+  .project-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+  .project-visual {
+    aspect-ratio: 16 / 9;
+  }
+  .section-heading {
+    margin-bottom: 24px;
+  }
+  h2 {
+    font-size: 28px;
+  }
+  .timeline li {
+    grid-template-columns: 48px 1fr;
+    gap: 16px;
+  }
+  .timeline .detail-slot {
+    display: none;
+  }
+}

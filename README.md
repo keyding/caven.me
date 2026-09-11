@@ -1,7 +1,8 @@
 # caven.me
 
-A minimal static Astro site. The homepage is deliberately one placeholder line;
-portfolio content and deployment are separate work.
+A static Astro portfolio in progress. The homepage currently presents a color-block
+layout for review, without real portfolio content. See [layout review](docs/layout-review.md)
+for browser evidence and the pending approval gate for issue #3.
 
 ## Setup
 
@@ -51,8 +52,8 @@ It loads Tailwind's theme, Preflight reset, and utilities, with class detection
 limited to `src/`. Use complete utility class names in templates; put shared
 theme customizations and custom CSS in this stylesheet.
 
-The placeholder uses `m-2 font-sans` to exercise the integration. No class-merging
-helper is needed yet. Consider [cn](https://github.com/shadcn-ui/cn) when reusable
+The layout uses native CSS in the shared stylesheet on top of the existing
+Tailwind reset. No class-merging helper is needed yet. Consider [cn](https://github.com/shadcn-ui/cn) when reusable
 components need conditional classes and caller overrides with conflict resolution.
 
 ## Checks and test boundary
@@ -77,7 +78,8 @@ a successful lint/format run alone does not validate an Astro template.
 
 The shared Playwright suite observes the **built website through a browser**.
 It runs the homepage check at desktop and phone sizes, verifies a successful
-response and one visible placeholder line, and checks horizontal overflow.
+response, six visible regions in reading order, three project slots, and no
+horizontal overflow or overlapping regions.
 It always builds and starts its own preview on `127.0.0.1:4321`; stop any other
 server on that port first. Future slices should extend this suite at the same
 public boundary. Failure traces are written to ignored `test-results/`.

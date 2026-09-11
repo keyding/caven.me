@@ -7,9 +7,63 @@ import "../styles/global.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>caven.me</title>
+    <meta name="robots" content="noindex" />
+    <title>Homepage layout preview — caven.me</title>
   </head>
-  <body class="m-2 font-sans">
-    <main>Hello, world.</main>
+  <body>
+    <div class="page-shell">
+      <header>
+        <p class="preview-note">Layout preview <span>01 / Color study</span></p>
+        <nav class="navigation block" aria-label="Navigation">
+          <span class="eyebrow">01 / Navigation</span>
+          <div class="nav-slots" aria-hidden="true"><span></span><span></span><span></span></div>
+        </nav>
+      </header>
+
+      <main>
+        <section class="introduction block" aria-labelledby="introduction-title">
+          <p class="eyebrow">02 / Profile</p>
+          <div class="intro-layout">
+            <div>
+              <h1 id="introduction-title">Introduction</h1>
+              <div class="copy-lines" aria-hidden="true"><i></i><i></i><i></i></div>
+              <div class="action-slots" aria-hidden="true"><span></span><span></span></div>
+            </div>
+            <div class="portrait-slot" aria-hidden="true">Portrait</div>
+          </div>
+        </section>
+
+        <section class="selected-work block" aria-labelledby="work-title">
+          <div class="section-heading"><h2 id="work-title">Selected work</h2><span class="eyebrow">03 / Projects</span></div>
+          <div class="project-grid">
+            {[1, 2, 3].map((number) => (
+              <article aria-label={`Project ${number}`}>
+                <div class="project-visual" aria-hidden="true">{String(number).padStart(2, "0")}</div>
+                <div class="project-caption"><h3>Project {number}</h3><div class="copy-lines" aria-hidden="true"><i></i><i></i></div></div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section class="experience block" aria-labelledby="experience-title">
+          <div class="section-heading"><h2 id="experience-title">Experience</h2><span class="eyebrow">04 / Timeline</span></div>
+          <ol class="timeline" aria-label="Experience placeholders">
+            {[1, 2, 3].map((number) => (
+              <li><span class="date-slot" aria-hidden="true"></span><span>Experience {number}</span><span class="detail-slot" aria-hidden="true"></span></li>
+            ))}
+          </ol>
+        </section>
+
+        <section class="additional-work block" aria-labelledby="additional-title">
+          <div class="section-heading"><h2 id="additional-title">Additional work</h2><span class="eyebrow">05 / More</span></div>
+          <div class="additional-slot"><span>Project slot</span><span class="detail-slot" aria-hidden="true"></span></div>
+        </section>
+      </main>
+
+      <footer class="footer block">
+        <div class="section-heading"><h2>Footer</h2><span class="eyebrow">06 / Contact</span></div>
+        <div class="footer-slots" aria-hidden="true"><span></span><span></span><span></span></div>
+      </footer>
+    </div>
   </body>
 </html>
