@@ -6,7 +6,9 @@ Keep the issue open and do not begin the next content ticket until approval is r
 
 ## Composition
 
-- A centered content column capped at 960px; 32px section gaps on desktop.
+- A centered content column capped at 768px; 32px section gaps on desktop.
+- Continuous vertical rules frame the column; straight horizontal rules define
+  each region, replacing the rounded outer cards.
 - Six distinguishable, softly colored regions: navigation, introduction,
   selected work, experience, additional work, and footer.
 - A generous introduction followed immediately by three equally weighted project
@@ -73,6 +75,10 @@ navigation region did not exist. After implementation, both tests passed.
   above are committed so the PR can be reviewed without a local server.
 
 ## Approval record
+
+Revision requested by Caven: introduce a line-based treatment and reconsider the
+960px column. The revised preview caps the column at 768px and adds continuous
+side rules and horizontal section dividers. This request is not final approval.
 
 Pending. Review the relative width, section spacing, introduction height,
 project-card proportions, and mobile reading order. Record Caven's decision

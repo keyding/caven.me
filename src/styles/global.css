@@ -12,19 +12,21 @@ body {
   margin: 0;
 }
 .page-shell {
-  width: min(100% - 48px, 960px);
-  margin: 32px auto 64px;
+  width: min(100% - 48px, 768px);
+  margin-inline: auto;
+  padding-block: 32px 64px;
+  border-inline: 1px solid #292d3224;
 }
 .preview-note {
   display: flex;
   justify-content: space-between;
   margin-bottom: 16px;
+  padding-inline: 24px;
   color: #616771;
   font-size: 12px;
 }
 .block {
-  border: 1px solid #292d3214;
-  border-radius: 12px;
+  border-block: 1px solid #292d3224;
   padding: 32px;
 }
 main {
@@ -142,7 +144,7 @@ h3 {
   gap: 16px;
 }
 article {
-  border-radius: 8px;
+  border: 1px solid #292d3214;
   overflow: hidden;
   background: #f8faf5;
 }
@@ -214,8 +216,10 @@ article {
 @media (max-width: 640px) {
   .page-shell {
     width: calc(100% - 32px);
-    margin-top: 20px;
-    margin-bottom: 32px;
+    padding-block: 20px 32px;
+  }
+  .preview-note {
+    padding-inline: 12px;
   }
   .block {
     padding: 24px;
