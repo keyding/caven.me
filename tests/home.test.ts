@@ -140,7 +140,14 @@ test("signature crossings do not reveal later strokes", async ({ browser }) => {
   // Keep the contour comparison independent of page-copy/font subpixel placement.
   await signature.evaluate((element) => {
     element.setAttribute("data-state", "running");
-    Object.assign(element.style, { position: "fixed", top: "0", left: "0", margin: "0" });
+    Object.assign(element.style, {
+      position: "fixed",
+      top: "0",
+      left: "0",
+      margin: "0",
+      background: "#faf9f6",
+      zIndex: "1",
+    });
   });
   for (const time of [700, 1100]) {
     await signature.evaluate((element, time) => {
