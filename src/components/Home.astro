@@ -45,6 +45,7 @@ const t = home[locale];
         <section class="introduction block" aria-labelledby="introduction-title">
           <p class="eyebrow">{t.profile}</p>
           <div class="intro-layout">
+            <img class="portrait-slot" src="/images/caven-portrait.png" width="2508" height="2508" alt={t.portrait} />
             <div>
               <h1 id="introduction-title"><span class="hand-underlined">{t.greeting}</span></h1>
               <p class="intro-role"><span>{t.role} <VerificationCheck class="profile-badge" aria-hidden="true" /></span></p>
@@ -55,7 +56,6 @@ const t = home[locale];
                 <a href={contact.x}><X class="pika-icon" aria-hidden="true" />X</a>
               </div>
             </div>
-            <img class="portrait-slot" src="/images/caven-portrait.png" width="1254" height="1254" alt={t.portrait} />
           </div>
         </section>
 

@@ -45,9 +45,8 @@ main {
 }
 .intro-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 132px;
-  align-items: center;
-  gap: 48px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
   margin-top: 32px;
 }
 h1,
@@ -83,12 +82,10 @@ h3 {
   width: 65%;
 }
 .portrait-slot {
-  display: grid;
-  place-items: center;
-  aspect-ratio: 1;
+  display: block;
+  width: 120px;
+  height: auto;
   object-fit: contain;
-  color: #46566e;
-  font-size: 12px;
 }
 .section-heading {
   display: flex;
@@ -372,10 +369,7 @@ h3 {
     gap: 24px;
     margin-top: 24px;
   }
-  .portrait-slot {
-    width: 80px;
-    grid-row: 1;
-  }
+
   .project-grid {
     grid-template-columns: minmax(0, 1fr);
     gap: 40px;
@@ -533,7 +527,6 @@ a:hover {
   font-size: 15px;
   line-height: 1.8;
   color: #616771;
-  max-width: 58ch;
 }
 .intro-contacts {
   margin-top: 20px;
