@@ -45,9 +45,10 @@ main {
 }
 .intro-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 24px;
-  margin-top: 32px;
+  grid-template-columns: 160px minmax(0, 1fr);
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 28px;
 }
 h1,
 h2 {
@@ -83,7 +84,7 @@ h3 {
 }
 .portrait-slot {
   display: block;
-  width: 120px;
+  width: 100%;
   height: auto;
   object-fit: contain;
 }
@@ -365,9 +366,15 @@ h3 {
     padding: 20px;
   }
   .intro-layout {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
-    margin-top: 24px;
+    grid-template-columns: 88px minmax(0, 1fr);
+    gap: 16px;
+  }
+  .intro-layout h1 {
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+  .intro-layout .intro-role {
+    font-size: 13px;
   }
 
   .project-grid {
@@ -520,7 +527,7 @@ a:hover {
 .intro-role {
   font-size: 16px;
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 0;
   font-weight: 500;
 }
 .intro-copy {

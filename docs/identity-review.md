@@ -13,9 +13,9 @@ frontend architecture, mobile interaction, PWA, SDK, React/TypeScript, team deli
 independent product and open-source experience without adding dates, metrics, or
 employer/project claims. The English and Chinese versions have equivalent meaning.
 The source document was only read, and is not included in this repository.
-The portrait uses Caven's supplied 2508px RGBA PNG with actual transparency. It is
-served unchanged, without a circular background or cropping, above the greeting
-and aligned with the text. The introduction spans the available text column; the
+The portrait uses Caven's supplied 1440px RGBA PNG with actual transparency. It is
+served unchanged, without a circular background or cropping, to the left of the greeting
+and role, with the PROFILE label removed. The introduction spans the available text column; the
 previous 58ch cap was removed after the portrait moved out of the right column.
 
 Project, experience, toolkit and additional-work details remain localized

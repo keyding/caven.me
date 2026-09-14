@@ -43,20 +43,19 @@ const t = home[locale];
     <div class="page-shell">
       <main>
         <section class="introduction block" aria-labelledby="introduction-title">
-          <p class="eyebrow">{t.profile}</p>
           <div class="intro-layout">
-            <img class="portrait-slot" src="/images/caven-portrait.png" width="2508" height="2508" alt={t.portrait} />
+            <img class="portrait-slot" src="/images/caven-portrait.png" width="1440" height="1440" alt={t.portrait} />
             <div>
               <h1 id="introduction-title"><span class="hand-underlined">{t.greeting}</span></h1>
               <p class="intro-role"><span>{t.role} <VerificationCheck class="profile-badge" aria-hidden="true" /></span></p>
+            </div>
+          </div>
               <p class="intro-copy">{t.intro}</p>
               <div class="contact-links intro-contacts">
                 <a href={contact.email}><Email class="pika-icon" aria-hidden="true" />{t.email}</a>
                 <a href={contact.github}><GitHub class="pika-icon" aria-hidden="true" />GitHub</a>
                 <a href={contact.x}><X class="pika-icon" aria-hidden="true" />X</a>
               </div>
-            </div>
-          </div>
         </section>
 
         <section class="selected-work block" aria-labelledby="work-title">
