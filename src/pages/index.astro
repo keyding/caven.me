@@ -1,6 +1,14 @@
 ---
 import "../styles/global.css";
 import Signature from "../components/Signature.astro";
+import Translate from "../assets/icons/translate.svg";
+import ExternalLink from "../assets/icons/external-link.svg";
+import ChevronDown from "../assets/icons/chevron-down.svg";
+import Globe from "../assets/icons/globe.svg";
+import Code from "../assets/icons/code.svg";
+import Email from "../assets/icons/email.svg";
+import GitHub from "../assets/icons/github.svg";
+import Briefcase from "../assets/icons/briefcase.svg";
 ---
 
 <!doctype html>
@@ -17,7 +25,7 @@ import Signature from "../components/Signature.astro";
         <p class="preview-note">Layout preview <span>02 / Quiet layout</span></p>
         <nav class="navigation block" aria-label="Navigation">
           <span class="eyebrow">01 / Navigation</span>
-          <div class="nav-slots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="nav-preview"><div class="nav-slots" aria-hidden="true"><span></span><span></span><span></span></div><span class="language-preview" aria-label="Language switch preview"><Translate class="pika-icon" aria-hidden="true" /> EN / 中</span></div>
         </nav>
       </header>
 
@@ -44,8 +52,8 @@ import Signature from "../components/Signature.astro";
                   <p class="project-description">Project introduction</p>
                   <div class="copy-lines" aria-hidden="true"><i></i><i></i><i></i></div>
                   <ul class="project-links" aria-label={`Project ${number} destination placeholders`}>
-                    <li>Website <span aria-hidden="true">↗</span></li>
-                    <li>Source code <span aria-hidden="true">↗</span></li>
+                    <li><Globe class="pika-icon" aria-hidden="true" /> Website <ExternalLink class="pika-icon external-link-icon" aria-hidden="true" /></li>
+                    <li><Code class="pika-icon" aria-hidden="true" /> Source code <ExternalLink class="pika-icon external-link-icon" aria-hidden="true" /></li>
                   </ul>
                 </div>
                 <div class="project-visual" aria-hidden="true">{String(number).padStart(2, "0")}</div>
@@ -66,10 +74,8 @@ import Signature from "../components/Signature.astro";
                 <details class="experience-details" open={number === 1}>
                   <summary aria-label={`Role / Position — Company ${number}`}>
                     <span class="role-heading">
-                      <span>Role / Position</span>
-                      <svg class="disclosure-icon" aria-hidden="true" viewBox="0 0 16 16" fill="none">
-                        <path d="m4 6 4 4 4-4" />
-                      </svg>
+                      <span class="role-label"><Briefcase class="pika-icon" aria-hidden="true" /> Role / Position</span>
+                      <ChevronDown class="pika-icon disclosure-icon" aria-hidden="true" />
                     </span>
                     <span class="experience-period">Employment type · Period · Duration</span>
                   </summary>
@@ -122,8 +128,8 @@ import Signature from "../components/Signature.astro";
         <div class="footer-meta">
           <p>© 2026 Caven</p>
           <ul class="contact-placeholders" aria-label="Contact placeholders">
-            <li>Email <span aria-hidden="true">↗</span></li>
-            <li>GitHub <span aria-hidden="true">↗</span></li>
+            <li><Email class="pika-icon" aria-hidden="true" /> Email <ExternalLink class="pika-icon external-link-icon" aria-hidden="true" /></li>
+            <li><GitHub class="pika-icon" aria-hidden="true" /> GitHub <ExternalLink class="pika-icon external-link-icon" aria-hidden="true" /></li>
           </ul>
         </div>
       </div>

@@ -170,8 +170,32 @@ h3 {
   font-size: 14px;
   color: #616771;
 }
-.project-links span {
-  margin-left: 4px;
+.project-links li,
+.contact-placeholders li,
+.role-label,
+.language-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.pika-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.external-link-icon {
+  width: 14px;
+  height: 14px;
+}
+.nav-preview {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.language-preview {
+  color: #616771;
+  font-size: 12px;
+  white-space: nowrap;
 }
 .timeline {
   list-style: none;
@@ -247,8 +271,6 @@ h3 {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  stroke: currentColor;
-  stroke-width: 1.5;
 }
 .experience-details[open] .disclosure-icon {
   transform: rotate(180deg);
@@ -364,9 +386,6 @@ h3 {
   list-style: none;
   padding: 0;
   margin: 0;
-}
-.contact-placeholders span {
-  margin-left: 4px;
 }
 .footer-landscape {
   display: block;
