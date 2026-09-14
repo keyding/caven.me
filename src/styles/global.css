@@ -15,7 +15,6 @@ body {
   width: min(100% - 48px, 768px);
   margin-inline: auto;
   padding-top: 32px;
-  border-inline: 1px solid #292d3224;
 }
 .preview-note {
   display: flex;
@@ -26,7 +25,6 @@ body {
   font-size: 12px;
 }
 .block {
-  border-block: 1px solid #292d3224;
   padding: 32px;
 }
 main {
@@ -48,7 +46,6 @@ main {
   gap: 20px;
   min-height: 72px;
   padding-block: 20px;
-  background: #e9edf2;
 }
 .nav-slots,
 .action-slots {
@@ -62,7 +59,6 @@ main {
   border-radius: 3px;
 }
 .introduction {
-  background: #e6edf8;
   padding-block: 40px;
 }
 .intro-layout {
@@ -134,9 +130,6 @@ h3 {
   gap: 12px;
   margin-bottom: 28px;
 }
-.selected-work {
-  background: #e8eee6;
-}
 .project-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -151,16 +144,13 @@ article {
   display: grid;
   place-items: center;
   aspect-ratio: 4 / 3;
-  background: #cddcc7;
+  background: #e6e9e4;
   color: #53664b;
   font-family: Georgia, serif;
   font-size: 36px;
 }
 .project-caption {
   padding: 20px;
-}
-.experience {
-  background: #f3ebdf;
 }
 .timeline {
   list-style: none;
@@ -187,7 +177,7 @@ article {
   top: 6px;
   border: 1px solid #9e8e73;
   border-radius: 50%;
-  background: #f3ebdf;
+  background: #faf9f6;
 }
 .experience-heading {
   display: flex;
@@ -283,9 +273,6 @@ article {
   background: #b2a58e52;
   border-radius: 2px;
 }
-.additional-work {
-  background: #eee8f3;
-}
 .additional-slot {
   display: flex;
   align-items: center;
@@ -293,12 +280,12 @@ article {
   gap: 24px;
   padding: 24px;
   border-radius: 6px;
-  background: #e0d6e9;
+  background: #eeede9;
   font-size: 14px;
 }
 .additional-slot .detail-slot {
   width: 25%;
-  background: #baacc7;
+  background: #c3c2be;
 }
 .hand-underlined {
   position: relative;
@@ -322,11 +309,9 @@ article {
 .footer-content {
   width: min(100% - 48px, 768px);
   margin-inline: auto;
-  border-inline: 1px solid #292d3224;
 }
 .footer-farewell {
   padding: 48px 32px 36px;
-  border-top: 1px solid #292d3224;
 }
 .footer-farewell h2 {
   margin-top: 20px;
@@ -341,13 +326,13 @@ article {
   transform: rotate(-6deg);
 }
 .footer-meta {
+  border-top: 1px solid #292d3214;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 16px 24px;
   padding: 24px 32px;
-  border-block: 1px solid #292d3224;
   font-size: 12px;
   color: #616771;
 }

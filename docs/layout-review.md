@@ -7,9 +7,10 @@ Keep the issue open and do not begin the next content ticket until approval is r
 ## Composition
 
 - A centered content column capped at 768px; 32px section gaps on desktop.
-- Continuous vertical rules frame the column; straight horizontal rules define
-  each region, replacing the rounded outer cards.
-- Six distinguishable regions (colored content placeholders and an illustrated footer): navigation, introduction,
+- The latest revision removes continuous side rules and section borders, using
+  warm white surfaces and whitespace. The Experience timeline and one faint
+  footer metadata divider remain; project-card borders are still provisional.
+- Six regions, separated by spacing and headings rather than colored panels: navigation, introduction,
   selected work, experience, additional work, and footer.
 - A generous introduction followed immediately by three equally weighted project
   slots. Three independently collapsible timeline entries and one additional-work slot follow.
@@ -41,7 +42,7 @@ Section headings use a restrained blue curved underline, inspired by the supplie
 Opensource UI reference. This is original native CSS, without importing its React
 components or adding a framework dependency.
 
-The footer text keeps the 768px column and hairline borders. Its farewell and
+The footer text keeps the 768px column without outer borders. Its farewell and
 script-font signature concept sit above a compact copyright/contact row. The
 Tianchi illustration extends up to 1440px, scales down proportionally on phones,
 and blends its white background into the warm page surface. The PNG is the original
@@ -52,8 +53,7 @@ only a system-script-font placeholder, not a finished custom signature asset.
 [Desktop footer](layout-evidence/footer-desktop.png) ·
 [Mobile footer](layout-evidence/footer-mobile.png)
 
-768px is a composition choice, not an accessibility requirement. After side
-borders and 32px padding, the main text area is about 702px. Real bilingual text
+768px is a composition choice, not an accessibility requirement. After 32px side padding, the main text area is about 704px. Real bilingual text
 will need its own line-length check and narrower paragraph measures if necessary.
 The landscape can extend wider without making prose lines longer.
 
@@ -121,8 +121,9 @@ side rules and horizontal section dividers. Caven also requested an expanded Exp
 period, role, and two contributions per entry, then requested independent
 expand/collapse behavior matching the supplied reference screenshots. The latest
 revision keeps summary information and tags visible while toggling contributions.
-The latest request adds the complete heading/footer preview with the Tianchi
-candidate. These requests are not final approval.
+The latest revision removes outer lines and colored section backgrounds at
+Caven's request, preserving the Experience timeline and a single footer divider.
+These requests are not final approval.
 
 Pending. Review the relative width, section spacing, introduction height,
 project-card proportions, and mobile reading order. Record Caven's decision
