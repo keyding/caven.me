@@ -7,7 +7,7 @@ for (const locale of ["en", "zh"] as const) {
     for (let visit = 0; visit < 2; visit++) {
       await expect(page.locator("html")).toHaveAttribute("lang", locale === "en" ? "en" : "zh-CN");
       await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-        locale === "en" ? "Hello, I’m Caven." : "你好，我是丁强。",
+        locale === "en" ? "Hello, I’m Caven." : "嗨，我是丁强。",
       );
       await expect(
         page.getByText(

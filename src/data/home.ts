@@ -57,7 +57,7 @@ export const home = {
   },
   zh: {
     lang: "zh-CN",
-    greeting: "你好，我是丁强。",
+    greeting: "嗨，我是丁强。",
     role: "高级前端工程师 · 前端技术负责人",
     title: "丁强 Caven — 高级前端工程师 · 前端技术负责人",
     intro:

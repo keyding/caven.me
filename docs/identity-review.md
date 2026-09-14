@@ -98,7 +98,7 @@ passed with zero diagnostics. Signature contour baselines remain unchanged.
 
 ## Greeting and accent refinement
 
-The homepage greeting is “Hello, I’m Caven.” / “你好，我是丁强。”. All hand-drawn
+The homepage greeting is “Hello, I’m Caven.” / “嗨，我是丁强。”. All hand-drawn
 heading underlines use warm yellow (#e5bd48), while link hover/focus uses dark gold
 (#8a6500) for contrast against warm white. The decorative blue badge is exported
 from Pikaicons `verification-check`, Solid variant `30877:4242`; it does not convey
