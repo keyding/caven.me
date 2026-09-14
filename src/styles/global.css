@@ -139,7 +139,11 @@ h3 {
   color: #616771;
 }
 .project-links li,
-.role-label,
+.role-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
 .pika-icon {
   width: 18px;
   height: 18px;

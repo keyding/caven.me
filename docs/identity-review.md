@@ -59,3 +59,22 @@ independent disclosure and signature regressions remain in the suite.
 CI runs formatting, lint, Astro/TypeScript checking, a production build and the
 full browser suite on PRs and main. It uploads browser evidence and failure traces.
 No deployment or domain configuration is included.
+
+Local result: formatting, lint and Astro/TypeScript checks passed (zero diagnostics);
+the full built-site suite passed **24/24** across desktop and mobile projects.
+The retained signature snapshot is now captured at a fixed viewport origin, so
+font-driven subpixel page positioning cannot alter its crop. Both updated mobile
+baseline images were visually inspected; original contours are unchanged.
+
+## Standards review
+
+The independent review found no documented architectural violations or actionable
+Fowler smell findings. It identified one accidental CSS selector grouping that
+applied icon dimensions to project/role labels. The text-container inline-flex
+rule was restored, then the full suite and rendered Experience layout were checked.
+
+## Spec review
+
+The independent review found the same layout regression, now fixed, and the
+outstanding final-artwork approval described above. Identity, routes, contact,
+typography, fallback behavior and CI match the slice; no scope creep was identified.
