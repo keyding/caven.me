@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("homepage presents the six layout regions in reading order without overflow", async ({
+test("homepage presents the seven layout regions in reading order without overflow", async ({
   page,
 }, testInfo) => {
   const response = await page.goto("/");
@@ -10,6 +10,7 @@ test("homepage presents the six layout regions in reading order without overflow
     page.getByRole("region", { name: "Introduction", exact: true }),
     page.getByRole("region", { name: "Selected work", exact: true }),
     page.getByRole("region", { name: "Experience", exact: true }),
+    page.getByRole("region", { name: "Tech stack", exact: true }),
     page.getByRole("region", { name: "Additional work", exact: true }),
     page.getByRole("contentinfo"),
   ];

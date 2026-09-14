@@ -85,8 +85,27 @@ import "../styles/global.css";
           </ol>
         </section>
 
+        <section class="tech-stack block" aria-labelledby="stack-title">
+          <div class="section-heading">
+            <h2 id="stack-title"><span class="hand-underlined">Tech stack</span></h2>
+            <span class="eyebrow">05 / Toolkit</span>
+          </div>
+          <div class="stack-groups">
+            {["Languages", "Frontend", "Engineering & Tools"].map((group) => (
+              <div class="stack-group">
+                <h3>{group}</h3>
+                <ul class="stack-tags" aria-label={`${group} placeholders`}>
+                  {[1, 2, 3, 4].map((number) => (
+                    <li><span class="stack-icon" aria-hidden="true"></span>Technology {number}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section class="additional-work block" aria-labelledby="additional-title">
-          <div class="section-heading"><h2 id="additional-title"><span class="hand-underlined">Additional work</span></h2><span class="eyebrow">05 / More</span></div>
+          <div class="section-heading"><h2 id="additional-title"><span class="hand-underlined">Additional work</span></h2><span class="eyebrow">06 / More</span></div>
           <div class="additional-slot"><span>Project slot</span><span class="detail-slot" aria-hidden="true"></span></div>
         </section>
       </main>
@@ -95,7 +114,7 @@ import "../styles/global.css";
     <footer class="footer" id="footer">
       <div class="footer-content">
         <div class="footer-farewell">
-          <p class="eyebrow">06 / Until next time</p>
+          <p class="eyebrow">07 / Until next time</p>
           <h2><span class="hand-underlined">Thanks for stopping by.</span></h2>
           <p class="signature" aria-label="Caven signature concept">Caven</p>
         </div>

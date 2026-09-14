@@ -436,3 +436,35 @@ h3 {
     padding-left: 20px;
   }
 }
+
+.stack-groups {
+  display: grid;
+  gap: 24px;
+}
+.stack-group h3 {
+  margin-bottom: 12px;
+}
+.stack-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.stack-tags li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 1px solid #292d3214;
+  border-radius: 999px;
+  font-size: 13px;
+  color: #616771;
+}
+.stack-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  background: #c6d4df;
+}

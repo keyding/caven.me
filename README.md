@@ -78,7 +78,7 @@ a successful lint/format run alone does not validate an Astro template.
 
 The shared Playwright suite observes the **built website through a browser**.
 It runs the homepage check at desktop and phone sizes, verifies a successful
-response, six visible regions in reading order, three project slots, and no
+response, seven visible regions in reading order, three project slots, and no
 horizontal overflow or overlapping regions.
 It always builds and starts its own preview on `127.0.0.1:4321`; stop any other
 server on that port first. Future slices should extend this suite at the same
