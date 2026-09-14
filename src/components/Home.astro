@@ -10,7 +10,7 @@ import ExternalLink from "../assets/icons/external-link.svg";
 import ChevronDown from "../assets/icons/chevron-down.svg";
 import Globe from "../assets/icons/globe.svg";
 import Code from "../assets/icons/code.svg";
-import Email from "../assets/icons/email.svg";
+import EmailReveal from "./EmailReveal.astro";
 import GitHub from "../assets/icons/github.svg";
 import X from "../assets/icons/x.svg";
 import VerificationCheck from "../assets/icons/verification-check.svg";
@@ -52,7 +52,7 @@ const t = home[locale];
           </div>
               <p class="intro-copy">{t.intro}</p>
               <div class="contact-links intro-contacts">
-                <a href={contact.email}><Email class="pika-icon" aria-hidden="true" />{t.email}</a>
+                <EmailReveal href={contact.email} label={t.email} />
                 <a href={contact.github}><GitHub class="pika-icon" aria-hidden="true" />GitHub</a>
                 <a href={contact.x}><X class="pika-icon" aria-hidden="true" />X</a>
               </div>
@@ -144,7 +144,7 @@ const t = home[locale];
         <div class="footer-meta">
           <p>© 2026 Caven</p>
           <ul class="contact-links" aria-label={t.contact}>
-            <li><a href={contact.email}><Email class="pika-icon" aria-hidden="true" />{t.email}</a></li>
+            <li><EmailReveal href={contact.email} label={t.email} /></li>
             <li><a href={contact.github}><GitHub class="pika-icon" aria-hidden="true" />GitHub</a></li>
             <li><a href={contact.x}><X class="pika-icon" aria-hidden="true" />X</a></li>
           </ul>

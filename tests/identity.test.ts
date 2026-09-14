@@ -18,7 +18,7 @@ for (const locale of ["en", "zh"] as const) {
         ),
       ).toBeVisible();
       await expect(
-        page.getByRole("link", { name: locale === "en" ? "Email" : "邮件", exact: true }).first(),
+        page.getByRole("button", { name: locale === "en" ? "Email" : "邮件", exact: true }).first(),
       ).toHaveAttribute("href", "mailto:cavenasdev@gmail.com");
       await expect(page.getByRole("link", { name: "GitHub", exact: true }).first()).toHaveAttribute(
         "href",
@@ -74,7 +74,10 @@ for (const locale of ["en", "zh"] as const) {
     await page.keyboard.press("Enter");
     await expect(page.locator("html")).toHaveAttribute("lang", locale === "en" ? "zh-CN" : "en");
     await page.goBack();
-    const email = page.getByRole("link", { name: locale === "en" ? "Email" : "邮件", exact: true });
+    const email = page.getByRole("button", {
+      name: locale === "en" ? "Email" : "邮件",
+      exact: true,
+    });
     await expect(email).toHaveCount(2);
     for (const link of await email.all())
       await expect(link).toHaveAttribute("href", "mailto:cavenasdev@gmail.com");
@@ -158,4 +161,35 @@ test("navigation stays at the top when reading the footer", async ({ page }) => 
   const bounds = await navigation.boundingBox();
   expect(bounds?.y).toBeGreaterThanOrEqual(0);
   expect(bounds?.y).toBeLessThan(40);
+});
+
+test("email decrypts on click independently and retains its mail destination", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/");
+  const email = page.locator(".introduction .email-reveal");
+  await expect(email).toHaveText("Email");
+  await email.click();
+  await expect(email).not.toHaveText("Email");
+  await expect(email).not.toHaveText("cavenasdev@gmail.com");
+  await expect(email).toHaveText("cavenasdev@gmail.com");
+  await expect(email).toHaveAccessibleName("cavenasdev@gmail.com");
+  await expect(email).toHaveAttribute("href", "mailto:cavenasdev@gmail.com");
+  await expect(page.locator("footer .email-reveal")).toHaveText("Email");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test("email supports keyboard reveal with reduced motion in Chinese", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/zh/");
+  const email = page.locator(".introduction .email-reveal");
+  await email.focus();
+  await page.keyboard.press("Space");
+  await expect(email).toHaveText("cavenasdev@gmail.com");
+  await expect(email).toBeFocused();
+  await expect(email).not.toHaveAttribute("role", "button");
+  const footer = page.locator("footer .email-reveal");
+  await footer.focus();
+  await page.keyboard.press("Enter");
+  await expect(footer).toHaveText("cavenasdev@gmail.com");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });

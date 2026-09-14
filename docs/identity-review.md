@@ -110,3 +110,13 @@ with anchor offsets to keep destinations clear of it.
 Location and real-time clock placement is planned below the introduction contacts,
 but is not published until Caven supplies the city/timezone. No location is inferred
 from the development environment.
+
+## Email reveal
+
+Both contact rows initially show the localized Email label. First activation reveals
+the address with a short character-scramble animation inspired by
+[React Bits Decrypted Text](https://reactbits.dev/text-animations/decrypted-text).
+The effect is implemented with native browser APIs. Once revealed, the control
+becomes a mailto link. Reduced motion reveals immediately; without JavaScript,
+the original mailto link remains available. Keyboard activation and independent
+instances are covered by the browser suite (32 tests).
