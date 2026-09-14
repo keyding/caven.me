@@ -494,3 +494,24 @@ h3 {
     animation: none !important;
   }
 }
+
+/* Show the untouched outline at rest; isolate crossings only during writing. */
+.signature-c-part {
+  display: none;
+}
+.signature[data-state="pending"] .signature-c-part,
+.signature[data-state="running"] .signature-c-part {
+  display: inline;
+}
+.signature[data-state="pending"] .signature-c-static,
+.signature[data-state="running"] .signature-c-static {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .signature .signature-c-part {
+    display: none !important;
+  }
+  .signature .signature-c-static {
+    display: inline !important;
+  }
+}

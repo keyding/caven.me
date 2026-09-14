@@ -109,7 +109,7 @@ test("signature writes once when scrolled into view", async ({ page }, testInfo)
   await expect(signature).toHaveAttribute("data-state", "running");
   await expect
     .poll(() => signature.evaluate((element) => element.getAnimations({ subtree: true }).length))
-    .toBe(4);
+    .toBe(6);
   await page.waitForTimeout(700);
   await signature.screenshot({ path: testInfo.outputPath("signature-writing.png") });
   await expect(signature).toHaveAttribute("data-state", "complete");
@@ -130,4 +130,24 @@ test("signature stays complete with reduced motion", async ({ page }) => {
   expect(
     await signature.evaluate((element) => element.getAnimations({ subtree: true }).length),
   ).toBe(0);
+});
+
+test("signature crossings do not reveal later strokes", async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  await page.goto("http://127.0.0.1:4321/");
+  const signature = page.getByRole("img", { name: "Caven signature", exact: true });
+  await signature.evaluate((element) => element.setAttribute("data-state", "running"));
+  for (const time of [700, 1100]) {
+    await signature.evaluate((element, time) => {
+      for (const animation of element.getAnimations({ subtree: true })) {
+        animation.pause();
+        animation.currentTime = time;
+      }
+    }, time);
+    await expect(signature).toHaveScreenshot(`signature-crossing-${time}.png`, {
+      animations: "allow",
+    });
+  }
+  await context.close();
 });
