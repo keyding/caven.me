@@ -468,3 +468,29 @@ h3 {
   border-radius: 3px;
   background: #c6d4df;
 }
+
+/* The original contours stay visible without JavaScript. */
+.signature[data-state="pending"] .signature-ink,
+.signature[data-state="running"] .signature-ink {
+  mask: var(--stroke-mask);
+}
+.signature-stroke {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.signature[data-state="running"] .signature-stroke {
+  animation: signature-write var(--duration) linear var(--delay) both;
+}
+@keyframes signature-write {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .signature .signature-ink {
+    mask: none !important;
+  }
+  .signature .signature-stroke {
+    animation: none !important;
+  }
+}

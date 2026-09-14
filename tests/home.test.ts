@@ -38,6 +38,10 @@ test("homepage presents the seven layout regions in reading order without overfl
   await expect
     .poll(() => landscape.evaluate((image: HTMLImageElement) => image.naturalWidth))
     .toBeGreaterThan(0);
+  await expect(page.getByRole("img", { name: "Caven signature", exact: true })).toHaveAttribute(
+    "data-state",
+    "complete",
+  );
   await page.getByRole("contentinfo").screenshot({ path: testInfo.outputPath("footer.png") });
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.screenshot({ path: testInfo.outputPath("homepage.png"), fullPage: true });
@@ -95,4 +99,35 @@ test("experience contributions toggle independently by pointer and keyboard", as
   await page
     .getByRole("region", { name: "Experience", exact: true })
     .screenshot({ path: testInfo.outputPath("experience-expanded.png") });
+});
+
+test("signature writes once when scrolled into view", async ({ page }, testInfo) => {
+  await page.goto("/");
+  const signature = page.getByRole("img", { name: "Caven signature", exact: true });
+  await expect(signature).toHaveAttribute("data-state", "pending");
+  await signature.scrollIntoViewIfNeeded();
+  await expect(signature).toHaveAttribute("data-state", "running");
+  await expect
+    .poll(() => signature.evaluate((element) => element.getAnimations({ subtree: true }).length))
+    .toBe(4);
+  await page.waitForTimeout(700);
+  await signature.screenshot({ path: testInfo.outputPath("signature-writing.png") });
+  await expect(signature).toHaveAttribute("data-state", "complete");
+  await expect
+    .poll(() => signature.evaluate((element) => element.getAnimations({ subtree: true }).length))
+    .toBe(0);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await signature.scrollIntoViewIfNeeded();
+  await expect(signature).toHaveAttribute("data-state", "complete");
+});
+
+test("signature stays complete with reduced motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const signature = page.getByRole("img", { name: "Caven signature", exact: true });
+  await signature.scrollIntoViewIfNeeded();
+  await expect(signature).toHaveAttribute("data-state", "complete");
+  expect(
+    await signature.evaluate((element) => element.getAnimations({ subtree: true }).length),
+  ).toBe(0);
 });
