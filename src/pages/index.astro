@@ -25,7 +25,7 @@ import "../styles/global.css";
           <p class="eyebrow">02 / Profile</p>
           <div class="intro-layout">
             <div>
-              <h1 id="introduction-title">Introduction</h1>
+              <h1 id="introduction-title"><span class="hand-underlined">Introduction</span></h1>
               <div class="copy-lines" aria-hidden="true"><i></i><i></i><i></i></div>
               <div class="action-slots" aria-hidden="true"><span></span><span></span></div>
             </div>
@@ -34,7 +34,7 @@ import "../styles/global.css";
         </section>
 
         <section class="selected-work block" aria-labelledby="work-title">
-          <div class="section-heading"><h2 id="work-title">Selected work</h2><span class="eyebrow">03 / Projects</span></div>
+          <div class="section-heading"><h2 id="work-title"><span class="hand-underlined">Selected work</span></h2><span class="eyebrow">03 / Projects</span></div>
           <div class="project-grid">
             {[1, 2, 3].map((number) => (
               <article aria-label={`Project ${number}`}>
@@ -46,7 +46,7 @@ import "../styles/global.css";
         </section>
 
         <section class="experience block" aria-labelledby="experience-title">
-          <div class="section-heading"><h2 id="experience-title">Experience</h2><span class="eyebrow">04 / Timeline</span></div>
+          <div class="section-heading"><h2 id="experience-title"><span class="hand-underlined">Experience</span></h2><span class="eyebrow">04 / Timeline</span></div>
           <ol class="timeline" aria-label="Experience placeholders">
             {[1, 2, 3].map((number) => (
               <li>
@@ -78,15 +78,36 @@ import "../styles/global.css";
         </section>
 
         <section class="additional-work block" aria-labelledby="additional-title">
-          <div class="section-heading"><h2 id="additional-title">Additional work</h2><span class="eyebrow">05 / More</span></div>
+          <div class="section-heading"><h2 id="additional-title"><span class="hand-underlined">Additional work</span></h2><span class="eyebrow">05 / More</span></div>
           <div class="additional-slot"><span>Project slot</span><span class="detail-slot" aria-hidden="true"></span></div>
         </section>
       </main>
 
-      <footer class="footer block">
-        <div class="section-heading"><h2>Footer</h2><span class="eyebrow">06 / Contact</span></div>
-        <div class="footer-slots" aria-hidden="true"><span></span><span></span><span></span></div>
-      </footer>
     </div>
+    <footer class="footer" id="footer">
+      <div class="footer-content">
+        <div class="footer-farewell">
+          <p class="eyebrow">06 / Until next time</p>
+          <h2><span class="hand-underlined">Thanks for stopping by.</span></h2>
+          <p class="signature" aria-label="Caven signature concept">Caven</p>
+        </div>
+        <div class="footer-meta">
+          <p>© 2026 Caven</p>
+          <ul class="contact-placeholders" aria-label="Contact placeholders">
+            <li>Email <span aria-hidden="true">↗</span></li>
+            <li>GitHub <span aria-hidden="true">↗</span></li>
+          </ul>
+        </div>
+      </div>
+      <img
+        class="footer-landscape"
+        src="/images/tianchi-footer-study.png"
+        width="2172"
+        height="724"
+        alt="Hand-drawn concept of Changbai Mountain's Tianchi crater lake"
+        loading="lazy"
+        decoding="async"
+      />
+    </footer>
   </body>
 </html>

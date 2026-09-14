@@ -14,7 +14,7 @@ body {
 .page-shell {
   width: min(100% - 48px, 768px);
   margin-inline: auto;
-  padding-block: 32px 64px;
+  padding-top: 32px;
   border-inline: 1px solid #292d3224;
 }
 .preview-note {
@@ -51,8 +51,7 @@ main {
   background: #e9edf2;
 }
 .nav-slots,
-.action-slots,
-.footer-slots {
+.action-slots {
   display: flex;
   gap: 12px;
 }
@@ -301,23 +300,89 @@ article {
   width: 25%;
   background: #baacc7;
 }
+.hand-underlined {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+.hand-underlined::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 58%;
+  height: 8px;
+  border-top: 4px solid #89d2df;
+  border-radius: 50%;
+  transform: rotate(-2deg);
+}
 .footer {
-  background: #e4eeed;
+  padding-bottom: 16px;
 }
-.footer-slots {
+.footer-content {
+  width: min(100% - 48px, 768px);
+  margin-inline: auto;
+  border-inline: 1px solid #292d3224;
+}
+.footer-farewell {
+  padding: 48px 32px 36px;
+  border-top: 1px solid #292d3224;
+}
+.footer-farewell h2 {
+  margin-top: 20px;
+  font-size: clamp(28px, 4vw, 36px);
+}
+.signature {
+  width: fit-content;
+  margin-top: 20px;
+  font-family: "Snell Roundhand", "Segoe Script", "Brush Script MT", cursive;
+  font-size: clamp(56px, 8vw, 80px);
+  line-height: 1.4;
+  transform: rotate(-6deg);
+}
+.footer-meta {
+  display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  padding: 24px 32px;
+  border-block: 1px solid #292d3224;
+  font-size: 12px;
+  color: #616771;
 }
-.footer-slots span {
-  width: 88px;
-  height: 28px;
-  background: #bdd3d0;
-  border-radius: 4px;
+.contact-placeholders {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.contact-placeholders span {
+  margin-left: 4px;
+}
+.footer-landscape {
+  display: block;
+  width: min(100%, 1440px);
+  height: auto;
+  margin: 0 auto;
+  mix-blend-mode: multiply;
 }
 
 @media (max-width: 640px) {
   .page-shell {
     width: calc(100% - 32px);
-    padding-block: 20px 32px;
+    padding-top: 20px;
+  }
+  .footer-content {
+    width: calc(100% - 32px);
+  }
+  .footer-farewell {
+    padding: 36px 24px 28px;
+  }
+  .footer-meta {
+    padding: 24px;
   }
   .preview-note {
     padding-inline: 12px;

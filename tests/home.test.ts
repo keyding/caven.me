@@ -29,6 +29,16 @@ test("homepage presents the six layout regions in reading order without overflow
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
     true,
   );
+  const landscape = page.getByRole("img", {
+    name: "Hand-drawn concept of Changbai Mountain's Tianchi crater lake",
+  });
+  await landscape.scrollIntoViewIfNeeded();
+  await expect(landscape).toBeVisible();
+  await expect
+    .poll(() => landscape.evaluate((image: HTMLImageElement) => image.naturalWidth))
+    .toBeGreaterThan(0);
+  await page.getByRole("contentinfo").screenshot({ path: testInfo.outputPath("footer.png") });
+  await page.evaluate(() => window.scrollTo(0, 0));
   await page.screenshot({ path: testInfo.outputPath("homepage.png"), fullPage: true });
 });
 
