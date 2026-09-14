@@ -38,10 +38,9 @@ test("homepage presents the seven layout regions in reading order without overfl
   await expect
     .poll(() => landscape.evaluate((image: HTMLImageElement) => image.naturalWidth))
     .toBeGreaterThan(0);
-  await expect(page.getByRole("img", { name: "Caven signature", exact: true })).toHaveAttribute(
-    "data-state",
-    "complete",
-  );
+  await expect(
+    page.getByRole("contentinfo").getByRole("img", { name: "Caven signature", exact: true }),
+  ).toHaveAttribute("data-state", "complete");
   await page.getByRole("contentinfo").screenshot({ path: testInfo.outputPath("footer.png") });
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.screenshot({ path: testInfo.outputPath("homepage.png"), fullPage: true });
@@ -103,7 +102,9 @@ test("experience contributions toggle independently by pointer and keyboard", as
 
 test("signature writes once when scrolled into view", async ({ page }, testInfo) => {
   await page.goto("/");
-  const signature = page.getByRole("img", { name: "Caven signature", exact: true });
+  const signature = page
+    .getByRole("contentinfo")
+    .getByRole("img", { name: "Caven signature", exact: true });
   await expect(signature).toHaveAttribute("data-state", "pending");
   await signature.scrollIntoViewIfNeeded();
   await expect(signature).toHaveAttribute("data-state", "running");
@@ -124,7 +125,9 @@ test("signature writes once when scrolled into view", async ({ page }, testInfo)
 test("signature stays complete with reduced motion", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  const signature = page.getByRole("img", { name: "Caven signature", exact: true });
+  const signature = page
+    .getByRole("contentinfo")
+    .getByRole("img", { name: "Caven signature", exact: true });
   await signature.scrollIntoViewIfNeeded();
   await expect(signature).toHaveAttribute("data-state", "complete");
   expect(
@@ -136,7 +139,9 @@ test("signature crossings do not reveal later strokes", async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
   await page.goto("http://127.0.0.1:4321/");
-  const signature = page.getByRole("img", { name: "Caven signature", exact: true });
+  const signature = page
+    .getByRole("contentinfo")
+    .getByRole("img", { name: "Caven signature", exact: true });
   // Keep the contour comparison independent of page-copy/font subpixel placement.
   await signature.evaluate((element) => {
     element.setAttribute("data-state", "running");
@@ -146,6 +151,8 @@ test("signature crossings do not reveal later strokes", async ({ browser }) => {
       left: "0",
       margin: "0",
       background: "#faf9f6",
+      // Cover fractional crop edges as well as the SVG box.
+      boxShadow: "0 0 0 2px #faf9f6",
       zIndex: "1",
     });
   });

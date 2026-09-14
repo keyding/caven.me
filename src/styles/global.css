@@ -85,8 +85,7 @@ h3 {
   display: grid;
   place-items: center;
   aspect-ratio: 1;
-  border-radius: 50%;
-  background: #c4d3e9;
+  border: 1px dashed #b9c4d2;
   color: #46566e;
   font-size: 12px;
 }
@@ -490,8 +489,14 @@ a:hover {
   text-underline-offset: 4px;
 }
 .brand {
-  font-family: "Instrument Serif", "Songti SC", serif;
-  font-size: 28px;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  min-height: 44px;
+}
+.brand .signature {
+  width: 80px;
+  margin: 0;
 }
 .nav-links,
 .contact-links {
@@ -532,9 +537,6 @@ a:hover {
 .intro-contacts {
   margin-top: 20px;
   font-size: 14px;
-}
-.portrait-slot {
-  object-fit: cover;
 }
 :lang(zh-CN) h1,
 :lang(zh-CN) h2 {

@@ -3,6 +3,7 @@
 export const contact = {
   email: "mailto:cavenasdev@gmail.com",
   github: "https://github.com/keyding",
+  twitter: "https://x.com/cavenasdev",
 };
 
 export const projectIds = ["pwarelay", "lemon-squeezy-sdk", "online-arbitrage-tool"];
@@ -24,7 +25,7 @@ export const home = {
     switchPath: "/zh/",
     switchLang: "zh-CN",
     profile: "Profile",
-    portrait: "Portrait of Caven",
+    portrait: "Portrait",
     email: "Email",
     project: "Project",
     projectIntro: "Project introduction",
@@ -70,7 +71,7 @@ export const home = {
     switchPath: "/",
     switchLang: "en",
     profile: "关于我",
-    portrait: "丁强的照片",
+    portrait: "头像",
     email: "邮件",
     project: "项目",
     projectIntro: "项目简介",

@@ -13,7 +13,8 @@ frontend architecture, mobile interaction, PWA, SDK, React/TypeScript, team deli
 independent product and open-source experience without adding dates, metrics, or
 employer/project claims. The English and Chinese versions have equivalent meaning.
 The source document was only read, and is not included in this repository.
-The portrait is its existing square image, resized to a 400px WebP.
+The low-resolution extracted portrait has been removed at Caven's request. A square,
+unfilled placeholder reserves its space until a high-resolution PNG is supplied.
 
 Project, experience, toolkit and additional-work details remain localized
 placeholders for #5–7. Their real content and a public resume download are outside
@@ -24,7 +25,7 @@ with JavaScript, and falls back to native locale navigation without JavaScript.
 
 The production build was rendered in Chromium at desktop and phone sizes.
 The following captures were visually inspected for mixed-script typography,
-wrapping, portrait quality, whitespace, and footer composition:
+wrapping, portrait placeholder, whitespace, and footer composition:
 
 - [English mobile, 390px](identity-evidence/en-mobile.png)
 - [Chinese mobile, 390px](identity-evidence/zh-mobile.png)
@@ -61,7 +62,7 @@ full browser suite on PRs and main. It uploads browser evidence and failure trac
 No deployment or domain configuration is included.
 
 Local result: formatting, lint and Astro/TypeScript checks passed (zero diagnostics);
-the full built-site suite passed **24/24** across desktop and mobile projects.
+the full built-site suite passed **26/26** across desktop and mobile projects.
 The retained signature snapshot is now captured at a fixed viewport origin, so
 font-driven subpixel page positioning cannot alter its crop. Both updated mobile
 baseline images were visually inspected; original contours are unchanged.
@@ -78,3 +79,18 @@ rule was restored, then the full suite and rendered Experience layout were check
 The independent review found the same layout regression, now fixed, and the
 outstanding final-artwork approval described above. Identity, routes, contact,
 typography, fallback behavior and CI match the slice; no scope creep was identified.
+
+## Requested refinements
+
+Caven requested the navigation wordmark be replaced by the same animated signature,
+Twitter be added after GitHub (`cavenasdev`), and the low-resolution portrait be
+replaced by a placeholder without a circular background. Both signatures use
+instance-specific SVG references and independent viewport observers. Reduced
+motion and no-JavaScript fallbacks remain. Twitter appears in both contact rows.
+The portrait placeholder has a transparent background and a square dashed outline;
+the removed low-resolution file is no longer shipped.
+
+Both independent review axes found no new issues in these refinements. The
+navigation/independent-animation regression first failed on the old text wordmark
+and passed after the change. The final full suite passed 26/26 and static checks
+passed with zero diagnostics. Signature contour baselines remain unchanged.

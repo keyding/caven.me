@@ -107,7 +107,7 @@ for (const locale of ["en", "zh"] as const) {
     await expect(
       page.getByRole("link", { name: locale === "en" ? "Email" : "邮件", exact: true }).first(),
     ).toBeVisible();
-    const signature = page.getByRole("img", {
+    const signature = page.getByRole("contentinfo").getByRole("img", {
       name: locale === "en" ? "Caven signature" : "Caven 签名",
       exact: true,
     });
@@ -126,3 +126,26 @@ for (const locale of ["en", "zh"] as const) {
     await context.close();
   });
 }
+
+test("navigation and footer signatures animate independently, with Twitter beside GitHub", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const header = page
+    .getByRole("navigation")
+    .getByRole("img", { name: "Caven signature", exact: true });
+  const footer = page
+    .getByRole("contentinfo")
+    .getByRole("img", { name: "Caven signature", exact: true });
+  await expect(header).toHaveAttribute("data-state", "running");
+  await expect(footer).toHaveAttribute("data-state", "pending");
+  await expect(header).toHaveAttribute("data-state", "complete");
+  await footer.scrollIntoViewIfNeeded();
+  await expect(footer).toHaveAttribute("data-state", "running");
+  await expect(header).toHaveAttribute("data-state", "complete");
+  await expect(footer).toHaveAttribute("data-state", "complete");
+  const twitter = page.getByRole("link", { name: "Twitter", exact: true });
+  await expect(twitter).toHaveCount(2);
+  for (const link of await twitter.all())
+    await expect(link).toHaveAttribute("href", "https://x.com/cavenasdev");
+});

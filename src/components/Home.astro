@@ -31,7 +31,7 @@ const t = home[locale];
     <div class="page-shell">
       <header>
         <nav class="navigation block" aria-label={t.navigation}>
-          <a class="brand" href={locale === "en" ? "/" : "/zh/"}>Caven</a>
+          <a class="brand" href={locale === "en" ? "/" : "/zh/"} aria-label="Caven"><Signature idPrefix="header" label={t.signature} /></a>
           <div class="nav-links">
             <a href="#work-title">{t.work}</a>
             <a href="#footer">{t.contact}</a>
@@ -51,9 +51,10 @@ const t = home[locale];
               <div class="contact-links intro-contacts">
                 <a href={contact.email}><Email class="pika-icon" aria-hidden="true" />{t.email}</a>
                 <a href={contact.github}><GitHub class="pika-icon" aria-hidden="true" />GitHub<ExternalLink class="pika-icon external-link-icon" aria-hidden="true" /></a>
+                <a href={contact.twitter}>Twitter<ExternalLink class="pika-icon external-link-icon" aria-hidden="true" /></a>
               </div>
             </div>
-            <img class="portrait-slot" src="/images/caven-portrait.webp" width="400" height="400" alt={t.portrait} />
+            <div class="portrait-slot" aria-hidden="true">{t.portrait}</div>
           </div>
         </section>
 
@@ -138,13 +139,14 @@ const t = home[locale];
         <div class="footer-farewell">
           <p class="eyebrow">{t.until}</p>
           <h2><span class="hand-underlined">{t.farewell}</span></h2>
-          <Signature label={t.signature} />
+          <Signature idPrefix="footer" label={t.signature} />
         </div>
         <div class="footer-meta">
           <p>© 2026 Caven</p>
           <ul class="contact-links" aria-label={t.contact}>
             <li><a href={contact.email}><Email class="pika-icon" aria-hidden="true" />{t.email}</a></li>
             <li><a href={contact.github}><GitHub class="pika-icon" aria-hidden="true" />GitHub<ExternalLink class="pika-icon external-link-icon" aria-hidden="true" /></a></li>
+            <li><a href={contact.twitter}>Twitter<ExternalLink class="pika-icon external-link-icon" aria-hidden="true" /></a></li>
           </ul>
         </div>
       </div>
