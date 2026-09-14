@@ -7,7 +7,7 @@ for (const locale of ["en", "zh"] as const) {
     for (let visit = 0; visit < 2; visit++) {
       await expect(page.locator("html")).toHaveAttribute("lang", locale === "en" ? "en" : "zh-CN");
       await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-        locale === "en" ? "Caven" : "丁强 / Caven",
+        locale === "en" ? "Hello, I’m Caven." : "你好，我是丁强。",
       );
       await expect(
         page.getByText(
@@ -148,4 +148,14 @@ test("navigation and footer signatures animate independently, with X beside GitH
   await expect(x).toHaveCount(2);
   for (const link of await x.all())
     await expect(link).toHaveAttribute("href", "https://x.com/cavenasdev");
+});
+
+test("navigation stays at the top when reading the footer", async ({ page }) => {
+  await page.goto("/");
+  const navigation = page.getByRole("navigation");
+  await page.getByRole("contentinfo").scrollIntoViewIfNeeded();
+  await expect(navigation).toBeInViewport();
+  const bounds = await navigation.boundingBox();
+  expect(bounds?.y).toBeGreaterThanOrEqual(0);
+  expect(bounds?.y).toBeLessThan(40);
 });

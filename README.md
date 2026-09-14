@@ -106,7 +106,7 @@ preserves valid page fragments when JavaScript is available.
 
 Geist (400/500) and Instrument Serif (400) are bundled from pinned Fontsource
 packages, with local Chinese system fallbacks. They make no external font requests.
-Both packages include their SIL Open Font License. The portrait is a transparent square placeholder pending a user-provided high-resolution PNG. The source resume
+Both packages include their SIL Open Font License. The portrait uses the user-supplied 1254px PNG without cropping or a circular background. Its checkerboard is baked into the RGB source; a truly transparent replacement remains possible. The source resume
 and phone number are not distributed. The outlined signature and Tianchi candidate
 are reused from #3. `noindex` remains until the discovery/release slice (#9).
 

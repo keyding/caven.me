@@ -2,6 +2,7 @@
 
 :root {
   color-scheme: light;
+  --accent: #8a6500;
   font-family: "Geist", "PingFang SC", "Microsoft YaHei", sans-serif;
   color: #292d32;
   background: #faf9f6;
@@ -85,7 +86,7 @@ h3 {
   display: grid;
   place-items: center;
   aspect-ratio: 1;
-  border: 1px dashed #b9c4d2;
+  object-fit: contain;
   color: #46566e;
   font-size: 12px;
 }
@@ -211,7 +212,7 @@ h3 {
   background: #292d3208;
 }
 .experience-details summary:focus-visible {
-  outline: 2px solid #3b64a2;
+  outline: 2px solid var(--accent);
   outline-offset: 4px;
 }
 .role-heading {
@@ -297,7 +298,7 @@ h3 {
   right: 0;
   width: 58%;
   height: 8px;
-  border-top: 4px solid #89d2df;
+  border-top: 4px solid #e5bd48;
   border-radius: 50%;
   transform: rotate(-2deg);
 }
@@ -479,12 +480,12 @@ a {
   text-decoration: none;
 }
 a:focus-visible {
-  outline: 2px solid #3b64a2;
+  outline: 2px solid var(--accent);
   outline-offset: 4px;
   border-radius: 3px;
 }
 a:hover {
-  color: #315b97;
+  color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -565,5 +566,39 @@ a:hover {
   }
   .nav-links {
     gap: 4px 12px;
+  }
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: min(100% - 48px, 768px);
+  margin-inline: auto;
+  background: #faf9f6f2;
+  backdrop-filter: blur(12px);
+}
+html {
+  scroll-padding-top: 120px;
+}
+.profile-badge {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin-left: 4px;
+  vertical-align: -5px;
+  color: #08b2c5;
+}
+@media (max-width: 640px) {
+  .site-header {
+    width: calc(100% - 32px);
+  }
+}
+@media (max-width: 640px) {
+  .nav-links {
+    gap: 8px 12px;
+  }
+  html {
+    scroll-padding-top: 160px;
   }
 }

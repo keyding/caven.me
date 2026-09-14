@@ -11,7 +11,7 @@ export const projectIds = ["pwarelay", "lemon-squeezy-sdk", "online-arbitrage-to
 export const home = {
   en: {
     lang: "en",
-    name: "Caven",
+    greeting: "Hello, I’m Caven.",
     role: "Senior Frontend Engineer & Frontend Lead",
     title: "Caven — Senior Frontend Engineer & Frontend Lead",
     intro:
@@ -25,7 +25,7 @@ export const home = {
     switchPath: "/zh/",
     switchLang: "zh-CN",
     profile: "Profile",
-    portrait: "Portrait",
+    portrait: "Portrait of Caven",
     email: "Email",
     project: "Project",
     projectIntro: "Project introduction",
@@ -57,7 +57,7 @@ export const home = {
   },
   zh: {
     lang: "zh-CN",
-    name: "丁强 / Caven",
+    greeting: "你好，我是丁强。",
     role: "高级前端工程师 · 前端技术负责人",
     title: "丁强 Caven — 高级前端工程师 · 前端技术负责人",
     intro:
@@ -71,7 +71,7 @@ export const home = {
     switchPath: "/",
     switchLang: "en",
     profile: "关于我",
-    portrait: "头像",
+    portrait: "丁强的照片",
     email: "邮件",
     project: "项目",
     projectIntro: "项目简介",

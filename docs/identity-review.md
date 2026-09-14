@@ -13,8 +13,9 @@ frontend architecture, mobile interaction, PWA, SDK, React/TypeScript, team deli
 independent product and open-source experience without adding dates, metrics, or
 employer/project claims. The English and Chinese versions have equivalent meaning.
 The source document was only read, and is not included in this repository.
-The low-resolution extracted portrait has been removed at Caven's request. A square,
-unfilled placeholder reserves its space until a high-resolution PNG is supplied.
+The low-resolution extracted portrait has been replaced by Caven's supplied 1254px
+PNG. It is served unchanged, without a circular background or cropping. Its RGB
+source contains a visible checkerboard and no alpha channel.
 
 Project, experience, toolkit and additional-work details remain localized
 placeholders for #5–7. Their real content and a public resume download are outside
@@ -25,7 +26,7 @@ with JavaScript, and falls back to native locale navigation without JavaScript.
 
 The production build was rendered in Chromium at desktop and phone sizes.
 The following captures were visually inspected for mixed-script typography,
-wrapping, portrait placeholder, whitespace, and footer composition:
+wrapping, portrait, whitespace, and footer composition:
 
 - [English mobile, 390px](identity-evidence/en-mobile.png)
 - [Chinese mobile, 390px](identity-evidence/zh-mobile.png)
@@ -62,7 +63,7 @@ full browser suite on PRs and main. It uploads browser evidence and failure trac
 No deployment or domain configuration is included.
 
 Local result: formatting, lint and Astro/TypeScript checks passed (zero diagnostics);
-the full built-site suite passed **26/26** across desktop and mobile projects.
+the full built-site suite passed **28/28** across desktop and mobile projects.
 The retained signature snapshot is now captured at a fixed viewport origin, so
 font-driven subpixel page positioning cannot alter its crop. Both updated mobile
 baseline images were visually inspected; original contours are unchanged.
@@ -87,10 +88,24 @@ X be added after GitHub (`cavenasdev`), and the low-resolution portrait be
 replaced by a placeholder without a circular background. Both signatures use
 instance-specific SVG references and independent viewport observers. Reduced
 motion and no-JavaScript fallbacks remain. X appears in both contact rows.
-The portrait placeholder has a transparent background and a square dashed outline;
+That temporary placeholder was later replaced by the supplied PNG, as recorded above;
 the removed low-resolution file is no longer shipped.
 
 Both independent review axes found no new issues in these refinements. The
 navigation/independent-animation regression first failed on the old text wordmark
-and passed after the change. The final full suite passed 26/26 and static checks
+and passed after the change. The final full suite passed 28/28 and static checks
 passed with zero diagnostics. Signature contour baselines remain unchanged.
+
+## Greeting and accent refinement
+
+The homepage greeting is “Hello, I’m Caven.” / “你好，我是丁强。”. All hand-drawn
+heading underlines use warm yellow (#e5bd48), while link hover/focus uses dark gold
+(#8a6500) for contrast against warm white. The decorative blue badge is exported
+from Pikaicons `verification-check`, Solid variant `30877:4242`; it does not convey
+an independent certification claim. Social contact links no longer show external
+link indicators. Navigation sticks to the viewport top, including over the footer,
+with anchor offsets to keep destinations clear of it.
+
+Location and real-time clock placement is planned below the introduction contacts,
+but is not published until Caven supplies the city/timezone. No location is inferred
+from the development environment.

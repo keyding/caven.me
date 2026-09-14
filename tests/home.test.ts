@@ -7,7 +7,7 @@ test("homepage presents the seven layout regions in reading order without overfl
   expect(response?.status()).toBe(200);
   const regions = [
     page.getByRole("navigation", { name: "Navigation" }),
-    page.getByRole("region", { name: "Caven", exact: true }),
+    page.getByRole("region", { name: "Hello, I’m Caven.", exact: true }),
     page.getByRole("region", { name: "Selected work", exact: true }),
     page.getByRole("region", { name: "Experience", exact: true }),
     page.getByRole("region", { name: "Tech stack", exact: true }),
@@ -25,7 +25,7 @@ test("homepage presents the seven layout regions in reading order without overfl
     expect(box.x + box.width).toBeLessThanOrEqual(page.viewportSize()!.width);
     previousBottom = box.y + box.height;
   }
-  await expect(page.getByRole("heading", { name: "Caven", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Hello, I’m Caven.", exact: true })).toBeVisible();
   await expect(page.getByRole("article")).toHaveCount(3);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
     true,
@@ -153,7 +153,7 @@ test("signature crossings do not reveal later strokes", async ({ browser }) => {
       background: "#faf9f6",
       // Cover fractional crop edges as well as the SVG box.
       boxShadow: "0 0 0 2px #faf9f6",
-      zIndex: "1",
+      zIndex: "100",
     });
   });
   for (const time of [700, 1100]) {

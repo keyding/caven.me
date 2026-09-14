@@ -13,6 +13,7 @@ import Code from "../assets/icons/code.svg";
 import Email from "../assets/icons/email.svg";
 import GitHub from "../assets/icons/github.svg";
 import X from "../assets/icons/x.svg";
+import VerificationCheck from "../assets/icons/verification-check.svg";
 import Briefcase from "../assets/icons/briefcase.svg";
 interface Props { locale: Locale }
 const { locale } = Astro.props;
@@ -29,8 +30,7 @@ const t = home[locale];
     <meta name="description" content={t.intro} />
   </head>
   <body>
-    <div class="page-shell">
-      <header>
+      <header class="site-header">
         <nav class="navigation block" aria-label={t.navigation}>
           <a class="brand" href={locale === "en" ? "/" : "/zh/"} aria-label="Caven"><Signature idPrefix="header" label={t.signature} /></a>
           <div class="nav-links">
@@ -40,22 +40,22 @@ const t = home[locale];
           </div>
         </nav>
       </header>
-
+    <div class="page-shell">
       <main>
         <section class="introduction block" aria-labelledby="introduction-title">
           <p class="eyebrow">{t.profile}</p>
           <div class="intro-layout">
             <div>
-              <h1 id="introduction-title"><span class="hand-underlined">{t.name}</span></h1>
-              <p class="intro-role">{t.role}</p>
+              <h1 id="introduction-title"><span class="hand-underlined">{t.greeting}</span></h1>
+              <p class="intro-role"><span>{t.role} <VerificationCheck class="profile-badge" aria-hidden="true" /></span></p>
               <p class="intro-copy">{t.intro}</p>
               <div class="contact-links intro-contacts">
                 <a href={contact.email}><Email class="pika-icon" aria-hidden="true" />{t.email}</a>
-                <a href={contact.github}><GitHub class="pika-icon" aria-hidden="true" />GitHub<ExternalLink class="pika-icon external-link-icon" aria-hidden="true" /></a>
-                <a href={contact.x}><X class="pika-icon" aria-hidden="true" />X<ExternalLink class="pika-icon external-link-icon" aria-hidden="true" /></a>
+                <a href={contact.github}><GitHub class="pika-icon" aria-hidden="true" />GitHub</a>
+                <a href={contact.x}><X class="pika-icon" aria-hidden="true" />X</a>
               </div>
             </div>
-            <div class="portrait-slot" aria-hidden="true">{t.portrait}</div>
+            <img class="portrait-slot" src="/images/caven-portrait.png" width="1254" height="1254" alt={t.portrait} />
           </div>
         </section>
 
@@ -146,8 +146,8 @@ const t = home[locale];
           <p>© 2026 Caven</p>
           <ul class="contact-links" aria-label={t.contact}>
             <li><a href={contact.email}><Email class="pika-icon" aria-hidden="true" />{t.email}</a></li>
-            <li><a href={contact.github}><GitHub class="pika-icon" aria-hidden="true" />GitHub<ExternalLink class="pika-icon external-link-icon" aria-hidden="true" /></a></li>
-            <li><a href={contact.x}><X class="pika-icon" aria-hidden="true" />X<ExternalLink class="pika-icon external-link-icon" aria-hidden="true" /></a></li>
+            <li><a href={contact.github}><GitHub class="pika-icon" aria-hidden="true" />GitHub</a></li>
+            <li><a href={contact.x}><X class="pika-icon" aria-hidden="true" />X</a></li>
           </ul>
         </div>
       </div>
