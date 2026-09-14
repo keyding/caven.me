@@ -132,25 +132,46 @@ h3 {
 }
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 48px;
 }
-article {
-  border: 1px solid #292d3214;
-  overflow: hidden;
-  background: #f8faf5;
+.project-entry {
+  min-width: 0;
 }
 .project-visual {
   display: grid;
   place-items: center;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
   background: #e6e9e4;
   color: #53664b;
   font-family: Georgia, serif;
   font-size: 36px;
 }
 .project-caption {
-  padding: 20px;
+  margin-bottom: 24px;
+}
+.project-caption h3 {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+.project-description {
+  font-size: 14px;
+  color: #616771;
+  margin-bottom: 12px;
+}
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  list-style: none;
+  margin-top: 20px;
+  padding: 0;
+  font-size: 14px;
+  color: #616771;
+}
+.project-links span {
+  margin-left: 4px;
 }
 .timeline {
   list-style: none;
@@ -399,10 +420,7 @@ article {
   }
   .project-grid {
     grid-template-columns: minmax(0, 1fr);
-    gap: 20px;
-  }
-  .project-visual {
-    aspect-ratio: 16 / 9;
+    gap: 40px;
   }
   .section-heading {
     margin-bottom: 24px;

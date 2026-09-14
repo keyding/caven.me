@@ -37,9 +37,17 @@ import "../styles/global.css";
           <div class="section-heading"><h2 id="work-title"><span class="hand-underlined">Selected work</span></h2><span class="eyebrow">03 / Projects</span></div>
           <div class="project-grid">
             {[1, 2, 3].map((number) => (
-              <article aria-label={`Project ${number}`}>
+              <article class="project-entry" aria-labelledby={`project-${number}-title`}>
+                <div class="project-caption">
+                  <h3 id={`project-${number}-title`}>Project {number}</h3>
+                  <p class="project-description">Project introduction</p>
+                  <div class="copy-lines" aria-hidden="true"><i></i><i></i><i></i></div>
+                  <ul class="project-links" aria-label={`Project ${number} destination placeholders`}>
+                    <li>Website <span aria-hidden="true">↗</span></li>
+                    <li>Source code <span aria-hidden="true">↗</span></li>
+                  </ul>
+                </div>
                 <div class="project-visual" aria-hidden="true">{String(number).padStart(2, "0")}</div>
-                <div class="project-caption"><h3>Project {number}</h3><div class="copy-lines" aria-hidden="true"><i></i><i></i></div></div>
               </article>
             ))}
           </div>

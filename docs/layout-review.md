@@ -9,17 +9,18 @@ Keep the issue open and do not begin the next content ticket until approval is r
 - A centered content column capped at 768px; 32px section gaps on desktop.
 - The latest revision removes continuous side rules and section borders, using
   warm white surfaces and whitespace. The Experience timeline and one faint
-  footer metadata divider remain; project-card borders are still provisional.
+  footer metadata divider remain; project entries are text-led and have no card borders.
 - Six regions, separated by spacing and headings rather than colored panels: navigation, introduction,
   selected work, experience, additional work, and footer.
-- A generous introduction followed immediately by three equally weighted project
-  slots. Three independently collapsible timeline entries and one additional-work slot follow.
+- A generous introduction followed immediately by three vertically stacked project
+  entries, each with title, introduction, optional destination placeholders, then
+  a 16:9 image placeholder. No project detail pages are planned for the first release. Three independently collapsible timeline entries and one additional-work slot follow.
   Each entry keeps company, location, role, employment period, and skill tags
   visible. Clicking the role row reveals two contribution placeholders. The first
   entry starts open; the others start closed. Native details/summary supports
   pointer, Enter, and Space without JavaScript. Markers and a vertical rule
   connect the entries; the heading stacks on phones.
-- At 640px and below, project cards stack, the portrait moves above the
+- At 640px and below, project spacing tightens, the portrait moves above the
   introduction, and outer gutters reduce to 16px with 24px section gaps.
 - Warm white background, charcoal labels, subtle borders, and restrained blue
   emphasis. Color fills describe regions for review, not final project artwork.
@@ -75,8 +76,7 @@ the phone uses 390 × 664 CSS pixels with the iPhone 13 device preset (3× raste
 
 ![Mobile layout](layout-evidence/mobile.png)
 
-All six regions remain readable and separate. The project grid changes from
-three columns to one without clipping. The built preview was also opened in
+All six regions remain readable and separate. Project entries remain in a single column on desktop and mobile without clipping. The built preview was also opened in
 the Codex in-app browser at `http://127.0.0.1:4322` for interactive review.
 
 ## References inspected
@@ -126,9 +126,12 @@ expand/collapse behavior matching the supplied reference screenshots. The latest
 revision keeps summary information and tags visible while toggling contributions.
 The latest revision removes outer lines and colored section backgrounds at
 Caven's request, preserving the Experience timeline and a single footer divider.
+Caven explicitly adopted homepage-only project presentation: title, concise
+introduction, optional project/source links and landscape image. Issues #1, #3–7,
+#9 and #10 are aligned with that first-release scope.
 The illustration now grows with the entire page width, including wide desktops.
 These requests are not final approval.
 
 Pending. Review the relative width, section spacing, introduction height,
-project-card proportions, and mobile reading order. Record Caven's decision
+project-entry proportions, and mobile reading order. Record Caven's decision
 and any adjustments here before treating the layout as approved.
