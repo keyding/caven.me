@@ -1,5 +1,13 @@
 @import "tailwindcss" source("../");
 
+@font-face {
+  font-family: "Caven Signature";
+  src: local("Bastliga One"), local("BastligaOne");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   color-scheme: light;
   font-family: "Geist", "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -341,10 +349,9 @@ h3 {
 .signature {
   width: fit-content;
   margin-top: 20px;
-  font-family: "Snell Roundhand", "Segoe Script", "Brush Script MT", cursive;
-  font-size: clamp(56px, 8vw, 80px);
+  font-family: "Caven Signature", "Snell Roundhand", "Segoe Script", cursive;
+  font-size: clamp(80px, 12vw, 112px);
   line-height: 1.4;
-  transform: rotate(-6deg);
 }
 .footer-meta {
   border-top: 1px solid #292d3214;

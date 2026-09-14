@@ -57,7 +57,7 @@ Tianchi illustration fills the page width without a desktop cap, scales proporti
 and blends its white background into the warm page surface. The PNG is the original
 AI-generated candidate from this conversation, copied to `public/images/` and
 served locally. No third-party illustration was copied. Signature typography is
-only a system-script-font placeholder, not a finished custom signature asset.
+the user-selected Bastliga One, resolved from an installed local font with system-script fallbacks. The font file is not bundled or redistributed. The [font publisher’s terms](https://www.1001fonts.com/bastliga-one-font.html) allow personal use only and require a license for promotional/commercial use; production embedding and its license remain to be confirmed. Devices without the installed font display the fallback.
 
 [Desktop footer](layout-evidence/footer-desktop.png) ·
 [Mobile footer](layout-evidence/footer-mobile.png) ·
