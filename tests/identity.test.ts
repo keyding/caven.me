@@ -193,3 +193,30 @@ test("email supports keyboard reveal with reduced motion in Chinese", async ({ p
   await expect(footer).toHaveText("cavenasdev@gmail.com");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
+
+test("email hint is hoverable and dismissible, and social links open new tabs", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const email = page.locator(".introduction .email-reveal");
+  await email.hover();
+  await expect
+    .poll(() => email.evaluate((el) => getComputedStyle(el, "::after").opacity))
+    .toBe("1");
+  const box = await email.boundingBox();
+  if (!box) throw new Error("Email control missing");
+  await page.mouse.move(box.x + 10, box.y - 10);
+  await expect
+    .poll(() => email.evaluate((el) => getComputedStyle(el, "::after").opacity))
+    .toBe("1");
+  await page.keyboard.press("Escape");
+  await expect
+    .poll(() => email.evaluate((el) => getComputedStyle(el, "::after").opacity))
+    .toBe("0");
+  for (const name of ["GitHub", "X"]) {
+    for (const link of await page.getByRole("link", { name, exact: true }).all()) {
+      await expect(link).toHaveAttribute("target", "_blank");
+      await expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    }
+  }
+});

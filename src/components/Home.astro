@@ -44,7 +44,7 @@ const t = home[locale];
       <main>
         <section class="introduction block" aria-labelledby="introduction-title">
           <div class="intro-layout">
-            <img class="portrait-slot" src="/images/caven-portrait.png" width="1440" height="1440" alt={t.portrait} />
+            <div class="portrait-frame"><img class="portrait-slot" src="/images/caven-portrait.png" width="1440" height="1440" alt={t.portrait} /></div>
             <div>
               <h1 id="introduction-title"><span class="hand-underlined">{t.greeting}</span></h1>
               <p class="intro-role"><span>{t.role} <VerificationCheck class="profile-badge" aria-hidden="true" /></span></p>
@@ -53,8 +53,8 @@ const t = home[locale];
               <p class="intro-copy">{t.intro}</p>
               <div class="contact-links intro-contacts">
                 <EmailReveal href={contact.email} label={t.email} />
-                <a href={contact.github}><GitHub class="pika-icon" aria-hidden="true" />GitHub</a>
-                <a href={contact.x}><X class="pika-icon" aria-hidden="true" />X</a>
+                <a href={contact.github} target="_blank" rel="noopener noreferrer"><GitHub class="pika-icon" aria-hidden="true" />GitHub</a>
+                <a href={contact.x} target="_blank" rel="noopener noreferrer"><X class="pika-icon" aria-hidden="true" />X</a>
               </div>
         </section>
 
@@ -145,8 +145,8 @@ const t = home[locale];
           <p>© 2026 Caven</p>
           <ul class="contact-links" aria-label={t.contact}>
             <li><EmailReveal href={contact.email} label={t.email} /></li>
-            <li><a href={contact.github}><GitHub class="pika-icon" aria-hidden="true" />GitHub</a></li>
-            <li><a href={contact.x}><X class="pika-icon" aria-hidden="true" />X</a></li>
+            <li><a href={contact.github} target="_blank" rel="noopener noreferrer"><GitHub class="pika-icon" aria-hidden="true" />GitHub</a></li>
+            <li><a href={contact.x} target="_blank" rel="noopener noreferrer"><X class="pika-icon" aria-hidden="true" />X</a></li>
           </ul>
         </div>
       </div>

@@ -3,13 +3,40 @@ import Email from "../assets/icons/email.svg";
 interface Props { href: string; label: string }
 const { href, label } = Astro.props;
 ---
-<a class="email-reveal" href={href} aria-label={label}>
+<a class="email-reveal" href={href} aria-label={label} data-tooltip={label === "邮件" ? "点击看看" : "Click to reveal"}>
   <Email class="pika-icon" aria-hidden="true" />
   <span aria-hidden="true">{label}</span>
 </a>
 
 <style>
-  .email-reveal { max-width: 100%; }
+  .email-reveal { max-width: 100%; position: relative; }
+  .email-reveal::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    border-bottom: 4px solid transparent;
+    background-clip: padding-box;
+    left: 0;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #292d30;
+    color: #faf9f6;
+    font-size: 12px;
+    line-height: 1.5;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(5px) scale(.96);
+    transform-origin: bottom left;
+    pointer-events: auto;
+    transition: opacity 160ms ease, transform 160ms ease, visibility 160ms;
+  }
+  .email-reveal[role="button"]:not([data-tooltip-dismissed]):is(:hover, :focus-visible)::after {
+    opacity: 1; visibility: visible; transform: translateY(0) scale(1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .email-reveal::after { transition: none; transform: none; }
+  }
   .email-reveal span { overflow-wrap: anywhere; min-width: 0; }
   .email-reveal svg { flex-shrink: 0; }
 </style>
@@ -24,11 +51,15 @@ const { href, label } = Astro.props;
     let state: "idle" | "animating" | "revealed" = "idle";
     let frame = 0;
     link.setAttribute("role", "button");
+    link.setAttribute("aria-description", link.dataset.tooltip!);
+    link.addEventListener("pointerleave", () => { delete link.dataset.tooltipDismissed; });
+    link.addEventListener("blur", () => { delete link.dataset.tooltipDismissed; });
     const finish = () => {
       cancelAnimationFrame(frame);
       text.textContent = address;
       link.setAttribute("aria-label", address);
       link.removeAttribute("role");
+      link.removeAttribute("aria-description");
       state = "revealed";
     };
     link.addEventListener("click", (event) => {
@@ -36,6 +67,7 @@ const { href, label } = Astro.props;
       event.preventDefault();
       if (state === "animating") return;
       state = "animating";
+      link.dataset.tooltipDismissed = "";
       if (motion.matches) { finish(); return; }
       const start = performance.now();
       let lastStep = -1;
@@ -49,6 +81,9 @@ const { href, label } = Astro.props;
         frame = requestAnimationFrame(animate);
       };
       frame = requestAnimationFrame(animate);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") link.dataset.tooltipDismissed = "";
     });
     link.addEventListener("keydown", (event) => {
       if (event.key === " " && state !== "revealed") {

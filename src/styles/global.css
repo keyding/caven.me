@@ -45,7 +45,7 @@ main {
 }
 .intro-layout {
   display: grid;
-  grid-template-columns: 160px minmax(0, 1fr);
+  grid-template-columns: 120px minmax(0, 1fr);
   align-items: center;
   gap: 28px;
   margin-bottom: 28px;
@@ -366,7 +366,7 @@ h3 {
     padding: 20px;
   }
   .intro-layout {
-    grid-template-columns: 88px minmax(0, 1fr);
+    grid-template-columns: 120px minmax(0, 1fr);
     gap: 16px;
   }
   .intro-layout h1 {
@@ -575,8 +575,9 @@ a:hover {
   z-index: 10;
   width: min(100% - 48px, 768px);
   margin-inline: auto;
-  background: #faf9f6f2;
-  backdrop-filter: blur(12px);
+  background: #faf9f699;
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
 }
 html {
   scroll-padding-top: 120px;
@@ -601,4 +602,24 @@ html {
   html {
     scroll-padding-top: 160px;
   }
+}
+
+.portrait-frame {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.portrait-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle, transparent 48%, #faf9f620 68%, #faf9f6b3 100%);
+  pointer-events: none;
+}
+
+.intro-layout .hand-underlined {
+  display: inline-block;
 }

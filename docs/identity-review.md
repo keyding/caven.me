@@ -14,7 +14,7 @@ independent product and open-source experience without adding dates, metrics, or
 employer/project claims. The English and Chinese versions have equivalent meaning.
 The source document was only read, and is not included in this repository.
 The portrait uses Caven's supplied 1440px RGBA PNG with actual transparency. It is
-served unchanged, without a circular background or cropping, to the left of the greeting
+served unchanged, inside a 120px circular container with a subtle gradient edge, to the left of the greeting
 and role, with the PROFILE label removed. The introduction spans the available text column; the
 previous 58ch cap was removed after the portrait moved out of the right column.
 
@@ -119,4 +119,4 @@ the address with a short character-scramble animation inspired by
 The effect is implemented with native browser APIs. Once revealed, the control
 becomes a mailto link. Reduced motion reveals immediately; without JavaScript,
 the original mailto link remains available. Keyboard activation and independent
-instances are covered by the browser suite (32 tests).
+instances are covered by the browser suite (34 tests).
