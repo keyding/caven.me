@@ -127,7 +127,7 @@ for (const locale of ["en", "zh"] as const) {
   });
 }
 
-test("navigation and footer signatures animate independently, with Twitter beside GitHub", async ({
+test("navigation and footer signatures animate independently, with X beside GitHub", async ({
   page,
 }) => {
   await page.goto("/");
@@ -144,8 +144,8 @@ test("navigation and footer signatures animate independently, with Twitter besid
   await expect(footer).toHaveAttribute("data-state", "running");
   await expect(header).toHaveAttribute("data-state", "complete");
   await expect(footer).toHaveAttribute("data-state", "complete");
-  const twitter = page.getByRole("link", { name: "Twitter", exact: true });
-  await expect(twitter).toHaveCount(2);
-  for (const link of await twitter.all())
+  const x = page.getByRole("link", { name: "X", exact: true });
+  await expect(x).toHaveCount(2);
+  for (const link of await x.all())
     await expect(link).toHaveAttribute("href", "https://x.com/cavenasdev");
 });

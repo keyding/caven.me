@@ -3,7 +3,7 @@
 export const contact = {
   email: "mailto:cavenasdev@gmail.com",
   github: "https://github.com/keyding",
-  twitter: "https://x.com/cavenasdev",
+  x: "https://x.com/cavenasdev",
 };
 
 export const projectIds = ["pwarelay", "lemon-squeezy-sdk", "online-arbitrage-tool"];

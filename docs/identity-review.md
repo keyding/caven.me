@@ -83,10 +83,10 @@ typography, fallback behavior and CI match the slice; no scope creep was identif
 ## Requested refinements
 
 Caven requested the navigation wordmark be replaced by the same animated signature,
-Twitter be added after GitHub (`cavenasdev`), and the low-resolution portrait be
+X be added after GitHub (`cavenasdev`), and the low-resolution portrait be
 replaced by a placeholder without a circular background. Both signatures use
 instance-specific SVG references and independent viewport observers. Reduced
-motion and no-JavaScript fallbacks remain. Twitter appears in both contact rows.
+motion and no-JavaScript fallbacks remain. X appears in both contact rows.
 The portrait placeholder has a transparent background and a square dashed outline;
 the removed low-resolution file is no longer shipped.
 

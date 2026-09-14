@@ -13,5 +13,6 @@ All icons use the Stroke variant. Exported on 2026-09-14.
 | email.svg         | 24187:10862 |
 | github.svg        | 30877:8170  |
 | briefcase.svg     | 24187:9463  |
+| x.svg             | 24187:11543 |
 
-Only the Style=Stroke group is retained from each export, preserving its paths and 24×24 viewBox. Exported backgrounds and IDs are removed; the foreground color uses currentColor. Chevron-down rotates 180 degrees for the open state. Language and destination labels remain non-interactive preview content.
+Only the Style=Stroke group is retained from each export, preserving its paths and 24×24 viewBox. Exported backgrounds and IDs are removed; the foreground color uses currentColor. Chevron-down rotates 180 degrees for the open state. The X icon comes from `social/x-com` (component set `27925:3168`).

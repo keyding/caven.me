@@ -111,4 +111,4 @@ and phone number are not distributed. The outlined signature and Tianchi candida
 are reused from #3. `noindex` remains until the discovery/release slice (#9).
 
 Navigation and footer signatures use separate SVG IDs and animate independently.
-Twitter links use the user-provided `cavenasdev` account at `https://x.com/cavenasdev`.
+X links use the user-provided `cavenasdev` account at `https://x.com/cavenasdev`.
