@@ -220,3 +220,18 @@ test("email hint is hoverable and dismissible, and social links open new tabs", 
     }
   }
 });
+
+test("portrait sits above the greeting on narrow screens and beside it on desktop", async ({
+  page,
+}) => {
+  await page.goto("/");
+  for (const width of [320, 390, 1280]) {
+    await page.setViewportSize({ width, height: 850 });
+    const portrait = await page.locator(".portrait-frame").boundingBox();
+    const heading = await page.getByRole("heading", { level: 1 }).boundingBox();
+    if (!portrait || !heading) throw new Error("Introduction missing");
+    expect(portrait.width).toBe(120);
+    if (width < 600) expect(portrait.y + portrait.height).toBeLessThanOrEqual(heading.y);
+    else expect(portrait.x + portrait.width).toBeLessThan(heading.x);
+  }
+});

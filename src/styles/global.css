@@ -366,7 +366,7 @@ h3 {
     padding: 20px;
   }
   .intro-layout {
-    grid-template-columns: 120px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     gap: 16px;
   }
   .intro-layout h1 {
@@ -622,4 +622,16 @@ html {
 
 .intro-layout .hand-underlined {
   display: inline-block;
+}
+
+.intro-contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-top: 20px;
+}
+.intro-contact-row .intro-contacts {
+  margin-top: 0;
 }
