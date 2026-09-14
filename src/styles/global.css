@@ -349,7 +349,7 @@ article {
 }
 .footer-landscape {
   display: block;
-  width: min(100%, 1440px);
+  width: 100%;
   height: auto;
   margin: 0 auto;
   mix-blend-mode: multiply;

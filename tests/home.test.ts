@@ -40,6 +40,23 @@ test("homepage presents the six layout regions in reading order without overflow
   await page.getByRole("contentinfo").screenshot({ path: testInfo.outputPath("footer.png") });
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.screenshot({ path: testInfo.outputPath("homepage.png"), fullPage: true });
+  const widths = testInfo.project.name === "desktop" ? [1920, 2560] : [320, 390];
+  for (const width of widths) {
+    await page.setViewportSize({ width, height: 900 });
+    const pageWidth = await page.evaluate(() => document.documentElement.clientWidth);
+    const bounds = await landscape.boundingBox();
+    expect(bounds).not.toBeNull();
+    if (!bounds) throw new Error("Footer illustration has no visible bounds");
+    expect(bounds.x).toBeCloseTo(0, 0);
+    expect(bounds.width).toBeCloseTo(pageWidth, 0);
+    expect(bounds.width / bounds.height).toBeCloseTo(3, 2);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(pageWidth);
+  }
+  if (testInfo.project.name === "desktop") {
+    await page
+      .getByRole("contentinfo")
+      .screenshot({ path: testInfo.outputPath("footer-wide.png") });
+  }
 });
 
 test("experience contributions toggle independently by pointer and keyboard", async ({
