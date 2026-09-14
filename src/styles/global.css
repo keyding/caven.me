@@ -16,14 +16,6 @@ body {
   margin-inline: auto;
   padding-top: 32px;
 }
-.preview-note {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  padding-inline: 24px;
-  color: #616771;
-  font-size: 12px;
-}
 .block {
   padding: 32px;
 }
@@ -46,17 +38,6 @@ main {
   gap: 20px;
   min-height: 72px;
   padding-block: 20px;
-}
-.nav-slots,
-.action-slots {
-  display: flex;
-  gap: 12px;
-}
-.nav-slots span {
-  width: 40px;
-  height: 12px;
-  background: #b9c4d2;
-  border-radius: 3px;
 }
 .introduction {
   padding-block: 40px;
@@ -99,19 +80,6 @@ h3 {
 }
 .copy-lines i:last-child {
   width: 65%;
-}
-.action-slots {
-  margin-top: 28px;
-}
-.action-slots span {
-  width: 96px;
-  height: 32px;
-  border-radius: 5px;
-  background: #a4bbdf;
-}
-.action-slots span + span {
-  width: 72px;
-  background: #c4d3e9;
 }
 .portrait-slot {
   display: grid;
@@ -171,13 +139,7 @@ h3 {
   color: #616771;
 }
 .project-links li,
-.contact-placeholders li,
 .role-label,
-.language-preview {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
 .pika-icon {
   width: 18px;
   height: 18px;
@@ -186,16 +148,6 @@ h3 {
 .external-link-icon {
   width: 14px;
   height: 14px;
-}
-.nav-preview {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.language-preview {
-  color: #616771;
-  font-size: 12px;
-  white-space: nowrap;
 }
 .timeline {
   list-style: none;
@@ -379,14 +331,6 @@ h3 {
   font-size: 12px;
   color: #616771;
 }
-.contact-placeholders {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
 .footer-landscape {
   display: block;
   width: 100%;
@@ -409,9 +353,6 @@ h3 {
   .footer-meta {
     padding: 24px;
   }
-  .preview-note {
-    padding-inline: 12px;
-  }
   .block {
     padding: 24px;
   }
@@ -421,12 +362,6 @@ h3 {
   }
   .navigation {
     padding: 20px;
-  }
-  .nav-slots {
-    gap: 8px;
-  }
-  .nav-slots span {
-    width: 20px;
   }
   .intro-layout {
     grid-template-columns: minmax(0, 1fr);
@@ -532,5 +467,97 @@ h3 {
   }
   .signature .signature-c-static {
     display: inline !important;
+  }
+}
+
+/* Identity content uses the approved column and native link behavior. */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:focus-visible {
+  outline: 2px solid #3b64a2;
+  outline-offset: 4px;
+  border-radius: 3px;
+}
+a:hover {
+  color: #315b97;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.brand {
+  font-family: "Instrument Serif", "Songti SC", serif;
+  font-size: 28px;
+}
+.nav-links,
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.nav-links {
+  justify-content: flex-end;
+  font-size: 13px;
+}
+.nav-links a,
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+}
+.language-switch {
+  white-space: nowrap;
+}
+.intro-role {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.intro-copy {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #616771;
+  max-width: 58ch;
+}
+.intro-contacts {
+  margin-top: 20px;
+  font-size: 14px;
+}
+.portrait-slot {
+  object-fit: cover;
+}
+:lang(zh-CN) h1,
+:lang(zh-CN) h2 {
+  line-height: 1.4;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .introduction {
+    animation: intro-enter 500ms ease-out;
+  }
+  a {
+    transition: color 150ms ease;
+  }
+}
+@keyframes intro-enter {
+  from {
+    transform: translateY(8px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@media (max-width: 380px) {
+  .navigation {
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .nav-links {
+    gap: 4px 12px;
   }
 }

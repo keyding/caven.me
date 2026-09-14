@@ -7,7 +7,7 @@ test("homepage presents the seven layout regions in reading order without overfl
   expect(response?.status()).toBe(200);
   const regions = [
     page.getByRole("navigation", { name: "Navigation" }),
-    page.getByRole("region", { name: "Introduction", exact: true }),
+    page.getByRole("region", { name: "Caven", exact: true }),
     page.getByRole("region", { name: "Selected work", exact: true }),
     page.getByRole("region", { name: "Experience", exact: true }),
     page.getByRole("region", { name: "Tech stack", exact: true }),
@@ -25,7 +25,7 @@ test("homepage presents the seven layout regions in reading order without overfl
     expect(box.x + box.width).toBeLessThanOrEqual(page.viewportSize()!.width);
     previousBottom = box.y + box.height;
   }
-  await expect(page.getByRole("heading", { name: "Introduction", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Caven", exact: true })).toBeVisible();
   await expect(page.getByRole("article")).toHaveCount(3);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
     true,

@@ -1,8 +1,9 @@
 # caven.me
 
-A static Astro portfolio in progress. The homepage currently presents a color-block
-layout for review, without real portfolio content. See [layout review](docs/layout-review.md)
-for browser evidence and the pending approval gate for issue #3.
+A static bilingual Astro portfolio in progress. English is served at `/` and Chinese
+at `/zh/`. The identity and contact slice uses the [approved layout](docs/layout-review.md);
+project, experience, and toolkit entries remain localized placeholders for later slices.
+See [identity review](docs/identity-review.md) for source attribution and visual evidence.
 
 ## Setup
 
@@ -77,9 +78,12 @@ directives. Temporary `debugger` probes verified both regions are checked.
 a successful lint/format run alone does not validate an Astro template.
 
 The shared Playwright suite observes the **built website through a browser**.
-It runs the homepage check at desktop and phone sizes, verifies a successful
-response, seven visible regions in reading order, three project slots, and no
-horizontal overflow or overlapping regions.
+It runs at desktop and phone sizes and covers layout containment, locale direct access
+and refresh, language switching with stable project fragments, keyboard focus,
+contact destinations, local font loading, reduced motion, JavaScript-free content,
+and the retained signature animation. `.github/workflows/checks.yml` runs static
+checks and this suite on pull requests and pushes to main; deployment remains a
+later slice. Configure branch protection separately when introducing release gates.
 It always builds and starts its own preview on `127.0.0.1:4321`; stop any other
 server on that port first. Future slices should extend this suite at the same
 public boundary. Failure traces are written to ignored `test-results/`.
@@ -92,3 +96,17 @@ server environment sets `ASTRO_PREVIEW_BACKGROUND=1` to keep the preview attache
 so Playwright can own its lifecycle. This behavior was verified against the
 pinned Astro version and should be rechecked on upgrades. For manually started
 background servers, use `pnpm exec vp run dev stop` or `pnpm exec vp run preview stop`.
+
+## Content and assets
+
+Edit `src/data/home.ts` for both languages and shared contact destinations. Route
+files select a locale; `src/components/Home.astro` keeps their markup in sync.
+Language links work as native links without JavaScript; the small enhancement
+preserves valid page fragments when JavaScript is available.
+
+Geist (400/500) and Instrument Serif (400) are bundled from pinned Fontsource
+packages, with local Chinese system fallbacks. They make no external font requests.
+Both packages include their SIL Open Font License. The portrait is a 400px WebP
+extracted from the supplied resume's image, not a page capture. The source resume
+and phone number are not distributed. The outlined signature and Tianchi candidate
+are reused from #3. `noindex` remains until the discovery/release slice (#9).

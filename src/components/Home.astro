@@ -1,0 +1,180 @@
+---
+import "../styles/global.css";
+import "@fontsource/geist/latin-400.css";
+import "@fontsource/geist/latin-500.css";
+import "@fontsource/instrument-serif/latin-400.css";
+import { home, contact, projectIds, type Locale } from "../data/home";
+import Signature from "../components/Signature.astro";
+import Translate from "../assets/icons/translate.svg";
+import ExternalLink from "../assets/icons/external-link.svg";
+import ChevronDown from "../assets/icons/chevron-down.svg";
+import Globe from "../assets/icons/globe.svg";
+import Code from "../assets/icons/code.svg";
+import Email from "../assets/icons/email.svg";
+import GitHub from "../assets/icons/github.svg";
+import Briefcase from "../assets/icons/briefcase.svg";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = home[locale];
+---
+
+<!doctype html>
+<html lang={t.lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{t.title}</title>
+    <meta name="description" content={t.intro} />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header>
+        <nav class="navigation block" aria-label={t.navigation}>
+          <a class="brand" href={locale === "en" ? "/" : "/zh/"}>Caven</a>
+          <div class="nav-links">
+            <a href="#work-title">{t.work}</a>
+            <a href="#footer">{t.contact}</a>
+            <a class="language-switch" href={t.switchPath} hreflang={t.switchLang} lang={t.switchLang} aria-label={t.switchLabel} data-language-switch><Translate class="pika-icon" aria-hidden="true" />{t.switchText}</a>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <section class="introduction block" aria-labelledby="introduction-title">
+          <p class="eyebrow">{t.profile}</p>
+          <div class="intro-layout">
+            <div>
+              <h1 id="introduction-title"><span class="hand-underlined">{t.name}</span></h1>
+              <p class="intro-role">{t.role}</p>
+              <p class="intro-copy">{t.intro}</p>
+              <div class="contact-links intro-contacts">
+                <a href={contact.email}><Email class="pika-icon" aria-hidden="true" />{t.email}</a>
+                <a href={contact.github}><GitHub class="pika-icon" aria-hidden="true" />GitHub<ExternalLink class="pika-icon external-link-icon" aria-hidden="true" /></a>
+              </div>
+            </div>
+            <img class="portrait-slot" src="/images/caven-portrait.webp" width="400" height="400" alt={t.portrait} />
+          </div>
+        </section>
+
+        <section class="selected-work block" aria-labelledby="work-title">
+          <div class="section-heading"><h2 id="work-title"><span class="hand-underlined">{t.work}</span></h2><span class="eyebrow">{t.project}</span></div>
+          <div class="project-grid">
+            {[1, 2, 3].map((number) => (
+              <article id={projectIds[number - 1]} class="project-entry" aria-labelledby={`project-${number}-title`}>
+                <div class="project-caption">
+                  <h3 id={`project-${number}-title`}>{t.project} {number}</h3>
+                  <p class="project-description">{t.projectIntro}</p>
+                  <div class="copy-lines" aria-hidden="true"><i></i><i></i><i></i></div>
+                  <ul class="project-links" aria-label={`${t.project} ${number} ${t.destinations}`}>
+                    <li><Globe class="pika-icon" aria-hidden="true" /> {t.website} <ExternalLink class="pika-icon external-link-icon" aria-hidden="true" /></li>
+                    <li><Code class="pika-icon" aria-hidden="true" /> {t.source} <ExternalLink class="pika-icon external-link-icon" aria-hidden="true" /></li>
+                  </ul>
+                </div>
+                <div class="project-visual" aria-hidden="true">{String(number).padStart(2, "0")}</div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section class="experience block" aria-labelledby="experience-title">
+          <div class="section-heading"><h2 id="experience-title"><span class="hand-underlined">{t.experience}</span></h2><span class="eyebrow">{t.timeline}</span></div>
+          <ol class="timeline" aria-label={t.experiencePlaceholders}>
+            {[1, 2, 3].map((number) => (
+              <li>
+                <div class="experience-heading">
+                  <h3>{t.company} {number}</h3>
+                  <span class="experience-period">{t.location}</span>
+                </div>
+                <details class="experience-details" open={number === 1}>
+                  <summary aria-label={`${t.rolePlaceholder} — ${t.company} ${number}`}>
+                    <span class="role-heading">
+                      <span class="role-label"><Briefcase class="pika-icon" aria-hidden="true" /> {t.rolePlaceholder}</span>
+                      <ChevronDown class="pika-icon disclosure-icon" aria-hidden="true" />
+                    </span>
+                    <span class="experience-period">{t.period}</span>
+                  </summary>
+                  <ul class="contributions" aria-label={`${t.company} ${number} ${t.contributions}`}>
+                    <li><span>{t.contribution}</span><span class="contribution-line" aria-hidden="true"></span></li>
+                    <li><span>{t.contribution}</span><span class="contribution-line" aria-hidden="true"></span></li>
+                  </ul>
+                </details>
+                <ul class="experience-tags" aria-label={`${t.company} ${number} ${t.tags}`}>
+                  {t.skills.map((skill) => <li>{skill}</li>)}
+                </ul>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section class="tech-stack block" aria-labelledby="stack-title">
+          <div class="section-heading">
+            <h2 id="stack-title"><span class="hand-underlined">{t.stack}</span></h2>
+            <span class="eyebrow">{t.toolkit}</span>
+          </div>
+          <div class="stack-groups">
+            {t.groups.map((group) => (
+              <div class="stack-group">
+                <h3>{group}</h3>
+                <ul class="stack-tags" aria-label={`${group} ${t.placeholders}`}>
+                  {[1, 2, 3, 4].map((number) => (
+                    <li><span class="stack-icon" aria-hidden="true"></span>{t.technology} {number}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section class="additional-work block" aria-labelledby="additional-title">
+          <div class="section-heading"><h2 id="additional-title"><span class="hand-underlined">{t.additional}</span></h2><span class="eyebrow">{t.more}</span></div>
+          <div class="additional-slot"><span>{t.projectSlot}</span><span class="detail-slot" aria-hidden="true"></span></div>
+        </section>
+      </main>
+
+    </div>
+    <footer class="footer" id="footer">
+      <div class="footer-content">
+        <div class="footer-farewell">
+          <p class="eyebrow">{t.until}</p>
+          <h2><span class="hand-underlined">{t.farewell}</span></h2>
+          <Signature label={t.signature} />
+        </div>
+        <div class="footer-meta">
+          <p>© 2026 Caven</p>
+          <ul class="contact-links" aria-label={t.contact}>
+            <li><a href={contact.email}><Email class="pika-icon" aria-hidden="true" />{t.email}</a></li>
+            <li><a href={contact.github}><GitHub class="pika-icon" aria-hidden="true" />GitHub<ExternalLink class="pika-icon external-link-icon" aria-hidden="true" /></a></li>
+          </ul>
+        </div>
+      </div>
+      <img
+        class="footer-landscape"
+        src="/images/tianchi-footer-study.png"
+        width="2172"
+        height="724"
+        alt={t.landscape}
+        loading="lazy"
+        decoding="async"
+      />
+    </footer>
+  </body>
+</html>
+
+<script>
+  const languageLink = document.querySelector<HTMLAnchorElement>("[data-language-switch]");
+  if (languageLink) {
+    const destination = languageLink.pathname;
+    const updateLanguageLink = () => {
+      let id: string;
+      try {
+        id = decodeURIComponent(window.location.hash.slice(1));
+      } catch {
+        id = "";
+      }
+      languageLink.href = destination + (id && document.getElementById(id) ? window.location.hash : "");
+    };
+    updateLanguageLink();
+    window.addEventListener("hashchange", updateLanguageLink);
+  }
+</script>
