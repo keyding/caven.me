@@ -33,6 +33,7 @@
   --color-paper: #faf9f6;
   --color-ink: #292d32;
   --color-accent: #8a6500;
+  --color-highlight: #e5bd48;
 }
 
 /* The original contours stay visible without JavaScript. */
