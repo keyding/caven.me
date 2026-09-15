@@ -243,7 +243,7 @@ test("Tianjin clock uses Beijing time and advances independently of visitor time
   await page.clock.install({ time: new Date("2026-09-15T15:59:59Z") });
   await page.goto("/zh/");
   const clock = page.locator("[data-local-time]");
-  await expect(page.locator("[data-location-time]")).toContainText("中国天津");
+  await expect(page.locator("[data-location-time]")).toContainText("中国 · 天津");
   await expect(clock).toHaveText("23:59");
   await page.clock.runFor(1000);
   await expect(clock).toHaveText("00:00");

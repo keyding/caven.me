@@ -77,7 +77,7 @@ export const home = {
     profile: "关于我",
     portrait: "丁强的照片",
     email: "邮件",
-    homeLocation: "中国天津",
+    homeLocation: "中国 · 天津",
     localTimeLabel: "天津当地时间",
     project: "项目",
     projectIntro: "项目简介",
