@@ -1,8 +1,5 @@
 ---
 import "../styles/global.css";
-import geistRegular from "@fontsource/geist/files/geist-latin-400-normal.woff2?url";
-import geistMedium from "@fontsource/geist/files/geist-latin-500-normal.woff2?url";
-import instrumentSerif from "@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url";
 import { home, contact, projectIds, homeTimeZone, type Locale } from "../data/home";
 import Signature from "../components/Signature.astro";
 import Translate from "../assets/icons/translate.svg";
@@ -26,7 +23,6 @@ const underlineClasses = "relative inline-block pb-2 after:absolute after:right-
 <html lang={t.lang} class="scheme-light scroll-pt-[120px] bg-paper font-sans text-ink [font-synthesis:none] max-sm:scroll-pt-[160px] [&_a]:text-inherit [&_a]:no-underline [&_a:focus-visible]:rounded-[3px] [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-solid [&_a:focus-visible]:outline-accent [&_a:focus-visible]:outline-offset-4 [&_a:hover]:text-accent [&_a:hover]:underline [&_a:hover]:underline-offset-4">
   <head>
     <meta charset="UTF-8" />
-    {[geistRegular, geistMedium, instrumentSerif].map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin="anonymous" />)}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
     <title>{t.title}</title>

@@ -254,9 +254,7 @@ test("Tianjin clock uses Beijing time and advances independently of visitor time
   await context.close();
 });
 
-test("cold font loading preloads local WOFF2 files without duplicate requests", async ({
-  page,
-}) => {
+test("cold font loading uses local WOFF2 files without duplicate requests", async ({ page }) => {
   const requests: string[] = [];
   await page.route(/\.woff2(?:\?|$)/, async (route) => {
     requests.push(route.request().url());
@@ -265,15 +263,14 @@ test("cold font loading preloads local WOFF2 files without duplicate requests", 
   });
   await page.goto("/");
   await page.evaluate(() => document.fonts.ready);
-  const preloads = await page
-    .locator('link[rel="preload"][as="font"]')
-    .evaluateAll((links) => links.map((link) => (link as HTMLLinkElement).href));
-  expect(preloads).toHaveLength(3);
-  expect(requests.sort()).toEqual(preloads.sort());
+  expect(requests).toHaveLength(3);
+  expect(new Set(requests).size).toBe(3);
   const origin = new URL(page.url()).origin;
-  expect(preloads.every((url) => new URL(url).origin === origin)).toBe(true);
+  expect(requests.every((url) => new URL(url).origin === origin)).toBe(true);
   expect(
-    await page.evaluate(() => [...document.fonts].every((font) => font.display === "block")),
+    await page.evaluate(() =>
+      [...document.fonts].every((font) => font.display === "block" && font.status === "loaded"),
+    ),
   ).toBe(true);
 });
 

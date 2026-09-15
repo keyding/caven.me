@@ -1,6 +1,6 @@
 @import "tailwindcss" source("../");
 
-/* Preload these local WOFF2 files in Home; briefly block fallback to avoid a font swap on refresh. */
+/* Local WOFF2 faces briefly block fallback to reduce font swapping on refresh. */
 
 @font-face {
   font-family: "Geist";
