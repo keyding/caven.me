@@ -51,10 +51,13 @@ Vite+ linting and formatting.
 Import `src/styles/global.css` from pages (or a shared layout when one exists).
 It loads Tailwind's theme, Preflight reset, and utilities, with class detection
 limited to `src/`. Use complete utility class names in templates; put shared
-theme customizations and custom CSS in this stylesheet.
+theme customizations in this stylesheet.
 
-The layout uses native CSS in the shared stylesheet on top of the existing
-Tailwind reset. No class-merging helper is needed yet. Consider [cn](https://github.com/shadcn-ui/cn) when reusable
+Use Tailwind utilities for layout, typography, colors, responsive rules, and interaction states.
+Custom CSS is reserved for animation choreography (signature masks, entrance motion,
+and tooltip transitions). Shared font and color tokens live in `@theme`; repeated
+heading underline utilities are defined once in the template. Keep inclusive breakpoint
+boundaries when replacing existing media queries. No class-merging helper is needed yet. Consider [cn](https://github.com/shadcn-ui/cn) when reusable
 components need conditional classes and caller overrides with conflict resolution.
 
 ## Checks and test boundary

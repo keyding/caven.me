@@ -18,10 +18,11 @@ import Briefcase from "../assets/icons/briefcase.svg";
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = home[locale];
+const underlineClasses = "hand-underlined relative inline-block pb-2 after:absolute after:right-0 after:bottom-0 after:h-2 after:w-[58%] after:rotate-[-2deg] after:rounded-[50%] after:border-t-4 after:border-[#e5bd48] after:content-['']";
 ---
 
 <!doctype html>
-<html lang={t.lang}>
+<html lang={t.lang} class="scheme-light scroll-pt-[120px] bg-paper font-sans text-ink [font-synthesis:none] [@media(max-width:640px)]:scroll-pt-[160px] [&_a]:text-inherit [&_a]:no-underline [&_a:focus-visible]:rounded-[3px] [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-solid [&_a:focus-visible]:outline-accent [&_a:focus-visible]:outline-offset-4 [&_a:hover]:text-accent [&_a:hover]:underline [&_a:hover]:underline-offset-4">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -30,79 +31,79 @@ const t = home[locale];
     <meta name="description" content={t.intro} />
   </head>
   <body>
-      <header class="site-header">
-        <nav class="navigation block" aria-label={t.navigation}>
-          <a class="brand" href={locale === "en" ? "/" : "/zh/"} aria-label="Caven"><Signature idPrefix="header" label={t.signature} /></a>
-          <div class="nav-links">
+      <header class="site-header sticky top-0 z-10 mx-auto w-[min(calc(100%-48px),768px)] bg-[#faf9f699] backdrop-blur-[20px] backdrop-saturate-[140%] [@media(max-width:640px)]:w-[calc(100%-32px)]">
+        <nav class="navigation flex min-h-[72px] items-center justify-between gap-5 px-8 py-5 [@media(max-width:640px)]:px-5 [@media(max-width:380px)]:items-start [@media(max-width:380px)]:gap-3" aria-label={t.navigation}>
+          <a class="brand inline-flex min-h-11 shrink-0 items-center [&_.signature]:m-0 [&_.signature]:w-20" href={locale === "en" ? "/" : "/zh/"} aria-label="Caven"><Signature idPrefix="header" label={t.signature} /></a>
+          <div class="nav-links m-0 flex list-none flex-wrap items-center justify-end gap-x-5 gap-y-2 p-0 text-[13px] [@media(max-width:640px)]:gap-x-3 [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center [&_a]:gap-1.5">
             <a href="#work-title">{t.work}</a>
             <a href="#footer">{t.contact}</a>
-            <a class="language-switch" href={t.switchPath} hreflang={t.switchLang} lang={t.switchLang} aria-label={t.switchLabel} data-language-switch><Translate class="pika-icon" aria-hidden="true" />{t.switchText}</a>
+            <a class="language-switch whitespace-nowrap" href={t.switchPath} hreflang={t.switchLang} lang={t.switchLang} aria-label={t.switchLabel} data-language-switch><Translate class="pika-icon size-[18px] shrink-0" aria-hidden="true" />{t.switchText}</a>
           </div>
         </nav>
       </header>
-    <div class="page-shell">
-      <main>
-        <section class="introduction block" aria-labelledby="introduction-title">
-          <div class="intro-layout">
-            <div class="portrait-frame"><img class="portrait-slot" src="/images/caven-portrait.png" width="1440" height="1440" alt={t.portrait} /></div>
+    <div class="page-shell mx-auto w-[min(calc(100%-48px),768px)] pt-8 [@media(max-width:640px)]:w-[calc(100%-32px)] [@media(max-width:640px)]:pt-5">
+      <main class="my-8 grid gap-8 [@media(max-width:640px)]:my-6 [@media(max-width:640px)]:gap-6">
+        <section class="introduction px-8 py-10 [@media(max-width:640px)]:p-6" aria-labelledby="introduction-title">
+          <div class="intro-layout mb-7 grid grid-cols-[120px_minmax(0,1fr)] items-center gap-7 [@media(max-width:640px)]:grid-cols-1 [@media(max-width:640px)]:gap-4">
+            <div class="portrait-frame relative size-[120px] overflow-hidden rounded-full border border-[#eee] after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:bg-[radial-gradient(circle,transparent_48%,#faf9f620_68%,#faf9f6b3_100%)] after:content-['']"><img class="portrait-slot block h-auto w-full object-contain" src="/images/caven-portrait.png" width="1440" height="1440" alt={t.portrait} /></div>
             <div>
-              <h1 id="introduction-title"><span class="hand-underlined">{t.greeting}</span></h1>
-              <p class="intro-role"><span>{t.role} <VerificationCheck class="profile-badge" aria-hidden="true" /></span></p>
+              <h1 class="mb-6 font-display text-[clamp(36px,5vw,56px)] leading-[1.1] font-normal in-[:lang(zh-CN)]:leading-[1.4] [@media(max-width:640px)]:mb-4 [@media(max-width:640px)]:text-[32px]" id="introduction-title"><span class={underlineClasses}>{t.greeting}</span></h1>
+              <p class="intro-role mb-0 text-base leading-[1.6] font-medium [@media(max-width:640px)]:text-[13px]"><span>{t.role} <VerificationCheck class="profile-badge ml-1 inline-block size-[22px] align-[-5px] text-[#08b2c5]" aria-hidden="true" /></span></p>
             </div>
           </div>
-              <p class="intro-copy">{t.intro}</p>
-              <div class="intro-contact-row">
-              <div class="contact-links intro-contacts">
+              <p class="intro-copy text-[15px] leading-[1.8] text-[#616771]">{t.intro}</p>
+              <div class="intro-contact-row mt-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+              <div class="contact-links m-0 flex list-none flex-wrap items-center gap-x-5 gap-y-2 p-0 [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center [&_a]:gap-1.5 intro-contacts text-sm leading-[inherit]">
                 <EmailReveal href={contact.email} label={t.email} />
-                <a href={contact.github} target="_blank" rel="noopener noreferrer"><GitHub class="pika-icon" aria-hidden="true" />GitHub</a>
-                <a href={contact.x} target="_blank" rel="noopener noreferrer"><X class="pika-icon" aria-hidden="true" />X</a>
+                <a href={contact.github} target="_blank" rel="noopener noreferrer"><GitHub class="pika-icon size-[18px] shrink-0" aria-hidden="true" />GitHub</a>
+                <a href={contact.x} target="_blank" rel="noopener noreferrer"><X class="pika-icon size-[18px] shrink-0" aria-hidden="true" />X</a>
               </div>
               </div>
         </section>
 
-        <section class="selected-work block" aria-labelledby="work-title">
-          <div class="section-heading"><h2 id="work-title"><span class="hand-underlined">{t.work}</span></h2><span class="eyebrow">{t.project}</span></div>
-          <div class="project-grid">
+        <section class="selected-work p-8 [@media(max-width:640px)]:p-6" aria-labelledby="work-title">
+          <div class="section-heading mb-7 flex flex-wrap items-baseline justify-between gap-3 [@media(max-width:640px)]:mb-6"><h2 class="font-display text-[30px] leading-[1.2] font-normal in-[:lang(zh-CN)]:leading-[1.4] [@media(max-width:640px)]:text-[28px]" id="work-title"><span class={underlineClasses}>{t.work}</span></h2><span class="eyebrow text-[11px] leading-[1.5] tracking-[0.08em] uppercase text-[#535d6c]">{t.project}</span></div>
+          <div class="project-grid grid grid-cols-1 gap-12 [@media(max-width:640px)]:gap-10">
             {[1, 2, 3].map((number) => (
-              <article id={projectIds[number - 1]} class="project-entry" aria-labelledby={`project-${number}-title`}>
-                <div class="project-caption">
-                  <h3 id={`project-${number}-title`}>{t.project} {number}</h3>
-                  <p class="project-description">{t.projectIntro}</p>
-                  <div class="copy-lines" aria-hidden="true"><i></i><i></i><i></i></div>
-                  <ul class="project-links" aria-label={`${t.project} ${number} ${t.destinations}`}>
-                    <li><Globe class="pika-icon" aria-hidden="true" /> {t.website} <ExternalLink class="pika-icon external-link-icon" aria-hidden="true" /></li>
-                    <li><Code class="pika-icon" aria-hidden="true" /> {t.source} <ExternalLink class="pika-icon external-link-icon" aria-hidden="true" /></li>
+              <article id={projectIds[number - 1]} class="project-entry min-w-0" aria-labelledby={`project-${number}-title`}>
+                <div class="project-caption mb-6">
+                  <h3 class="mb-4 text-xl leading-[inherit] font-medium" id={`project-${number}-title`}>{t.project} {number}</h3>
+                  <p class="project-description mb-3 text-sm leading-[inherit] text-[#616771]">{t.projectIntro}</p>
+                  <div class="copy-lines grid gap-2.5 [&_i]:block [&_i]:h-2 [&_i]:rounded-[2px] [&_i]:bg-[#a6b5c252] [&_i:last-child]:w-[65%]" aria-hidden="true"><i></i><i></i><i></i></div>
+                  <ul class="project-links mt-5 flex list-none flex-wrap gap-x-6 gap-y-3 p-0 text-sm leading-[inherit] text-[#616771] [&_li]:inline-flex [&_li]:items-center [&_li]:gap-1.5" aria-label={`${t.project} ${number} ${t.destinations}`}>
+                    <li><Globe class="pika-icon size-[18px] shrink-0" aria-hidden="true" /> {t.website} <ExternalLink class="pika-icon external-link-icon size-3.5 shrink-0" aria-hidden="true" /></li>
+                    <li><Code class="pika-icon size-[18px] shrink-0" aria-hidden="true" /> {t.source} <ExternalLink class="pika-icon external-link-icon size-3.5 shrink-0" aria-hidden="true" /></li>
                   </ul>
                 </div>
-                <div class="project-visual" aria-hidden="true">{String(number).padStart(2, "0")}</div>
+                <div class="project-visual grid aspect-video place-items-center rounded-lg bg-[#e6e9e4] font-[Georgia,serif] text-4xl leading-[inherit] text-[#53664b]" aria-hidden="true">{String(number).padStart(2, "0")}</div>
               </article>
             ))}
           </div>
         </section>
 
-        <section class="experience block" aria-labelledby="experience-title">
-          <div class="section-heading"><h2 id="experience-title"><span class="hand-underlined">{t.experience}</span></h2><span class="eyebrow">{t.timeline}</span></div>
-          <ol class="timeline" aria-label={t.experiencePlaceholders}>
+        <section class="experience p-8 [@media(max-width:640px)]:p-6" aria-labelledby="experience-title">
+          <div class="section-heading mb-7 flex flex-wrap items-baseline justify-between gap-3 [@media(max-width:640px)]:mb-6"><h2 class="font-display text-[30px] leading-[1.2] font-normal in-[:lang(zh-CN)]:leading-[1.4] [@media(max-width:640px)]:text-[28px]" id="experience-title"><span class={underlineClasses}>{t.experience}</span></h2><span class="eyebrow text-[11px] leading-[1.5] tracking-[0.08em] uppercase text-[#535d6c]">{t.timeline}</span></div>
+          <ol class="timeline m-0 list-none p-0 [&>li]:relative [&>li]:ml-1 [&>li]:border-l [&>li]:border-[#b7aa94] [&>li]:pb-8 [&>li]:pl-7 [&>li]:text-sm [&>li]:leading-[inherit] [&>li:last-child]:border-transparent [&>li:last-child]:pb-0 [@media(max-width:640px)]:[&>li]:pl-5 [&>li]:before:absolute [&>li]:before:left-[-5px] [&>li]:before:top-1.5 [&>li]:before:size-[9px] [&>li]:before:rounded-full [&>li]:before:border [&>li]:before:border-[#9e8e73] [&>li]:before:bg-paper [&>li]:before:content-['']" aria-label={t.experiencePlaceholders}>
             {[1, 2, 3].map((number) => (
               <li>
-                <div class="experience-heading">
-                  <h3>{t.company} {number}</h3>
-                  <span class="experience-period">{t.location}</span>
+                <div class="experience-heading flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 [@media(max-width:640px)]:flex-col [@media(max-width:640px)]:gap-1">
+                  <h3 class="m-0 text-base leading-[inherit] font-medium">{t.company} {number}</h3>
+                  <span class="experience-period text-xs leading-[inherit] text-[#686154]">{t.location}</span>
                 </div>
-                <details class="experience-details" open={number === 1}>
-                  <summary aria-label={`${t.rolePlaceholder} — ${t.company} ${number}`}>
-                    <span class="role-heading">
-                      <span class="role-label"><Briefcase class="pika-icon" aria-hidden="true" /> {t.rolePlaceholder}</span>
-                      <ChevronDown class="pika-icon disclosure-icon" aria-hidden="true" />
+                <details class="experience-details group mt-3" open={number === 1}>
+                  <summary class="min-h-11 cursor-pointer list-none rounded py-2 hover:bg-[#292d3208] focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-accent focus-visible:outline-offset-4 [&::-webkit-details-marker]:hidden" aria-label={`${t.rolePlaceholder} — ${t.company} ${number}`}>
+                    <span class="role-heading mb-1.5 flex items-center justify-between gap-4 font-medium">
+                      <span class="role-label inline-flex items-center gap-1.5"><Briefcase class="pika-icon size-[18px] shrink-0" aria-hidden="true" /> {t.rolePlaceholder}</span>
+                      <ChevronDown class="pika-icon disclosure-icon size-4 shrink-0 group-open:rotate-180" aria-hidden="true" />
                     </span>
-                    <span class="experience-period">{t.period}</span>
+                    <span class="experience-period text-xs leading-[inherit] text-[#686154]">{t.period}</span>
                   </summary>
-                  <ul class="contributions" aria-label={`${t.company} ${number} ${t.contributions}`}>
-                    <li><span>{t.contribution}</span><span class="contribution-line" aria-hidden="true"></span></li>
-                    <li><span>{t.contribution}</span><span class="contribution-line" aria-hidden="true"></span></li>
+                  <ul class="contributions mt-[18px] grid list-disc gap-2.5 pl-4 text-xs leading-[inherit] text-[#686154] [&_li:last-child_.contribution-line]:w-[60%]" aria-label={`${t.company} ${number} ${t.contributions}`}>
+                    <li><span>{t.contribution}</span><span class="contribution-line mt-2 block h-1.5 w-[85%] rounded-[2px] bg-[#b2a58e52]" aria-hidden="true"></span></li>
+                    <li><span>{t.contribution}</span><span class="contribution-line mt-2 block h-1.5 w-[85%] rounded-[2px] bg-[#b2a58e52]" aria-hidden="true"></span></li>
                   </ul>
                 </details>
-                <ul class="experience-tags" aria-label={`${t.company} ${number} ${t.tags}`}>
+                <ul class="experience-tags mt-4 flex list-none flex-wrap gap-2 p-0 [&_li]:rounded-[999px] [&_li]:border [&_li]:border-[#b7aa9466] [&_li]:bg-[#faf9f680] [&_li]:px-2.5 [&_li]:py-[3px] [&_li]:text-xs [&_li]:leading-[inherit] [&_li]:text-[#686154]" aria-label={`${t.company} ${number} ${t.tags}`}>
                   {t.skills.map((skill) => <li>{skill}</li>)}
                 </ul>
               </li>
@@ -110,18 +111,18 @@ const t = home[locale];
           </ol>
         </section>
 
-        <section class="tech-stack block" aria-labelledby="stack-title">
-          <div class="section-heading">
-            <h2 id="stack-title"><span class="hand-underlined">{t.stack}</span></h2>
-            <span class="eyebrow">{t.toolkit}</span>
+        <section class="tech-stack p-8 [@media(max-width:640px)]:p-6" aria-labelledby="stack-title">
+          <div class="section-heading mb-7 flex flex-wrap items-baseline justify-between gap-3 [@media(max-width:640px)]:mb-6">
+            <h2 class="font-display text-[30px] leading-[1.2] font-normal in-[:lang(zh-CN)]:leading-[1.4] [@media(max-width:640px)]:text-[28px]" id="stack-title"><span class={underlineClasses}>{t.stack}</span></h2>
+            <span class="eyebrow text-[11px] leading-[1.5] tracking-[0.08em] uppercase text-[#535d6c]">{t.toolkit}</span>
           </div>
-          <div class="stack-groups">
+          <div class="stack-groups grid gap-6">
             {t.groups.map((group) => (
               <div class="stack-group">
-                <h3>{group}</h3>
-                <ul class="stack-tags" aria-label={`${group} ${t.placeholders}`}>
+                <h3 class="mb-3 text-sm leading-[inherit] font-medium">{group}</h3>
+                <ul class="stack-tags m-0 flex list-none flex-wrap gap-2 p-0 [&_li]:flex [&_li]:items-center [&_li]:gap-2 [&_li]:rounded-[999px] [&_li]:border [&_li]:border-[#292d3214] [&_li]:px-3 [&_li]:py-1.5 [&_li]:text-[13px] [&_li]:text-[#616771]" aria-label={`${group} ${t.placeholders}`}>
                   {[1, 2, 3, 4].map((number) => (
-                    <li><span class="stack-icon" aria-hidden="true"></span>{t.technology} {number}</li>
+                    <li><span class="stack-icon size-4 rounded-[3px] bg-[#c6d4df]" aria-hidden="true"></span>{t.technology} {number}</li>
                   ))}
                 </ul>
               </div>
@@ -129,31 +130,31 @@ const t = home[locale];
           </div>
         </section>
 
-        <section class="additional-work block" aria-labelledby="additional-title">
-          <div class="section-heading"><h2 id="additional-title"><span class="hand-underlined">{t.additional}</span></h2><span class="eyebrow">{t.more}</span></div>
-          <div class="additional-slot"><span>{t.projectSlot}</span><span class="detail-slot" aria-hidden="true"></span></div>
+        <section class="additional-work p-8 [@media(max-width:640px)]:p-6" aria-labelledby="additional-title">
+          <div class="section-heading mb-7 flex flex-wrap items-baseline justify-between gap-3 [@media(max-width:640px)]:mb-6"><h2 class="font-display text-[30px] leading-[1.2] font-normal in-[:lang(zh-CN)]:leading-[1.4] [@media(max-width:640px)]:text-[28px]" id="additional-title"><span class={underlineClasses}>{t.additional}</span></h2><span class="eyebrow text-[11px] leading-[1.5] tracking-[0.08em] uppercase text-[#535d6c]">{t.more}</span></div>
+          <div class="additional-slot flex items-center justify-between gap-6 rounded-md bg-[#eeede9] p-6 text-sm leading-[inherit] [&_.detail-slot]:w-1/4 [&_.detail-slot]:bg-[#c3c2be]"><span>{t.projectSlot}</span><span class="detail-slot h-2 rounded-[2px] bg-[#b2a58e52]" aria-hidden="true"></span></div>
         </section>
       </main>
 
     </div>
-    <footer class="footer" id="footer">
-      <div class="footer-content">
-        <div class="footer-farewell">
-          <p class="eyebrow">{t.until}</p>
-          <h2><span class="hand-underlined">{t.farewell}</span></h2>
+    <footer class="footer pb-4" id="footer">
+      <div class="footer-content mx-auto w-[min(calc(100%-48px),768px)] [@media(max-width:640px)]:w-[calc(100%-32px)]">
+        <div class="footer-farewell px-8 pt-12 pb-9 [@media(max-width:640px)]:px-6 [@media(max-width:640px)]:pt-9 [@media(max-width:640px)]:pb-7">
+          <p class="eyebrow text-[11px] leading-[1.5] tracking-[0.08em] uppercase text-[#535d6c]">{t.until}</p>
+          <h2 class="mt-5 font-display text-[clamp(28px,4vw,36px)] leading-[1.2] font-normal in-[:lang(zh-CN)]:leading-[1.4]"><span class={underlineClasses}>{t.farewell}</span></h2>
           <Signature idPrefix="footer" label={t.signature} />
         </div>
-        <div class="footer-meta">
+        <div class="footer-meta flex flex-wrap items-center justify-between gap-x-6 gap-y-4 border-t border-[#292d3214] px-8 py-6 text-xs leading-[inherit] text-[#616771] [@media(max-width:640px)]:px-6">
           <p>© 2026 Caven</p>
-          <ul class="contact-links" aria-label={t.contact}>
+          <ul class="contact-links m-0 flex list-none flex-wrap items-center gap-x-5 gap-y-2 p-0 [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center [&_a]:gap-1.5" aria-label={t.contact}>
             <li><EmailReveal href={contact.email} label={t.email} /></li>
-            <li><a href={contact.github} target="_blank" rel="noopener noreferrer"><GitHub class="pika-icon" aria-hidden="true" />GitHub</a></li>
-            <li><a href={contact.x} target="_blank" rel="noopener noreferrer"><X class="pika-icon" aria-hidden="true" />X</a></li>
+            <li><a href={contact.github} target="_blank" rel="noopener noreferrer"><GitHub class="pika-icon size-[18px] shrink-0" aria-hidden="true" />GitHub</a></li>
+            <li><a href={contact.x} target="_blank" rel="noopener noreferrer"><X class="pika-icon size-[18px] shrink-0" aria-hidden="true" />X</a></li>
           </ul>
         </div>
       </div>
       <img
-        class="footer-landscape"
+        class="footer-landscape mx-auto my-0 block h-auto w-full mix-blend-multiply"
         src="/images/tianchi-footer-study.png"
         width="2172"
         height="724"
