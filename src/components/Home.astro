@@ -30,7 +30,7 @@ const underlineClasses = "relative inline-block pb-2 after:absolute after:right-
   </head>
   <body>
       <header class="sticky top-0 z-10 mx-auto w-[min(calc(100%-48px),768px)] bg-[#faf9f699] backdrop-blur-[20px] backdrop-saturate-[140%] max-sm:w-[calc(100%-32px)]">
-        <nav class="flex min-h-[72px] items-center justify-between gap-5 px-8 py-5 max-sm:px-5 max-[380px]:items-start max-[380px]:gap-3" aria-label={t.navigation}>
+        <nav class="flex h-22 items-center justify-between gap-5 px-8 max-sm:px-5 max-[380px]:gap-3" aria-label={t.navigation}>
           <a class="inline-flex min-h-11 shrink-0 items-center [&_.signature]:m-0 [&_.signature]:w-20" href={locale === "en" ? "/" : "/zh/"} aria-label="Caven"><Signature idPrefix="header" label={t.signature} /></a>
           <div class="m-0 flex list-none flex-wrap items-center justify-end gap-x-5 gap-y-2 p-0 text-[13px] max-sm:gap-x-3 [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center [&_a]:gap-1.5">
             <a class="whitespace-nowrap" href={t.switchPath} hreflang={t.switchLang} lang={t.switchLang} aria-label={t.switchLabel} data-language-switch><Translate class="size-[18px] shrink-0" aria-hidden="true" />{t.switchText}</a>

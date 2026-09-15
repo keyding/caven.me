@@ -83,18 +83,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  [data-introduction] {
-    animation: intro-enter 500ms ease-out;
-  }
   a {
     transition: color 150ms ease;
-  }
-}
-@keyframes intro-enter {
-  from {
-    transform: translateY(8px);
-  }
-  to {
-    transform: translateY(0);
   }
 }
