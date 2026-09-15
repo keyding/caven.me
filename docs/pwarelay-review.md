@@ -106,3 +106,22 @@ formatting and lint also passed. Standards re-review and Spec review both have
 - [Framed thumbnail, mobile](pwarelay-evidence/image-frame-mobile.png)
 - [Large preview, desktop](pwarelay-evidence/image-preview-desktop.png)
 - [Large preview, mobile](pwarelay-evidence/image-preview-mobile.png)
+
+## Caption, Pikaicons and monochrome favicon follow-up
+
+Removed the thumbnail's View image overlay and shortened both localized captions
+to Sample data / 示例数据. Information and close icons are direct Pikaicons SVG
+exports; node provenance is recorded in `src/assets/icons/README.md`.
+
+This supersedes the earlier favicon outline treatment: the adaptive SVG has
+solid black strokes in light mode and white strokes in dark mode, with no halo.
+The transparent ICO fallback uses black strokes. Both icon URLs use version 3.
+
+Validation: formatting, lint and Astro checking passed. The full browser suite
+passed 90/92 tests; the two failures caught a white ICO export. After correcting
+the fallback to black, all four desktop/mobile favicon tests passed. Both review
+axes reported zero findings. Desktop and mobile visuals were inspected:
+
+- [Updated desktop thumbnail](pwarelay-evidence/image-polish-desktop.png)
+- [Updated mobile thumbnail](pwarelay-evidence/image-polish-mobile.png)
+- [Updated large preview](pwarelay-evidence/image-polish-preview.png)
