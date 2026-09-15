@@ -87,3 +87,21 @@
     transition: color 150ms ease;
   }
 }
+
+/* Fade grouped content without changing its position or dimensions. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-intro-stage] {
+    animation: intro-fade 300ms ease-out both;
+  }
+  [data-intro-stage="details"] {
+    animation-delay: 60ms;
+  }
+}
+@keyframes intro-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

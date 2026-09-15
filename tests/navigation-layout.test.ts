@@ -31,3 +31,32 @@ for (const path of ["/", "/zh/"]) {
     }
   });
 }
+
+test("introduction fades finish visibly and respect reduced motion", async ({ page }) => {
+  for (const reducedMotion of ["no-preference", "reduce"] as const) {
+    await page.emulateMedia({ reducedMotion });
+    await page.goto("/");
+    const stages = page.locator("[data-intro-stage]");
+    await expect(stages).toHaveCount(2);
+    if (reducedMotion === "reduce") {
+      expect(
+        await stages.evaluateAll(
+          (elements) => elements.flatMap((element) => element.getAnimations()).length,
+        ),
+      ).toBe(0);
+    } else {
+      await stages.evaluateAll(async (elements) => {
+        await Promise.all(
+          elements.flatMap((element) =>
+            element.getAnimations().map((animation) => animation.finished),
+          ),
+        );
+      });
+    }
+    for (const stage of await stages.all()) {
+      await expect(stage).toHaveCSS("opacity", "1");
+      await expect(stage).toHaveCSS("transform", "none");
+      await expect(stage).toHaveCSS("filter", "none");
+    }
+  }
+});
