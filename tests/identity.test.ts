@@ -313,3 +313,34 @@ test("email reveal still synchronizes when local storage is unavailable", async 
     await expect(link).toHaveText("cavenasdev@gmail.com");
   }
 });
+
+test("mobile expanded email gets its own row while GitHub and X stay together", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const rows = [
+    page.locator("[data-intro-contacts] > div"),
+    page.locator("footer ul").filter({ has: page.locator("[data-email-reveal]") }),
+  ];
+  const positions = async (row: (typeof rows)[number]) =>
+    row.locator("a").evaluateAll((links) => links.map((link) => link.getBoundingClientRect().top));
+  for (const row of rows) {
+    const [email, github, x] = await positions(row);
+    expect(email).toBe(github);
+    expect(github).toBe(x);
+  }
+  await page.locator("[data-introduction] [data-email-reveal]").click();
+  for (const path of [null, "/", "/zh/"]) {
+    if (path) await page.goto(path);
+    for (const row of rows) {
+      const [email, github, x] = await positions(row);
+      expect(github).toBeGreaterThan(email);
+      expect(github).toBe(x);
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+  }
+});
