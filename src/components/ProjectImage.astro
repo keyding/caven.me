@@ -19,7 +19,7 @@ const originalLabel = locale === "en" ? "Open original image" : "查看原图";
   <dialog class="image-preview m-auto w-fit max-w-[calc(100vw-32px)] max-h-[calc(100dvh-32px)] overscroll-contain rounded-[14px] border border-[#ffffff24] bg-[#161a18] p-3 text-[#f1f3f1] shadow-[0_24px_80px_#0006] backdrop:bg-[#101713cc] backdrop:backdrop-blur-[8px] motion-safe:open:animate-[preview-appear_160ms_ease-out]" id={`${id}-image-preview`} aria-labelledby={`${id}-image-caption`}>
     <div class="mb-3 flex items-center justify-between gap-6">
       <a class="inline-flex min-h-11 items-center gap-1.5 px-2 text-[13px] hover:!text-[#f0d98b] focus-visible:!outline-highlight" href={image.src} target="_blank" rel="noopener noreferrer">{originalLabel}<ExternalLink class="size-4 shrink-0" aria-hidden="true" /></a>
-      <button class="grid size-11 shrink-0 place-items-center cursor-pointer rounded-lg border border-[#ffffff29] bg-[#ffffff0d] text-inherit hover:bg-[#ffffff24] focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-highlight focus-visible:outline-offset-3" type="button" aria-label={closeLabel} data-image-close autofocus><Close class="size-5" aria-hidden="true" /></button>
+      <button class="group/close grid size-11 shrink-0 place-items-center cursor-pointer rounded-lg border border-[#ffffff29] bg-[#ffffff0d] text-inherit hover:bg-[#ffffff24] focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-highlight focus-visible:outline-offset-3" type="button" aria-label={closeLabel} data-image-close autofocus><Close class="size-5 origin-center [transform:scale(1)] opacity-100 duration-0 ease-out motion-safe:transition-transform motion-reduce:transition-opacity group-data-[pointer-pressed]/close:duration-100 motion-safe:group-data-[pointer-pressed]/close:[transform:scale(.96)] motion-reduce:group-data-[pointer-pressed]/close:opacity-85" aria-hidden="true" /></button>
     </div>
     <img class="mx-auto block h-auto max-h-[calc(100dvh-170px)] w-auto max-w-full rounded-md object-contain" src={image.src} width={image.width} height={image.height} alt={image.alt[locale]} loading="lazy" decoding="async" />
     <p class="mx-2 mt-3 mb-0 flex items-center gap-1.5 text-xs leading-[1.6] text-[#bec8c1]" id={`${id}-image-caption`}><InformationCircle class="size-4 shrink-0" aria-hidden="true" />{image.caption[locale]}</p>
@@ -52,6 +52,13 @@ const originalLabel = locale === "en" ? "Open original image" : "查看原图";
       event.preventDefault();
       dialog.showModal();
     });
+    const clearPointerPress = () => close.removeAttribute("data-pointer-pressed");
+    close.addEventListener("pointerdown", (event) => {
+      if (event.isPrimary && event.button === 0) close.setAttribute("data-pointer-pressed", "");
+    });
+    for (const event of ["pointerup", "pointercancel", "pointerleave", "lostpointercapture", "blur", "keydown"]) {
+      close.addEventListener(event, clearPointerPress);
+    }
     close.addEventListener("click", () => dialog.close());
     dialog.addEventListener("keydown", (event) => {
       if (event.key !== "Tab") return;
@@ -70,6 +77,9 @@ const originalLabel = locale === "en" ? "Open original image" : "查看原图";
       const bounds = dialog.getBoundingClientRect();
       if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
     });
-    dialog.addEventListener("close", () => trigger.focus({ preventScroll: true }));
+    dialog.addEventListener("close", () => {
+      clearPointerPress();
+      trigger.focus({ preventScroll: true });
+    });
   }
 </script>
