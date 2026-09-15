@@ -15,7 +15,26 @@ for (const locale of ["en", "zh"] as const) {
     await expect(
       project.getByRole("link", { name: locale === "en" ? "Source code" : "源代码", exact: true }),
     ).toHaveCount(0);
-    await expect(project.getByRole("img")).toHaveCount(0);
+    const image = project.getByRole("img", {
+      name:
+        locale === "en"
+          ? "PWARelay dashboard redesign preview with sample installation and attribution data"
+          : "PWARelay Dashboard 改版预览，展示安装与归因示例数据",
+    });
+    await expect(image).toBeVisible();
+    await expect
+      .poll(() => image.evaluate((el: HTMLImageElement) => [el.naturalWidth, el.naturalHeight]))
+      .toEqual([1600, 1000]);
+    await expect(project).toContainText(
+      locale === "en"
+        ? "Dashboard redesign preview · Sample data"
+        : "Dashboard 改版预览 · 示例数据",
+    );
+    await expect(
+      page
+        .getByRole("region", { name: locale === "en" ? "Selected work" : "精选项目", exact: true })
+        .getByText(locale === "en" ? "Project" : "项目", { exact: true }),
+    ).toHaveCount(0);
   });
 
   test(`${locale} PWARelay stays readable through refresh, keyboard navigation and translation`, async ({

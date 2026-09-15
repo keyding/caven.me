@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PWARelay — Dashboard design preview</title>
+    <style>
+      @font-face {
+        font-family: Geist;
+        src: url("../../../node_modules/@fontsource/geist/files/geist-latin-400-normal.woff2");
+      }
+      @font-face {
+        font-family: Geist;
+        font-weight: 500;
+        src: url("../../../node_modules/@fontsource/geist/files/geist-latin-500-normal.woff2");
+      }
+      html {
+        overflow: hidden;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #131414;
+        color: #efefef;
+        font:
+          14px Geist,
+          sans-serif;
+        width: 1600px;
+        height: 1000px;
+        -webkit-font-smoothing: antialiased;
+      }
+      svg {
+        display: block;
+      }
+      .icon {
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex-shrink: 0;
+      }
+      .muted {
+        color: #898c8c;
+      }
+      .top {
+        height: 66px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 28px;
+        border-bottom: 1px solid #292b2b;
+      }
+      .brand {
+        font-size: 19px;
+        font-weight: 500;
+        letter-spacing: -0.5px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .brandmark {
+        background: #ebeeee;
+        color: #151717;
+        width: 29px;
+        height: 29px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        font-size: 25px;
+      }
+      .topright {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        font-size: 12px;
+      }
+      .preview {
+        border: 1px solid #3c4141;
+        border-radius: 20px;
+        padding: 6px 12px;
+        color: #b9c1c1;
+      }
+      .avatar {
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: #303333;
+        width: 29px;
+        height: 29px;
+        font-size: 11px;
+      }
+      .shell {
+        display: flex;
+        height: 934px;
+      }
+      .sidebar {
+        width: 226px;
+        flex-shrink: 0;
+        padding: 22px 15px;
+        display: flex;
+        flex-direction: column;
+        color: #999d9d;
+      }
+      .search {
+        border: 1px solid #353838;
+        border-radius: 7px;
+        padding: 9px 10px;
+        display: flex;
+        gap: 8px;
+        margin-bottom: 27px;
+        font-size: 12px;
+      }
+      .search kbd {
+        margin-left: auto;
+        background: #292c2c;
+        border-radius: 3px;
+        padding: 0 4px;
+      }
+      .navtitle {
+        font-size: 10px;
+        letter-spacing: 1.3px;
+        padding: 0 12px;
+        margin-bottom: 9px;
+        color: #646969;
+      }
+      .navitem {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 12px;
+        border-radius: 7px;
+        margin: 2px 0;
+        font-size: 13px;
+      }
+      .navitem.active {
+        background: #282b2b;
+        color: #f4f6f6;
+      }
+      .navitem .count {
+        margin-left: auto;
+        font-size: 10px;
+        border: 1px solid #3f4444;
+        padding: 2px 5px;
+        border-radius: 4px;
+      }
+      .sidebar .bottom {
+        margin-top: auto;
+      }
+      .workspace {
+        margin: 23px 8px 0;
+        border-top: 1px solid #2c2e2e;
+        padding-top: 20px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        color: #d5d8d8;
+        font-size: 12px;
+      }
+      .workspace small {
+        display: block;
+        color: #6c7272;
+        font-size: 10px;
+        margin-top: 4px;
+      }
+      .main {
+        margin: 12px 14px 14px 0;
+        padding: 23px 29px;
+        background: #0b0d0d;
+        border: 1px solid #303333;
+        border-radius: 14px;
+        flex: 1;
+        min-width: 0;
+      }
+      .crumb {
+        font-size: 12px;
+        color: #717878;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .crumb b {
+        color: #c4cbcb;
+        font-weight: 400;
+      }
+      .env {
+        color: #86c3a6;
+        font-size: 10px;
+        border: 1px solid #2d4339;
+        border-radius: 4px;
+        padding: 3px 7px;
+        margin-left: 2px;
+      }
+      .heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 22px;
+      }
+      .heading h1 {
+        font-size: 27px;
+        letter-spacing: -0.9px;
+        font-weight: 500;
+        margin: 0 0 9px;
+      }
+      .heading p {
+        font-size: 12px;
+        color: #858c8c;
+        margin: 0;
+      }
+      .filters {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+      }
+      .filter {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 9px 12px;
+        border: 1px solid #323737;
+        border-radius: 7px;
+        color: #c4cbcb;
+        font-size: 11px;
+      }
+      .tabs {
+        display: flex;
+        gap: 25px;
+        margin: 26px 0 23px;
+        border-bottom: 1px solid #282d2d;
+        color: #858d8d;
+        font-size: 12px;
+      }
+      .tabs span {
+        padding: 0 0 13px;
+      }
+      .tabs .selected {
+        border-bottom: 2px solid #d7e4e0;
+        color: #e8eeee;
+      }
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+      .card {
+        border: 1px solid #2b3030;
+        border-radius: 10px;
+        background: #101313;
+        overflow: hidden;
+      }
+      .cardlabel {
+        padding: 12px 16px;
+        color: #a1aaaa;
+        background: #191d1d;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+      }
+      .cardlabel .dots {
+        margin-left: auto;
+        color: #777f7f;
+      }
+      .metricbody {
+        padding: 17px 16px 16px;
+      }
+      .value {
+        font-size: 30px;
+        font-weight: 500;
+        letter-spacing: -0.8px;
+        line-height: 1.1;
+      }
+      .metricbody p {
+        margin: 9px 0 0;
+        color: #7e8888;
+        font-size: 10px;
+      }
+      .metricbody p b {
+        font-weight: 400;
+        color: #a8cabb;
+      }
+      .sectionhead {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 26px 0 13px;
+      }
+      .sectionhead h2 {
+        font-size: 15px;
+        font-weight: 500;
+        margin: 0;
+      }
+      .sectionhead span {
+        font-size: 10px;
+        color: #738080;
+      }
+      .charts {
+        display: grid;
+        grid-template-columns: 1.65fr 1fr;
+        gap: 15px;
+      }
+      .chartcard {
+        height: 287px;
+      }
+      .charttop {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 17px 18px 8px;
+      }
+      .charttitle {
+        font-size: 12px;
+        color: #d9dfdf;
+      }
+      .charttitle small {
+        display: block;
+        font-size: 10px;
+        color: #718080;
+        margin-top: 7px;
+      }
+      .legend {
+        display: flex;
+        gap: 15px;
+        font-size: 10px;
+        color: #93a1a1;
+        align-items: center;
+      }
+      .dot {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        margin-right: 5px;
+        background: #80bfa8;
+      }
+      .dot.gray {
+        background: #686f71;
+      }
+      .plot {
+        width: 100%;
+        height: 222px;
+        padding: 0 14px 10px;
+      }
+      .funnel {
+        padding: 10px 19px;
+      }
+      .step {
+        margin: 9px 0;
+      }
+      .steplabel {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+        color: #a7b0b0;
+        margin-bottom: 7px;
+      }
+      .steplabel b {
+        color: #d8e1e1;
+        font-weight: 400;
+      }
+      .track {
+        height: 12px;
+        background: #1b2221;
+        border-radius: 3px;
+      }
+      .bar {
+        height: 100%;
+        background: linear-gradient(90deg, #527a6b, #96c6b3);
+        border-radius: 3px;
+      }
+      .smallnote {
+        font-size: 9px;
+        color: #657575;
+        margin: 13px 0 0;
+      }
+      .lower {
+        display: grid;
+        grid-template-columns: 1.65fr 1fr;
+        gap: 15px;
+        margin-top: 15px;
+      }
+      .tablecard {
+        height: 180px;
+      }
+      .tableheading {
+        padding: 14px 18px;
+        font-size: 12px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #242a29;
+      }
+      .tableheading span {
+        font-size: 10px;
+        color: #82918a;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 10px;
+      }
+      th {
+        font-weight: 400;
+        color: #697b75;
+        text-align: right;
+        padding: 10px 18px;
+      }
+      td {
+        text-align: right;
+        padding: 9px 18px;
+        border-top: 1px solid #1c2521;
+        color: #c7d2cc;
+      }
+      td:first-child,
+      th:first-child {
+        text-align: left;
+      }
+      .quality {
+        padding: 16px 18px;
+      }
+      .quality h3 {
+        font-size: 12px;
+        font-weight: 400;
+        margin: 0 0 17px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .quality h3 span {
+        color: #98bdaa;
+        font-size: 10px;
+      }
+      .qualityrow {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+        color: #83968d;
+        padding: 7px 0;
+      }
+      .qualityrow b {
+        font-weight: 400;
+        color: #cddbd3;
+      }
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        font-size: 9px;
+        color: #5e7267;
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <svg style="display: none">
+      <defs>
+        <symbol id="grid" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7" rx="1" />
+          <rect x="14" y="3" width="7" height="7" rx="1" />
+          <rect x="3" y="14" width="7" height="7" rx="1" />
+          <rect x="14" y="14" width="7" height="7" rx="1" />
+        </symbol>
+        <symbol id="chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 15v-4m5 4V7m5 8v-5" /></symbol>
+        <symbol id="circle" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="8" />
+          <path d="m8 12 3 3 5-6" />
+        </symbol>
+        <symbol id="box" viewBox="0 0 24 24">
+          <path d="m3 7 9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10" />
+        </symbol>
+        <symbol id="arrow" viewBox="0 0 24 24">
+          <path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4" />
+        </symbol>
+        <symbol id="bell" viewBox="0 0 24 24">
+          <path d="M5 16h14l-2-3V9a5 5 0 0 0-10 0v4zM10 20h4" />
+        </symbol>
+        <symbol id="search" viewBox="0 0 24 24">
+          <circle cx="10" cy="10" r="6" />
+          <path d="m15 15 5 5" />
+        </symbol>
+        <symbol id="chevron" viewBox="0 0 24 24"><path d="m8 10 4 4 4-4" /></symbol>
+      </defs>
+    </svg>
+    <header class="top">
+      <div class="brand">
+        <span class="brandmark">↗</span>PWARelay
+        <span style="color: #444c48; margin: 0 10px; font-weight: 400">/</span
+        ><span style="font-size: 12px; letter-spacing: 0; color: #a0ada6">Personal workspace</span>
+      </div>
+      <div class="topright">
+        <span class="preview">Design preview · Sample data</span
+        ><svg class="icon"><use href="#bell" /></svg><span class="avatar">C</span>
+      </div>
+    </header>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="search">
+          <svg class="icon"><use href="#search" /></svg>Search anything<kbd>⌘ K</kbd>
+        </div>
+        <div class="navtitle">WORKSPACE</div>
+        <div class="navitem">
+          <svg class="icon"><use href="#grid" /></svg>Projects
+        </div>
+        <div class="navtitle" style="margin-top: 29px">PROJECT</div>
+        <div class="navitem">
+          <svg class="icon"><use href="#circle" /></svg>Readiness
+        </div>
+        <div class="navitem">
+          <svg class="icon"><use href="#box" /></svg>Manifest OTA
+        </div>
+        <div class="navitem">
+          <svg class="icon"><use href="#arrow" /></svg>Install Journey
+        </div>
+        <div class="navitem">
+          <svg class="icon"><use href="#box" /></svg>Offline & Cache
+        </div>
+        <div class="navitem">
+          <svg class="icon"><use href="#circle" /></svg>Updates
+        </div>
+        <div class="navitem">
+          <svg class="icon"><use href="#bell" /></svg>Notifications
+        </div>
+        <div class="navitem active">
+          <svg class="icon"><use href="#chart" /></svg>Funnel & Attribution
+        </div>
+        <div class="bottom">
+          <div class="navitem">
+            <svg class="icon"><use href="#box" /></svg>Documentation
+          </div>
+          <div class="navitem">
+            <svg class="icon"><use href="#circle" /></svg>Settings
+          </div>
+          <div class="workspace">
+            <span class="avatar">C</span>
+            <div>Caven<small>Personal workspace</small></div>
+          </div>
+        </div>
+      </aside>
+      <main class="main">
+        <div class="crumb">
+          Projects <span>/</span> <b>Sample PWA</b> <span>/</span> Funnel
+          <span class="env">Production</span>
+        </div>
+        <div class="heading">
+          <div>
+            <h1>Funnel & Attribution</h1>
+            <p>Understand the journey from first visit to installed app.</p>
+          </div>
+          <div class="filters">
+            <span class="filter"
+              >All platforms <svg class="icon"><use href="#chevron" /></svg></span
+            ><span class="filter"
+              >Jul 1 – Jul 30, 2026 <svg class="icon"><use href="#chevron" /></svg
+            ></span>
+          </div>
+        </div>
+        <div class="tabs">
+          <span class="selected">Acquisition & Install</span><span>Overview</span
+          ><span>Channels</span><span>Install Experiments</span><span>Notifications</span>
+        </div>
+        <div class="metrics">
+          <div class="card">
+            <div class="cardlabel">
+              <svg class="icon"><use href="#grid" /></svg>Eligible cohort
+              <span class="dots">···</span>
+            </div>
+            <div class="metricbody">
+              <div class="value">1,200</div>
+              <p>Anonymous Subjects · cohort entry</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="cardlabel">
+              <svg class="icon"><use href="#arrow" /></svg>Invitations shown
+              <span class="dots">···</span>
+            </div>
+            <div class="metricbody">
+              <div class="value">720</div>
+              <p><b>60.0%</b> of eligible cohort</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="cardlabel">
+              <svg class="icon"><use href="#circle" /></svg>Installs observed
+              <span class="dots">···</span>
+            </div>
+            <div class="metricbody">
+              <div class="value">300</div>
+              <p>Positive installation evidence</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="cardlabel">
+              <svg class="icon"><use href="#chart" /></svg>Installation completion
+              <span class="dots">···</span>
+            </div>
+            <div class="metricbody">
+              <div class="value">25.0<span style="font-size: 21px">%</span></div>
+              <p><b>300 / 1,200</b> · 30-day mature window</p>
+            </div>
+          </div>
+        </div>
+        <div class="sectionhead">
+          <h2>Acquisition & Install</h2>
+          <span>Completed cohort · 30-day mature window</span>
+        </div>
+        <div class="charts">
+          <section class="card chartcard">
+            <div class="charttop">
+              <div class="charttitle">
+                Cohort trend<small>Anonymous Subjects by entry date</small>
+              </div>
+              <div class="legend">
+                <span><i class="dot gray"></i>Eligible cohort</span
+                ><span><i class="dot"></i>Install observed</span>
+              </div>
+            </div>
+            <svg
+              id="trend"
+              class="plot"
+              viewBox="0 0 740 220"
+              aria-label="Sample acquisition and installation trend"
+            ></svg>
+          </section>
+          <section class="card chartcard">
+            <div class="charttop">
+              <div class="charttitle">
+                Installation funnel<small>Anonymous Subjects · same eligible cohort</small>
+              </div>
+            </div>
+            <div class="funnel" id="funnel"></div>
+          </section>
+        </div>
+        <div class="lower">
+          <section class="card tablecard">
+            <div class="tableheading">Acquisition sources<span>Grouped by source</span></div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th>Eligible cohort</th>
+                  <th>Install observed</th>
+                  <th>Completion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Direct</td>
+                  <td>600</td>
+                  <td>156</td>
+                  <td>26.0%</td>
+                </tr>
+                <tr>
+                  <td>Organic search</td>
+                  <td>400</td>
+                  <td>100</td>
+                  <td>25.0%</td>
+                </tr>
+                <tr>
+                  <td>Referral</td>
+                  <td>200</td>
+                  <td>44</td>
+                  <td>22.0%</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="card tablecard quality">
+            <h3>Coverage & integrity <span>Complete cohort</span></h3>
+            <div class="qualityrow">Lost records<b>0</b></div>
+            <div class="qualityrow">Unobservable Subjects<b>0</b></div>
+            <div class="qualityrow">Incomplete associations<b>0</b></div>
+            <div class="qualityrow">Mature through<b>Aug 29, 2026 · UTC</b></div>
+          </section>
+        </div>
+        <div class="footer">
+          <span>Privacy by design. PWA infrastructure events only.</span
+          ><span>Illustrative dataset · Not connected to a live project</span>
+        </div>
+      </main>
+    </div>
+    <script>
+      // Deterministic sample cohorts: totals match the cards and source table.
+      const entries = [
+        24, 28, 26, 32, 38, 33, 30, 35, 39, 36, 31, 35, 40, 44, 39, 43, 47, 42, 38, 41, 46, 50, 45,
+        49, 54, 48, 44, 49, 53, 41,
+      ];
+      const installs = [
+        4, 5, 4, 7, 9, 8, 6, 7, 9, 8, 6, 8, 10, 12, 9, 11, 14, 11, 9, 10, 12, 15, 12, 14, 17, 14,
+        11, 14, 16, 8,
+      ];
+      const plot = document.getElementById("trend");
+      const points = (values) => values.map((v, i) => [38 + i * 22.7, 180 - v * 2.55]);
+      // Smooth cubic segments keep the screenshot independent of chart-library animation.
+      const curve = (values) => {
+        const p = points(values);
+        return p.reduce(
+          (d, [x, y], i) =>
+            i === 0
+              ? `M${x},${y}`
+              : `${d} C${p[i - 1][0] + 11.35},${p[i - 1][1]} ${x - 11.35},${y} ${x},${y}`,
+          "",
+        );
+      };
+      const a = curve(entries),
+        b = curve(installs),
+        end = 38 + 29 * 22.7;
+      plot.innerHTML = `<defs><linearGradient id="green" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#77b69d" stop-opacity=".35"/><stop offset="1" stop-color="#77b69d" stop-opacity=".015"/></linearGradient><linearGradient id="gray" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#87958e" stop-opacity=".13"/><stop offset="1" stop-color="#87958e" stop-opacity=".015"/></linearGradient></defs>${[0, 20, 40, 60].map((v) => `<path d="M38 ${180 - v * 2.55}H714" stroke="#29312d" stroke-dasharray="3 4"/><text x="7" y="${184 - v * 2.55}" fill="#64776b" font-size="10">${v}</text>`).join("")}<path d="${a}L${end},180H38Z" fill="url(#gray)"/><path d="${a}" fill="none" stroke="#697a71" stroke-width="1.8"/><path d="${b}L${end},180H38Z" fill="url(#green)"/><path d="${b}" fill="none" stroke="#99cfb7" stroke-width="2.2"/>${[0, 7, 14, 21, 29].map((i) => `<text x="${38 + i * 22.7}" y="207" fill="#74867b" font-size="10" text-anchor="middle">Jul ${i + 1}</text>`).join("")}`;
+      document.getElementById("funnel").innerHTML = [
+        ["Cohort entry", 1200],
+        ["Invitation shown", 720],
+        ["Install Flow started", 480],
+        ["Install observed", 300],
+        ["Standalone launch", 240],
+      ]
+        .map(
+          ([label, count]) =>
+            `<div class="step"><div class="steplabel"><span>${label}</span><b>${count.toLocaleString("en-US")}</b></div><div class="track"><div class="bar" style="width:${count / 12}%"></div></div></div>`,
+        )
+        .join("");
+    </script>
+  </body>
+</html>

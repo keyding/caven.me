@@ -11,17 +11,18 @@ general-availability claims are published.
 - `https://pwarelay.com` returned HTTP 200. Browser inspection confirmed the
   PWARelay lifecycle-infrastructure landing page. It labels Quickstart as
   pending review; the portfolio makes no claim that onboarding is available.
-- `https://github.com/terminalzero-dev/pwarelay` returned HTTP 404. No public
-  source destination was verified, so the entry omits the source link.
-- The official landing page labels its product scenario as a sample project.
-  This slice uses the specification's text-led fallback, without screenshots,
-  fabricated UI, or an empty image placeholder.
+- The actual source repository was verified as private after inspecting the
+  user-provided checkout; the portfolio omits its source link.
+- At the user's request, the project now includes a real browser capture of a
+  locally rendered dashboard redesign preview. Its sample data and preview
+  status are labelled inside the image and in both localized captions. See
+  [artwork source and provenance](artwork/pwarelay-dashboard/README.md).
 - The source resume remains local and unchanged; it is not committed.
 
 ## Implementation
 
 `src/data/projects.ts` holds stable project identity, optional website/source
-destinations and equivalent English/Chinese content. `ProjectEntry.astro`
+destinations, optional image metadata and equivalent English/Chinese content. `ProjectEntry.astro`
 renders the entry on both homepages. Additional entries can use this same
 model without adding routes. The two remaining project placeholders stay
 reserved for issue #7.
@@ -40,7 +41,7 @@ verified/omitted destinations, fragment entry and refresh, language switching,
 keyboard focus, responsive bounds, reduced motion, and JavaScript-free content.
 
 Final local checks: formatting, lint, Astro typecheck (0 errors/warnings/hints),
-production build and all 84 browser tests passed. The project suite contributes
+production build and all 86 browser tests passed. The project suite contributes
 10 tests across the desktop/mobile projects.
 
 Live Chromium review covered English and Chinese at 1280px and 390px, including
@@ -57,3 +58,19 @@ stays static rather than adding decorative entrance movement.
 Independent code-review passes against branch base `e8a9d4d` reported
 0 Standards findings and 0 Spec findings. Production deployment is outside
 this PR's verification scope.
+
+## Favicon follow-up
+
+The adaptive SVG was verified white under a dark media preference, while the
+ICO contained only dark foreground pixels. A regression test against the
+served raster icon failed (zero opaque light pixels), then passed after adding
+an opposite-color outline. SVG retains its media-query foreground and gains
+an opposite-color outline; the regenerated 16/32/48px ICO has a dark foreground
+and white outline on a transparent canvas. This protects contrast when browser
+chrome uses the raster fallback or a theme different from the OS preference.
+Versioned icon URLs invalidate the prior metadata references.
+
+The browser-visible tests cover the served ICO pixels, SVG theme switching,
+the project image's successful decode, localized caption, and removal of the
+Selected work / 精选项目 header's Project / 项目 label. This does not claim to
+identify which icon the user's browser chrome selected from the screenshot.

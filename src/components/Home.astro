@@ -62,7 +62,7 @@ const underlineClasses = "relative inline-block pb-2 after:absolute after:right-
         </section>
 
         <section class="p-8 max-sm:p-6" aria-labelledby="work-title">
-          <div class="mb-7 flex flex-wrap items-baseline justify-between gap-3 max-sm:mb-6"><h2 class="font-display text-[30px] leading-[1.2] font-normal in-[:lang(zh-CN)]:leading-[1.4] max-sm:text-[28px]" id="work-title"><span class={underlineClasses}>{t.work}</span></h2><span class="text-[11px] leading-normal tracking-[0.08em] uppercase text-[#535d6c]">{t.project}</span></div>
+          <div class="mb-7 flex flex-wrap items-baseline justify-between gap-3 max-sm:mb-6"><h2 class="font-display text-[30px] leading-[1.2] font-normal in-[:lang(zh-CN)]:leading-[1.4] max-sm:text-[28px]" id="work-title"><span class={underlineClasses}>{t.work}</span></h2></div>
           <div class="grid grid-cols-1 gap-12 max-sm:gap-10">
             {projects.map((project) => <ProjectEntry project={project} locale={locale} />)}
             {[2, 3].map((number) => (

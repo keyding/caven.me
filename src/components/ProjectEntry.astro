@@ -23,4 +23,10 @@ const t = home[locale];
       {project.source && <li><a href={project.source} target="_blank" rel="noopener noreferrer"><Code class="size-4.5 shrink-0" aria-hidden="true" />{t.source}<ExternalLink class="size-3.5 shrink-0" aria-hidden="true" /></a></li>}
     </ul>
   )}
+  {project.image && (
+    <figure class="mt-6 mb-0">
+      <img class="block h-auto w-full rounded-lg border border-[#292d3214]" src={project.image.src} width={project.image.width} height={project.image.height} alt={project.image.alt[locale]} loading="lazy" decoding="async" />
+      <figcaption class="mt-2 text-xs leading-[1.8] text-[#616771]">{project.image.caption[locale]}</figcaption>
+    </figure>
+  )}
 </article>

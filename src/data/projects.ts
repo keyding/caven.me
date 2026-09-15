@@ -5,6 +5,13 @@ export interface Project {
   title: string;
   website?: string;
   source?: string;
+  image?: {
+    src: string;
+    width: number;
+    height: number;
+    alt: Record<Locale, string>;
+    caption: Record<Locale, string>;
+  };
   content: Record<Locale, { role: string; intro: string }>;
 }
 
@@ -14,6 +21,19 @@ export const projects: Project[] = [
     id: "pwarelay",
     title: "PWARelay",
     website: "https://pwarelay.com",
+    image: {
+      src: "/images/pwarelay-dashboard.webp",
+      width: 1600,
+      height: 1000,
+      alt: {
+        en: "PWARelay dashboard redesign preview with sample installation and attribution data",
+        zh: "PWARelay Dashboard 改版预览，展示安装与归因示例数据",
+      },
+      caption: {
+        en: "Dashboard redesign preview · Sample data",
+        zh: "Dashboard 改版预览 · 示例数据",
+      },
+    },
     content: {
       en: {
         role: "Independent developer · Product architecture & full-stack engineering",
