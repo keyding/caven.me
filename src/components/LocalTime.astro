@@ -9,9 +9,9 @@ interface Props {
 const { location, timeZone, zoneLabel, label } = Astro.props;
 ---
 
-<p class="location-time m-0 ml-auto max-sm:ml-0 flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] leading-[1.6] text-[#73716c]">
-  <span class="location flex items-center gap-1.5"><MapPin class="pika-icon size-[18px] shrink-0" aria-hidden="true" />{location}</span>
-  <span class="local-clock flex items-center gap-1.5 whitespace-nowrap tabular-nums" aria-label={label}>
+<p data-location-time class="m-0 ml-auto max-sm:ml-0 flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] leading-[1.6] text-[#73716c]">
+  <span class="flex items-center gap-1.5"><MapPin class="size-[18px] shrink-0" aria-hidden="true" />{location}</span>
+  <span class="flex items-center gap-1.5 whitespace-nowrap tabular-nums" aria-label={label}>
     <time data-local-time data-time-zone={timeZone} hidden></time>
     <span>{zoneLabel}</span>
   </span>

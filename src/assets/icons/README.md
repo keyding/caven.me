@@ -19,3 +19,5 @@ Icons use the Stroke variant except the Solid profile badge. Exported on 2026-09
 Only the chosen variant is retained from each export, preserving its paths and 24×24 viewBox. Exported backgrounds and IDs are removed; the foreground color uses currentColor. Chevron-down rotates 180 degrees for the open state. The X icon comes from `social/x-com` (component set `27925:3168`).
 
 Current Contrast exports from the same Pikaicons file: email `27985:629`, GitHub `30877:8174`, X `27925:3172`, briefcase `28165:209`, chevron-down `27935:443`, external-link `27946:759`, globe `27925:3043`. Original 28% fill opacity is preserved; color uses currentColor. Translate and code have no Contrast variant and retain Stroke.
+
+Location uses the matching Contrast `map/map-pin` variant `28284:519`.

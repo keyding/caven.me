@@ -1,5 +1,32 @@
 @import "tailwindcss" source("../");
 
+/* Preload these local WOFF2 files in Home; briefly block fallback to avoid a font swap on refresh. */
+
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("@fontsource/geist/files/geist-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url("@fontsource/geist/files/geist-latin-500-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2")
+    format("woff2");
+}
+
 @theme {
   --font-sans: "Geist", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-display: "Instrument Serif", "Songti SC", "SimSun", Georgia, serif;
@@ -56,7 +83,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .introduction {
+  [data-introduction] {
     animation: intro-enter 500ms ease-out;
   }
   a {

@@ -166,7 +166,7 @@ test("navigation stays at the top when reading the footer", async ({ page }) => 
 test("email decrypts on click independently and retains its mail destination", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
-  const email = page.locator(".introduction .email-reveal");
+  const email = page.locator("[data-introduction] [data-email-reveal]");
   await expect(email).toHaveText("Email");
   await email.click();
   await expect(email).not.toHaveText("Email");
@@ -174,20 +174,20 @@ test("email decrypts on click independently and retains its mail destination", a
   await expect(email).toHaveText("cavenasdev@gmail.com");
   await expect(email).toHaveAccessibleName("cavenasdev@gmail.com");
   await expect(email).toHaveAttribute("href", "mailto:cavenasdev@gmail.com");
-  await expect(page.locator("footer .email-reveal")).toHaveText("Email");
+  await expect(page.locator("footer [data-email-reveal]")).toHaveText("Email");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 
 test("email supports keyboard reveal with reduced motion in Chinese", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/zh/");
-  const email = page.locator(".introduction .email-reveal");
+  const email = page.locator("[data-introduction] [data-email-reveal]");
   await email.focus();
   await page.keyboard.press("Space");
   await expect(email).toHaveText("cavenasdev@gmail.com");
   await expect(email).toBeFocused();
   await expect(email).not.toHaveAttribute("role", "button");
-  const footer = page.locator("footer .email-reveal");
+  const footer = page.locator("footer [data-email-reveal]");
   await footer.focus();
   await page.keyboard.press("Enter");
   await expect(footer).toHaveText("cavenasdev@gmail.com");
@@ -198,7 +198,7 @@ test("email hint is hoverable and dismissible, and social links open new tabs", 
   page,
 }) => {
   await page.goto("/");
-  const email = page.locator(".introduction .email-reveal");
+  const email = page.locator("[data-introduction] [data-email-reveal]");
   await email.hover();
   await expect
     .poll(() => email.evaluate((el) => getComputedStyle(el, "::after").opacity))
@@ -227,7 +227,7 @@ test("portrait sits above the greeting on narrow screens and beside it on deskto
   await page.goto("/");
   for (const width of [320, 390, 639, 640, 1280]) {
     await page.setViewportSize({ width, height: 850 });
-    const portrait = await page.locator(".portrait-frame").boundingBox();
+    const portrait = await page.locator("[data-portrait]").boundingBox();
     const heading = await page.getByRole("heading", { level: 1 }).boundingBox();
     if (!portrait || !heading) throw new Error("Introduction missing");
     expect(portrait.width).toBe(120);
@@ -244,13 +244,36 @@ test("Tianjin clock uses Beijing time and advances independently of visitor time
   await page.clock.install({ time: new Date("2026-09-15T15:59:59Z") });
   await page.goto("/zh/");
   const clock = page.locator("[data-local-time]");
-  await expect(page.locator(".location-time")).toContainText("中国天津");
+  await expect(page.locator("[data-location-time]")).toContainText("中国天津");
   await expect(clock).toHaveText("23:59");
   await page.clock.runFor(1000);
   await expect(clock).toHaveText("00:00");
   await expect(clock).toHaveAttribute("datetime", /^2026-09-15T16:00:/);
   await page.goto("/");
-  await expect(page.locator(".location-time")).toContainText("Tianjin, China");
+  await expect(page.locator("[data-location-time]")).toContainText("Tianjin, China");
   await expect(clock).toHaveText("00:00");
   await context.close();
+});
+
+test("cold font loading preloads local WOFF2 files without duplicate requests", async ({
+  page,
+}) => {
+  const requests: string[] = [];
+  await page.route(/\.woff2(?:\?|$)/, async (route) => {
+    requests.push(route.request().url());
+    await new Promise((resolve) => setTimeout(resolve, 250));
+    await route.continue();
+  });
+  await page.goto("/");
+  await page.evaluate(() => document.fonts.ready);
+  const preloads = await page
+    .locator('link[rel="preload"][as="font"]')
+    .evaluateAll((links) => links.map((link) => (link as HTMLLinkElement).href));
+  expect(preloads).toHaveLength(3);
+  expect(requests.sort()).toEqual(preloads.sort());
+  const origin = new URL(page.url()).origin;
+  expect(preloads.every((url) => new URL(url).origin === origin)).toBe(true);
+  expect(
+    await page.evaluate(() => [...document.fonts].every((font) => font.display === "block")),
+  ).toBe(true);
 });

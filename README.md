@@ -115,3 +115,9 @@ are reused from #3. `noindex` remains until the discovery/release slice (#9).
 
 Navigation and footer signatures use separate SVG IDs and animate independently.
 X links use the user-provided `cavenasdev` account at `https://x.com/cavenasdev`.
+
+Font loading uses local Fontsource WOFF2 assets with matching HTML preload links.
+The three faces use `font-display: block` to reduce refresh-time font swapping;
+slow connections can briefly delay text. No runtime font CDN is used.
+Legacy styling class names are removed; interaction hooks use data attributes,
+while active signature animation classes remain.

@@ -3,30 +3,30 @@ import Email from "../assets/icons/email.svg";
 interface Props { href: string; label: string }
 const { href, label } = Astro.props;
 ---
-<a class="email-reveal relative max-w-full after:pointer-events-auto after:absolute after:bottom-full after:left-0 after:rounded-lg after:border-b-4 after:border-transparent after:bg-[#292d30] after:bg-clip-padding after:px-2.5 after:py-1.5 after:text-xs after:leading-[1.5] after:whitespace-nowrap after:text-paper after:content-[attr(data-tooltip)]" href={href} aria-label={label} data-tooltip={label === "邮件" ? "点击看看" : "Click to reveal"}>
-  <Email class="pika-icon size-[18px] shrink-0" aria-hidden="true" />
+<a data-email-reveal class="relative max-w-full after:pointer-events-auto after:absolute after:bottom-full after:left-0 after:rounded-lg after:border-b-4 after:border-transparent after:bg-[#292d30] after:bg-clip-padding after:px-2.5 after:py-1.5 after:text-xs after:leading-[1.5] after:whitespace-nowrap after:text-paper after:content-[attr(data-tooltip)]" href={href} aria-label={label} data-tooltip={label === "邮件" ? "点击看看" : "Click to reveal"}>
+  <Email class="size-[18px] shrink-0" aria-hidden="true" />
   <span class="min-w-0 [overflow-wrap:anywhere]" aria-hidden="true">{label}</span>
 </a>
 
 <style>
   /* Tooltip visibility and entrance motion stay together with their state selectors. */
-  .email-reveal::after {
+  [data-email-reveal]::after {
     opacity: 0;
     visibility: hidden;
     transform: translateY(5px) scale(.96);
     transform-origin: bottom left;
     transition: opacity 160ms ease, transform 160ms ease, visibility 160ms;
   }
-  .email-reveal[role="button"]:not([data-tooltip-dismissed]):is(:hover, :focus-visible)::after {
+  [data-email-reveal][role="button"]:not([data-tooltip-dismissed]):is(:hover, :focus-visible)::after {
     opacity: 1; visibility: visible; transform: translateY(0) scale(1);
   }
   @media (prefers-reduced-motion: reduce) {
-    .email-reveal::after { transition: none; transform: none; }
+    [data-email-reveal]::after { transition: none; transform: none; }
   }
 </style>
 
 <script>
-  for (const link of document.querySelectorAll<HTMLAnchorElement>(".email-reveal")) {
+  for (const link of document.querySelectorAll<HTMLAnchorElement>("[data-email-reveal]")) {
     const text = link.querySelector("span");
     if (!text) continue;
     const address = link.getAttribute("href")!.slice(7);
