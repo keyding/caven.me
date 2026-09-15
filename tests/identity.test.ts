@@ -244,12 +244,14 @@ test("Tianjin clock uses Beijing time and advances independently of visitor time
   await page.goto("/zh/");
   const clock = page.locator("[data-local-time]");
   await expect(page.locator("[data-location-time]")).toContainText("中国 · 天津");
+  await expect(page.locator("[data-location-time]")).not.toContainText("UTC+8");
   await expect(clock).toHaveText("23:59");
   await page.clock.runFor(1000);
   await expect(clock).toHaveText("00:00");
   await expect(clock).toHaveAttribute("datetime", /^2026-09-15T16:00:/);
   await page.goto("/");
   await expect(page.locator("[data-location-time]")).toContainText("Tianjin, China");
+  await expect(page.locator("[data-location-time]")).toContainText("UTC+8");
   await expect(clock).toHaveText("00:00");
   await context.close();
 });

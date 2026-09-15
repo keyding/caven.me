@@ -54,7 +54,7 @@ const underlineClasses = "relative inline-block pb-2 after:absolute after:right-
                 <a href={contact.github} target="_blank" rel="noopener noreferrer"><GitHub class="size-4.5 shrink-0" aria-hidden="true" />GitHub</a>
                 <a href={contact.x} target="_blank" rel="noopener noreferrer"><X class="size-4.5 shrink-0" aria-hidden="true" />X</a>
               </div>
-                <LocalTime location={t.homeLocation} timeZone={homeTimeZone} zoneLabel="UTC+8" label={t.localTimeLabel} />
+                <LocalTime location={t.homeLocation} timeZone={homeTimeZone} zoneLabel={locale === "en" ? "UTC+8" : undefined} label={t.localTimeLabel} />
               </div>
             </div>
         </section>
