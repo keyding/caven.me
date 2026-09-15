@@ -48,7 +48,7 @@ const underlineClasses = "relative inline-block pb-2 after:absolute after:right-
             <div data-portrait class="relative size-[120px] overflow-hidden rounded-full border border-[#eee] after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:bg-[radial-gradient(circle,transparent_48%,#faf9f620_68%,#faf9f6b3_100%)] after:content-['']"><img class="h-auto w-full object-contain" src="/images/caven-portrait.png" width="1440" height="1440" alt={t.portrait} /></div>
             <div>
               <h1 class="mb-4 max-sm:mb-2 font-display text-[clamp(36px,5vw,56px)] leading-[1.1] font-normal in-[:lang(zh-CN)]:leading-[1.4] max-sm:text-[32px]" id="introduction-title"><span class={underlineClasses}>{t.greeting}</span></h1>
-              <p class="mb-0 text-base leading-[1.6] font-medium max-sm:text-[13px]"><span>{t.role} <VerificationCheck class="ml-1 inline-block size-[22px] align-[-5px] text-[#08b2c5]" aria-hidden="true" /></span></p>
+              <p class="mb-0 flex items-center gap-1 text-base leading-[1.6] font-medium max-sm:text-[13px]"><span>{t.role}</span><VerificationCheck class="size-[18px] shrink-0 text-[#08b2c5]" aria-hidden="true" /></p>
             </div>
           </div>
               <p class="text-[15px] leading-[1.8] text-[#616771]">{t.intro}</p>
