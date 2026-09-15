@@ -74,3 +74,8 @@ The browser-visible tests cover the served ICO pixels, SVG theme switching,
 the project image's successful decode, localized caption, and removal of the
 Selected work / 精选项目 header's Project / 项目 label. This does not claim to
 identify which icon the user's browser chrome selected from the screenshot.
+
+[Icon contrast evidence](pwarelay-evidence/favicon-contrast.png) renders the actual
+16px/32px ICO and SVG on light and dark backgrounds with a light OS preference.
+Follow-up review against `10502d0`: the sole Standards suggestion (clearer chart
+path variable names) was applied; Spec review reported 0 findings.

@@ -704,10 +704,10 @@
           "",
         );
       };
-      const a = curve(entries),
-        b = curve(installs),
+      const entryPath = curve(entries),
+        installPath = curve(installs),
         end = 38 + 29 * 22.7;
-      plot.innerHTML = `<defs><linearGradient id="green" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#77b69d" stop-opacity=".35"/><stop offset="1" stop-color="#77b69d" stop-opacity=".015"/></linearGradient><linearGradient id="gray" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#87958e" stop-opacity=".13"/><stop offset="1" stop-color="#87958e" stop-opacity=".015"/></linearGradient></defs>${[0, 20, 40, 60].map((v) => `<path d="M38 ${180 - v * 2.55}H714" stroke="#29312d" stroke-dasharray="3 4"/><text x="7" y="${184 - v * 2.55}" fill="#64776b" font-size="10">${v}</text>`).join("")}<path d="${a}L${end},180H38Z" fill="url(#gray)"/><path d="${a}" fill="none" stroke="#697a71" stroke-width="1.8"/><path d="${b}L${end},180H38Z" fill="url(#green)"/><path d="${b}" fill="none" stroke="#99cfb7" stroke-width="2.2"/>${[0, 7, 14, 21, 29].map((i) => `<text x="${38 + i * 22.7}" y="207" fill="#74867b" font-size="10" text-anchor="middle">Jul ${i + 1}</text>`).join("")}`;
+      plot.innerHTML = `<defs><linearGradient id="green" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#77b69d" stop-opacity=".35"/><stop offset="1" stop-color="#77b69d" stop-opacity=".015"/></linearGradient><linearGradient id="gray" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#87958e" stop-opacity=".13"/><stop offset="1" stop-color="#87958e" stop-opacity=".015"/></linearGradient></defs>${[0, 20, 40, 60].map((v) => `<path d="M38 ${180 - v * 2.55}H714" stroke="#29312d" stroke-dasharray="3 4"/><text x="7" y="${184 - v * 2.55}" fill="#64776b" font-size="10">${v}</text>`).join("")}<path d="${entryPath}L${end},180H38Z" fill="url(#gray)"/><path d="${entryPath}" fill="none" stroke="#697a71" stroke-width="1.8"/><path d="${installPath}L${end},180H38Z" fill="url(#green)"/><path d="${installPath}" fill="none" stroke="#99cfb7" stroke-width="2.2"/>${[0, 7, 14, 21, 29].map((i) => `<text x="${38 + i * 22.7}" y="207" fill="#74867b" font-size="10" text-anchor="middle">Jul ${i + 1}</text>`).join("")}`;
       document.getElementById("funnel").innerHTML = [
         ["Cohort entry", 1200],
         ["Invitation shown", 720],
