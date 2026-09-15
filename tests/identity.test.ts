@@ -235,3 +235,22 @@ test("portrait sits above the greeting on narrow screens and beside it on deskto
     else expect(portrait.x + portrait.width).toBeLessThan(heading.x);
   }
 });
+
+test("Tianjin clock uses Beijing time and advances independently of visitor timezone", async ({
+  browser,
+}) => {
+  const context = await browser.newContext({ timezoneId: "America/New_York" });
+  const page = await context.newPage();
+  await page.clock.install({ time: new Date("2026-09-15T15:59:59Z") });
+  await page.goto("/zh/");
+  const clock = page.locator("[data-local-time]");
+  await expect(page.locator(".location-time")).toContainText("中国天津");
+  await expect(clock).toHaveText("23:59");
+  await page.clock.runFor(1000);
+  await expect(clock).toHaveText("00:00");
+  await expect(clock).toHaveAttribute("datetime", /^2026-09-15T16:00:/);
+  await page.goto("/");
+  await expect(page.locator(".location-time")).toContainText("Tianjin, China");
+  await expect(clock).toHaveText("00:00");
+  await context.close();
+});

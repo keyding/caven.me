@@ -3,7 +3,7 @@ import "../styles/global.css";
 import "@fontsource/geist/latin-400.css";
 import "@fontsource/geist/latin-500.css";
 import "@fontsource/instrument-serif/latin-400.css";
-import { home, contact, projectIds, type Locale } from "../data/home";
+import { home, contact, projectIds, homeTimeZone, type Locale } from "../data/home";
 import Signature from "../components/Signature.astro";
 import Translate from "../assets/icons/translate.svg";
 import ExternalLink from "../assets/icons/external-link.svg";
@@ -11,6 +11,7 @@ import ChevronDown from "../assets/icons/chevron-down.svg";
 import Globe from "../assets/icons/globe.svg";
 import Code from "../assets/icons/code.svg";
 import EmailReveal from "./EmailReveal.astro";
+import LocalTime from "./LocalTime.astro";
 import GitHub from "../assets/icons/github.svg";
 import X from "../assets/icons/x.svg";
 import VerificationCheck from "../assets/icons/verification-check.svg";
@@ -58,6 +59,7 @@ const underlineClasses = "hand-underlined relative inline-block pb-2 after:absol
                 <a href={contact.github} target="_blank" rel="noopener noreferrer"><GitHub class="pika-icon size-[18px] shrink-0" aria-hidden="true" />GitHub</a>
                 <a href={contact.x} target="_blank" rel="noopener noreferrer"><X class="pika-icon size-[18px] shrink-0" aria-hidden="true" />X</a>
               </div>
+                <LocalTime location={t.homeLocation} timeZone={homeTimeZone} zoneLabel="UTC+8" label={t.localTimeLabel} />
               </div>
         </section>
 

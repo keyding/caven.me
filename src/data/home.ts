@@ -6,6 +6,8 @@ export const contact = {
   x: "https://x.com/cavenasdev",
 };
 
+export const homeTimeZone = "Asia/Shanghai";
+
 export const projectIds = ["pwarelay", "lemon-squeezy-sdk", "online-arbitrage-tool"];
 
 export const home = {
@@ -27,6 +29,8 @@ export const home = {
     profile: "Profile",
     portrait: "Portrait of Caven",
     email: "Email",
+    homeLocation: "Tianjin, China",
+    localTimeLabel: "Tianjin local time",
     project: "Project",
     projectIntro: "Project introduction",
     destinations: "destination placeholders",
@@ -73,6 +77,8 @@ export const home = {
     profile: "关于我",
     portrait: "丁强的照片",
     email: "邮件",
+    homeLocation: "中国天津",
+    localTimeLabel: "天津当地时间",
     project: "项目",
     projectIntro: "项目简介",
     destinations: "链接占位",

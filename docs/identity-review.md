@@ -120,3 +120,8 @@ The effect is implemented with native browser APIs. Once revealed, the control
 becomes a mailto link. Reduced motion reveals immediately; without JavaScript,
 the original mailto link remains available. Keyboard activation and independent
 instances are covered by the browser suite (34 tests).
+
+Location is user-confirmed Tianjin, China. The contact row renders local time using
+Asia/Shanghai (UTC+8), independent of the visitor timezone. Browser tests cover
+midnight rollover and both locale labels. Without JavaScript the city and UTC
+offset remain visible.
