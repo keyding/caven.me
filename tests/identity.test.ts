@@ -62,7 +62,7 @@ for (const locale of ["en", "zh"] as const) {
     ).toBe(true);
     await page.keyboard.press("Tab");
     await expect(page.getByRole("link", { name: "Caven", exact: true })).toBeFocused();
-    for (let step = 0; step < 3; step++) await page.keyboard.press("Tab");
+    await page.keyboard.press("Tab");
     const language = page.getByRole("link", {
       name: locale === "en" ? "切换到中文" : "Switch to English",
       exact: true,

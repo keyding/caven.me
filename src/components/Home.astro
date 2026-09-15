@@ -36,8 +36,6 @@ const underlineClasses = "hand-underlined relative inline-block pb-2 after:absol
         <nav class="navigation flex min-h-[72px] items-center justify-between gap-5 px-8 py-5 max-sm:px-5 max-[380px]:items-start max-[380px]:gap-3" aria-label={t.navigation}>
           <a class="brand inline-flex min-h-11 shrink-0 items-center [&_.signature]:m-0 [&_.signature]:w-20" href={locale === "en" ? "/" : "/zh/"} aria-label="Caven"><Signature idPrefix="header" label={t.signature} /></a>
           <div class="nav-links m-0 flex list-none flex-wrap items-center justify-end gap-x-5 gap-y-2 p-0 text-[13px] max-sm:gap-x-3 [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center [&_a]:gap-1.5">
-            <a href="#work-title">{t.work}</a>
-            <a href="#footer">{t.contact}</a>
             <a class="language-switch whitespace-nowrap" href={t.switchPath} hreflang={t.switchLang} lang={t.switchLang} aria-label={t.switchLabel} data-language-switch><Translate class="pika-icon size-[18px] shrink-0" aria-hidden="true" />{t.switchText}</a>
           </div>
         </nav>
@@ -48,7 +46,7 @@ const underlineClasses = "hand-underlined relative inline-block pb-2 after:absol
           <div class="intro-layout mb-7 grid grid-cols-[120px_minmax(0,1fr)] items-center gap-7 max-sm:grid-cols-1 max-sm:gap-4">
             <div class="portrait-frame relative size-[120px] overflow-hidden rounded-full border border-[#eee] after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:bg-[radial-gradient(circle,transparent_48%,#faf9f620_68%,#faf9f6b3_100%)] after:content-['']"><img class="portrait-slot block h-auto w-full object-contain" src="/images/caven-portrait.png" width="1440" height="1440" alt={t.portrait} /></div>
             <div>
-              <h1 class="mb-4 font-display text-[clamp(36px,5vw,56px)] leading-[1.1] font-normal in-[:lang(zh-CN)]:leading-[1.4] max-sm:text-[32px]" id="introduction-title"><span class={underlineClasses}>{t.greeting}</span></h1>
+              <h1 class="mb-4 max-sm:mb-2 font-display text-[clamp(36px,5vw,56px)] leading-[1.1] font-normal in-[:lang(zh-CN)]:leading-[1.4] max-sm:text-[32px]" id="introduction-title"><span class={underlineClasses}>{t.greeting}</span></h1>
               <p class="intro-role mb-0 text-base leading-[1.6] font-medium max-sm:text-[13px]"><span>{t.role} <VerificationCheck class="profile-badge ml-1 inline-block size-[22px] align-[-5px] text-[#08b2c5]" aria-hidden="true" /></span></p>
             </div>
           </div>
