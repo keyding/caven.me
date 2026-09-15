@@ -113,13 +113,15 @@ from the development environment.
 
 ## Email reveal
 
-Both contact rows initially show the localized Email label. First activation reveals
+Before the first reveal, both contact rows show the localized Email label. First activation reveals
 the address with a short character-scramble animation inspired by
 [React Bits Decrypted Text](https://reactbits.dev/text-animations/decrypted-text).
 The effect is implemented with native browser APIs. Once revealed, the control
 becomes a mailto link. Reduced motion reveals immediately; without JavaScript,
-the original mailto link remains available. Keyboard activation and independent
-instances are covered by the browser suite (34 tests).
+the original mailto link remains available. The clicked control animates while the other contact row reveals immediately.
+The address is stored in localStorage so reloads, locale switches, and later visits
+restore both mail links directly. If storage is unavailable, same-page synchronization
+still works. These behaviors are covered by the browser suite (44 tests).
 
 Location is user-confirmed Tianjin, China. The contact row renders local time using
 Asia/Shanghai (UTC+8), independent of the visitor timezone. Browser tests cover

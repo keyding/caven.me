@@ -26,6 +26,10 @@ const { href, label } = Astro.props;
 </style>
 
 <script>
+  const storageKey = "caven.email-revealed.v1";
+  let savedAddress: string | null = null;
+  try { savedAddress = localStorage.getItem(storageKey); } catch { /* Storage may be disabled. */ }
+  const controls: { link: HTMLAnchorElement; address: string; finish: () => void }[] = [];
   for (const link of document.querySelectorAll<HTMLAnchorElement>("[data-email-reveal]")) {
     const text = link.querySelector("span");
     if (!text) continue;
@@ -46,11 +50,17 @@ const { href, label } = Astro.props;
       link.removeAttribute("aria-description");
       state = "revealed";
     };
+    controls.push({ link, address, finish });
+    if (savedAddress === address) finish();
     link.addEventListener("click", (event) => {
       if (state === "revealed") return;
       event.preventDefault();
       if (state === "animating") return;
       state = "animating";
+      try { localStorage.setItem(storageKey, address); } catch { /* In-page sync still works. */ }
+      for (const other of controls) {
+        if (other.link !== link && other.address === address) other.finish();
+      }
       link.dataset.tooltipDismissed = "";
       if (motion.matches) { finish(); return; }
       const start = performance.now();

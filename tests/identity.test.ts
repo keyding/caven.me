@@ -163,7 +163,7 @@ test("navigation stays at the top when reading the footer", async ({ page }) => 
   expect(bounds?.y).toBeLessThan(40);
 });
 
-test("email decrypts on click independently and retains its mail destination", async ({ page }) => {
+test("email decrypts on click and synchronizes both contact rows", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
   const email = page.locator("[data-introduction] [data-email-reveal]");
@@ -174,7 +174,7 @@ test("email decrypts on click independently and retains its mail destination", a
   await expect(email).toHaveText("cavenasdev@gmail.com");
   await expect(email).toHaveAccessibleName("cavenasdev@gmail.com");
   await expect(email).toHaveAttribute("href", "mailto:cavenasdev@gmail.com");
-  await expect(page.locator("footer [data-email-reveal]")).toHaveText("Email");
+  await expect(page.locator("footer [data-email-reveal]")).toHaveText("cavenasdev@gmail.com");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 
@@ -189,7 +189,6 @@ test("email supports keyboard reveal with reduced motion in Chinese", async ({ p
   await expect(email).not.toHaveAttribute("role", "button");
   const footer = page.locator("footer [data-email-reveal]");
   await footer.focus();
-  await page.keyboard.press("Enter");
   await expect(footer).toHaveText("cavenasdev@gmail.com");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
@@ -276,4 +275,42 @@ test("cold font loading preloads local WOFF2 files without duplicate requests", 
   expect(
     await page.evaluate(() => [...document.fonts].every((font) => font.display === "block")),
   ).toBe(true);
+});
+
+test("email reveal persists across reloads, locales and later visits", async ({
+  page,
+  context,
+}) => {
+  await page.goto("/");
+  await page.locator("footer [data-email-reveal]").click();
+  await expect(page.locator("[data-introduction] [data-email-reveal]")).toHaveText(
+    "cavenasdev@gmail.com",
+  );
+  await page.reload();
+  for (const link of await page.locator("[data-email-reveal]").all()) {
+    await expect(link).toHaveText("cavenasdev@gmail.com");
+    await expect(link).not.toHaveAttribute("role", "button");
+  }
+  const nextVisit = await context.newPage();
+  await nextVisit.goto("/zh/");
+  for (const link of await nextVisit.locator("[data-email-reveal]").all()) {
+    await expect(link).toHaveText("cavenasdev@gmail.com");
+    await expect(link).toHaveAttribute("href", "mailto:cavenasdev@gmail.com");
+  }
+  await nextVisit.close();
+});
+
+test("email reveal still synchronizes when local storage is unavailable", async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(window, "localStorage", {
+      get() {
+        throw new DOMException("Blocked", "SecurityError");
+      },
+    });
+  });
+  await page.goto("/");
+  await page.locator("footer [data-email-reveal]").click();
+  for (const link of await page.locator("[data-email-reveal]").all()) {
+    await expect(link).toHaveText("cavenasdev@gmail.com");
+  }
 });
