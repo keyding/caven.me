@@ -123,3 +123,16 @@ The three faces use `font-display: block` to reduce refresh-time font swapping;
 slow connections can briefly delay text. No runtime font CDN is used.
 Legacy styling class names are removed; interaction hooks use data attributes,
 while active signature animation classes remain.
+
+### Sharing metadata
+
+`Metadata.astro` renders localized descriptions, canonical and language-alternate URLs,
+Open Graph, X summary cards, and a Person JSON-LD record without client JavaScript.
+The production origin is `https://caven.me` in `astro.config.mjs`. Keep `noindex`
+until the release slice (#9); the manifest uses browser display and adds no service worker.
+
+The shared 1200×630 JPEG card combines the existing Tianchi footer illustration
+with the site's local fonts. Regenerate it with `node scripts/generate-og.mjs`
+after changing the card copy or illustration (requires the project's Playwright
+Chromium installation). The generator uses local inputs and does not change the
+original artwork. Both languages share the artwork, with localized metadata and alt text.
