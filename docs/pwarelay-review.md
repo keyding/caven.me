@@ -38,3 +38,22 @@ The first content test failed against the original placeholders, then passed
 after implementation in both locales and viewport projects. Coverage includes
 verified/omitted destinations, fragment entry and refresh, language switching,
 keyboard focus, responsive bounds, reduced motion, and JavaScript-free content.
+
+Final local checks: formatting, lint, Astro typecheck (0 errors/warnings/hints),
+production build and all 84 browser tests passed. The project suite contributes
+10 tests across the desktop/mobile projects.
+
+Live Chromium review covered English and Chinese at 1280px and 390px, including
+mixed-script wrapping, spacing, fragment positioning below the sticky header,
+and the website hover treatment. Browser assertions additionally cover 320px
+and 2560px bounds, visible keyboard focus and reduced motion. The text entry
+stays static rather than adding decorative entrance movement.
+
+- [English desktop](pwarelay-evidence/en-desktop.png)
+- [Chinese desktop](pwarelay-evidence/zh-desktop.png)
+- [English mobile](pwarelay-evidence/en-mobile.png)
+- [Chinese mobile](pwarelay-evidence/zh-mobile.png)
+
+Independent code-review passes against branch base `e8a9d4d` reported
+0 Standards findings and 0 Spec findings. Production deployment is outside
+this PR's verification scope.
