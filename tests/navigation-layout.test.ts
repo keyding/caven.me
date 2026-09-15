@@ -36,8 +36,10 @@ test("introduction fades finish visibly and respect reduced motion", async ({ pa
   for (const reducedMotion of ["no-preference", "reduce"] as const) {
     await page.emulateMedia({ reducedMotion });
     await page.goto("/");
-    const stages = page.locator("[data-intro-stage]");
-    await expect(stages).toHaveCount(2);
+    const stages = page.locator(
+      "[data-intro-stage], [data-intro-contacts] a, [data-intro-contacts] [data-location-time]",
+    );
+    await expect(stages).toHaveCount(6);
     if (reducedMotion === "reduce") {
       expect(
         await stages.evaluateAll(
@@ -45,6 +47,25 @@ test("introduction fades finish visibly and respect reduced motion", async ({ pa
         ),
       ).toBe(0);
     } else {
+      const opacities = await page
+        .locator("[data-intro-contacts] a, [data-intro-contacts] [data-location-time]")
+        .evaluateAll((elements) =>
+          elements.map((element) => {
+            for (const animation of element.getAnimations()) {
+              animation.pause();
+              animation.currentTime = 650;
+            }
+            return Number(getComputedStyle(element).opacity);
+          }),
+        );
+      for (let index = 1; index < opacities.length; index++) {
+        expect(opacities[index - 1]).toBeGreaterThan(opacities[index]);
+      }
+      await stages.evaluateAll((elements) =>
+        elements.forEach((element) =>
+          element.getAnimations().forEach((animation) => animation.play()),
+        ),
+      );
       await stages.evaluateAll(async (elements) => {
         await Promise.all(
           elements.flatMap((element) =>
