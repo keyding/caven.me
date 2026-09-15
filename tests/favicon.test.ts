@@ -4,16 +4,18 @@ test("SVG favicon uses transparent artwork and follows the color scheme", async 
   await page.goto("/favicon.svg");
   await expect(page.locator("rect")).toHaveCount(0);
   for (const [colorScheme, stroke] of [
-    ["light", "rgb(41, 45, 50)"],
+    ["light", "rgb(0, 0, 0)"],
     ["dark", "rgb(255, 255, 255)"],
   ] as const) {
     await page.emulateMedia({ colorScheme });
-    await expect(page.locator("use").last()).toHaveCSS("stroke", stroke);
-    await expect(page.locator("use").last()).toHaveCSS("fill", "none");
+    await expect(page.locator("path").last()).toHaveCSS("stroke", stroke);
+    await expect(page.locator("path").last()).toHaveCSS("fill", "none");
   }
 });
 
-test("raster favicon remains visible on light and dark tab backgrounds", async ({ page }) => {
+test("raster favicon uses solid monochrome strokes on a transparent background", async ({
+  page,
+}) => {
   await page.goto("/");
   const colors = await page.evaluate(async () => {
     const icon = document.querySelector<HTMLLinkElement>('link[rel="icon"]:not([type])')!;
@@ -36,7 +38,7 @@ test("raster favicon remains visible on light and dark tab backgrounds", async (
     }
     return { light, dark, transparent };
   });
-  expect(colors.light).toBeGreaterThan(20);
+  expect(colors.light).toBe(0);
   expect(colors.dark).toBeGreaterThan(20);
   expect(colors.transparent).toBeGreaterThan(1000);
 });

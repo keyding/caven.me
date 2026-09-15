@@ -25,11 +25,12 @@ for (const locale of ["en", "zh"] as const) {
     await expect
       .poll(() => image.evaluate((el: HTMLImageElement) => [el.naturalWidth, el.naturalHeight]))
       .toEqual([1600, 1000]);
-    await expect(project).toContainText(
-      locale === "en"
-        ? "Dashboard redesign preview · Sample data"
-        : "Dashboard 改版预览 · 示例数据",
+    await expect(project.locator("figcaption")).toHaveText(
+      locale === "en" ? "Sample data" : "示例数据",
     );
+    await expect(
+      project.getByText(locale === "en" ? "View image ↗" : "查看大图 ↗", { exact: true }),
+    ).toHaveCount(0);
     await expect(
       page
         .getByRole("region", { name: locale === "en" ? "Selected work" : "精选项目", exact: true })

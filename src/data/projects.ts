@@ -30,8 +30,8 @@ export const projects: Project[] = [
         zh: "PWARelay Dashboard 改版预览，展示安装与归因示例数据",
       },
       caption: {
-        en: "Dashboard redesign preview · Sample data",
-        zh: "Dashboard 改版预览 · 示例数据",
+        en: "Sample data",
+        zh: "示例数据",
       },
     },
     content: {

@@ -1,16 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <style>
-    svg { color: #292d32; --halo: #fff; }
-    @media (prefers-color-scheme: dark) { svg { color: #fff; --halo: #292d32; } }
+    svg { color: #000; }
+    @media (prefers-color-scheme: dark) { svg { color: #fff; } }
   </style>
   <!-- Simplified from the handwritten signature C, with a shorter cross-stroke. -->
-  <defs><g id="mark">
+  <g transform="translate(1 40) scale(.022)" fill="none" stroke="currentColor" stroke-width="110" stroke-linecap="round" stroke-linejoin="round">
     <path d="M2220 70 C1750 500 1170 1000 1135 480 C1135 80 1700 -990 2330 -1240 C2850 -1470 2370 -730 1930 -235"/>
     <path d="M1930 -235 C2270 -730 1550 -585 1050 -470 C200 -275 240 -180 900 -168 M900 -168 Q1600 -152 2360 -188"/>
-  </g></defs>
-  <g transform="translate(1 40) scale(.022)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <!-- A contrasting edge survives browser chrome that ignores the SVG theme. -->
-    <use href="#mark" stroke="var(--halo)" stroke-width="210"/>
-    <use href="#mark" stroke="currentColor" stroke-width="110"/>
   </g>
 </svg>

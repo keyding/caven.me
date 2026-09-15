@@ -1,4 +1,6 @@
 ---
+import InformationCircle from "../assets/icons/information-circle.svg";
+import Close from "../assets/icons/close.svg";
 import type { Project } from "../data/projects";
 import type { Locale } from "../data/home";
 interface Props { image: NonNullable<Project["image"]>; title: string; id: string; locale: Locale }
@@ -9,18 +11,17 @@ const originalLabel = locale === "en" ? "Open original image" : "查看原图";
 ---
 
 <figure class="project-image mt-6 mb-0" data-project-image>
-  <a class="group relative block cursor-zoom-in overflow-hidden rounded-2xl px-8 py-12 [background:radial-gradient(ellipse_at_10%_0%,#cad9d1,transparent_65%),radial-gradient(ellipse_at_100%_100%,#a8b9ae,transparent_65%),linear-gradient(135deg,#e7e0d7,#d9ccd1_55%,#b3c7bc)] [-webkit-tap-highlight-color:transparent] max-sm:rounded-xl max-sm:px-4.5 max-sm:pt-7.5 max-sm:pb-9.5" href={image.src} aria-label={label} data-image-trigger>
+  <a class="group relative block cursor-zoom-in overflow-hidden rounded-2xl px-8 py-12 [background:radial-gradient(ellipse_at_10%_0%,#cad9d1,transparent_65%),radial-gradient(ellipse_at_100%_100%,#a8b9ae,transparent_65%),linear-gradient(135deg,#e7e0d7,#d9ccd1_55%,#b3c7bc)] [-webkit-tap-highlight-color:transparent] max-sm:rounded-xl max-sm:px-4.5 max-sm:py-7.5" href={image.src} aria-label={label} data-image-trigger>
     <img class="block h-auto w-full rounded-lg shadow-[0_18px_34px_-14px_#1b2c2859,0_0_0_1px_#ffffff40] motion-safe:transition-transform motion-safe:duration-180 motion-safe:ease-out motion-safe:group-hover:-translate-y-0.5 motion-safe:group-active:scale-[.99]" src={image.src} width={image.width} height={image.height} alt={image.alt[locale]} loading="lazy" decoding="async" />
-    <span class="absolute right-4 bottom-3 text-[11px] leading-5 text-[#35433b] max-sm:bottom-2" aria-hidden="true">{locale === "en" ? "View image ↗" : "查看大图 ↗"}</span>
   </a>
-  <figcaption class="mt-2 text-xs leading-[1.8] text-[#616771]">{image.caption[locale]}</figcaption>
+  <figcaption class="mt-2 flex items-center gap-1.5 text-xs leading-[1.8] text-[#616771]"><InformationCircle class="size-4 shrink-0" aria-hidden="true" />{image.caption[locale]}</figcaption>
   <dialog class="image-preview m-auto w-fit max-w-[calc(100vw-32px)] max-h-[calc(100dvh-32px)] overscroll-contain rounded-[14px] border border-[#ffffff24] bg-[#161a18] p-3 text-[#f1f3f1] shadow-[0_24px_80px_#0006] backdrop:bg-[#101713cc] backdrop:backdrop-blur-[8px] motion-safe:open:animate-[preview-appear_160ms_ease-out]" id={`${id}-image-preview`} aria-labelledby={`${id}-image-caption`}>
     <div class="mb-3 flex items-center justify-between gap-6">
       <a class="inline-flex min-h-11 items-center px-2 text-[13px] hover:!text-[#f0d98b] focus-visible:!outline-highlight" href={image.src} target="_blank" rel="noopener noreferrer">{originalLabel}<span aria-hidden="true"> ↗</span></a>
-      <button class="size-11 shrink-0 cursor-pointer rounded-lg border border-[#ffffff29] bg-[#ffffff0d] text-[28px] text-inherit hover:bg-[#ffffff24] focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-highlight focus-visible:outline-offset-3" type="button" aria-label={closeLabel} data-image-close autofocus>×</button>
+      <button class="grid size-11 shrink-0 place-items-center cursor-pointer rounded-lg border border-[#ffffff29] bg-[#ffffff0d] text-inherit hover:bg-[#ffffff24] focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-highlight focus-visible:outline-offset-3" type="button" aria-label={closeLabel} data-image-close autofocus><Close class="size-5" aria-hidden="true" /></button>
     </div>
     <img class="mx-auto block h-auto max-h-[calc(100dvh-170px)] w-auto max-w-full rounded-md object-contain" src={image.src} width={image.width} height={image.height} alt={image.alt[locale]} loading="lazy" decoding="async" />
-    <p class="mx-2 mt-3 mb-0 text-xs leading-[1.6] text-[#bec8c1]" id={`${id}-image-caption`}>{image.caption[locale]}</p>
+    <p class="mx-2 mt-3 mb-0 flex items-center gap-1.5 text-xs leading-[1.6] text-[#bec8c1]" id={`${id}-image-caption`}><InformationCircle class="size-4 shrink-0" aria-hidden="true" />{image.caption[locale]}</p>
   </dialog>
 </figure>
 
