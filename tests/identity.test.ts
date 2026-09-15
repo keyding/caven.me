@@ -198,7 +198,11 @@ test("email hint is hoverable and dismissible, and social links open new tabs", 
 }) => {
   await page.goto("/");
   const email = page.locator("[data-introduction] [data-email-reveal]");
-  await email.hover();
+  if (await page.evaluate(() => matchMedia("(hover: hover) and (pointer: fine)").matches)) {
+    await email.hover();
+  } else {
+    await email.focus();
+  }
   await expect
     .poll(() => email.evaluate((el) => getComputedStyle(el, "::after").opacity))
     .toBe("1");
