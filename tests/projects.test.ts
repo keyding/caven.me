@@ -96,7 +96,9 @@ test("PWARelay content and links work without JavaScript", async ({ browser }) =
       "href",
       "#pwarelay",
     );
-    await expect(project.getByRole("link").last()).toHaveAttribute("href", "https://pwarelay.com");
+    await expect(
+      project.getByRole("link", { name: path === "/" ? "Website" : "网站", exact: true }),
+    ).toHaveAttribute("href", "https://pwarelay.com");
   }
   await context.close();
 });

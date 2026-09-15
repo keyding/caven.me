@@ -4,6 +4,7 @@ import type { Project } from "../data/projects";
 import Globe from "../assets/icons/globe.svg";
 import Code from "../assets/icons/code.svg";
 import ExternalLink from "../assets/icons/external-link.svg";
+import ProjectImage from "./ProjectImage.astro";
 
 interface Props { project: Project; locale: Locale }
 const { project, locale } = Astro.props;
@@ -24,9 +25,6 @@ const t = home[locale];
     </ul>
   )}
   {project.image && (
-    <figure class="mt-6 mb-0">
-      <img class="block h-auto w-full rounded-lg border border-[#292d3214]" src={project.image.src} width={project.image.width} height={project.image.height} alt={project.image.alt[locale]} loading="lazy" decoding="async" />
-      <figcaption class="mt-2 text-xs leading-[1.8] text-[#616771]">{project.image.caption[locale]}</figcaption>
-    </figure>
+    <ProjectImage image={project.image} title={project.title} id={project.id} locale={locale} />
   )}
 </article>

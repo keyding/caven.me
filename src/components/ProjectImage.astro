@@ -1,0 +1,125 @@
+---
+import type { Project } from "../data/projects";
+import type { Locale } from "../data/home";
+interface Props { image: NonNullable<Project["image"]>; title: string; id: string; locale: Locale }
+const { image, title, id, locale } = Astro.props;
+const label = locale === "en" ? `Enlarge ${title} image` : `放大 ${title} 图片`;
+const closeLabel = locale === "en" ? "Close preview" : "关闭预览";
+const originalLabel = locale === "en" ? "Open original image" : "查看原图";
+---
+
+<figure class="project-image mt-6 mb-0" data-project-image>
+  <a class="image-stage" href={image.src} aria-label={label} data-image-trigger>
+    <img src={image.src} width={image.width} height={image.height} alt={image.alt[locale]} loading="lazy" decoding="async" />
+    <span class="image-hint" aria-hidden="true">{locale === "en" ? "View image ↗" : "查看大图 ↗"}</span>
+  </a>
+  <figcaption class="mt-2 text-xs leading-[1.8] text-[#616771]">{image.caption[locale]}</figcaption>
+  <dialog class="image-preview" id={`${id}-image-preview`} aria-labelledby={`${id}-image-caption`}>
+    <div class="preview-toolbar">
+      <a href={image.src} target="_blank" rel="noopener noreferrer">{originalLabel}<span aria-hidden="true"> ↗</span></a>
+      <button type="button" aria-label={closeLabel} data-image-close autofocus>×</button>
+    </div>
+    <img src={image.src} width={image.width} height={image.height} alt={image.alt[locale]} loading="lazy" decoding="async" />
+    <p id={`${id}-image-caption`}>{image.caption[locale]}</p>
+  </dialog>
+</figure>
+
+<style>
+  .image-stage {
+    position: relative;
+    display: block;
+    padding: 48px 32px;
+    overflow: hidden;
+    border-radius: 16px;
+    background: radial-gradient(ellipse at 10% 0%, #cad9d1, transparent 65%), radial-gradient(ellipse at 100% 100%, #a8b9ae, transparent 65%), linear-gradient(135deg, #e7e0d7, #d9ccd1 55%, #b3c7bc);
+    cursor: zoom-in;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .image-stage img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 18px 34px -14px #1b2c2859, 0 0 0 1px #ffffff40;
+  }
+  .image-hint {
+    position: absolute;
+    right: 16px;
+    bottom: 12px;
+    color: #35433b;
+    font-size: 11px;
+    line-height: 20px;
+  }
+  .image-preview {
+    margin: auto;
+    padding: 12px;
+    width: fit-content;
+    max-width: calc(100vw - 32px);
+    max-height: calc(100dvh - 32px);
+    border: 1px solid #ffffff24;
+    border-radius: 14px;
+    background: #161a18;
+    color: #f1f3f1;
+    box-shadow: 0 24px 80px #0006;
+    overscroll-behavior: contain;
+  }
+  .image-preview::backdrop { background: #101713cc; backdrop-filter: blur(8px); }
+  .preview-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 12px; }
+  .preview-toolbar a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 8px; font-size: 13px; }
+  .preview-toolbar button { width: 44px; height: 44px; flex-shrink: 0; border: 1px solid #ffffff29; border-radius: 8px; background: #ffffff0d; color: inherit; font: inherit; font-size: 28px; cursor: pointer; }
+  .preview-toolbar button:hover { background: #ffffff24; }
+  .preview-toolbar a:hover { color: #f0d98b; }
+  .preview-toolbar button:focus-visible, .preview-toolbar a:focus-visible { outline: 2px solid #e5bd48; outline-offset: 3px; }
+  .image-preview img { display: block; width: auto; height: auto; max-width: 100%; max-height: calc(100dvh - 170px); margin: auto; border-radius: 6px; object-fit: contain; }
+  .image-preview p { margin: 12px 8px 0; font-size: 12px; line-height: 1.6; color: #bec8c1; }
+  :global(html:has(.image-preview[open])) { overflow: hidden; scrollbar-gutter: stable; }
+  @media (max-width: 639px) { .image-stage { padding: 30px 18px 38px; border-radius: 12px; } .image-hint { bottom: 8px; } }
+  @media (prefers-reduced-motion: no-preference) {
+    .image-stage img { transition: transform 180ms ease-out; }
+    .image-stage:active img { transform: scale(.99); }
+    .image-preview[open] { animation: preview-appear 160ms ease-out; }
+    @keyframes preview-appear { from { opacity: 0; transform: scale(.98); } to { opacity: 1; transform: scale(1); } }
+  }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) { .image-stage:hover img { transform: translateY(-2px); } }
+</style>
+
+<script>
+  for (const figure of document.querySelectorAll<HTMLElement>("[data-project-image]")) {
+    const trigger = figure.querySelector<HTMLAnchorElement>("[data-image-trigger]");
+    const dialog = figure.querySelector<HTMLDialogElement>("dialog");
+    const close = figure.querySelector<HTMLButtonElement>("[data-image-close]");
+    if (!trigger || !dialog || !close) continue;
+    trigger.setAttribute("role", "button");
+    trigger.setAttribute("aria-haspopup", "dialog");
+    trigger.setAttribute("aria-controls", dialog.id);
+    trigger.addEventListener("click", (event) => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      dialog.showModal();
+    });
+    trigger.addEventListener("keydown", (event) => {
+      if (event.key !== " ") return;
+      event.preventDefault();
+      dialog.showModal();
+    });
+    close.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("keydown", (event) => {
+      if (event.key !== "Tab") return;
+      const original = dialog.querySelector<HTMLAnchorElement>("a");
+      if (!original) return;
+      if (!event.shiftKey && document.activeElement === close) {
+        event.preventDefault();
+        original.focus();
+      } else if (event.shiftKey && document.activeElement === original) {
+        event.preventDefault();
+        close.focus();
+      }
+    });
+    dialog.addEventListener("click", (event) => {
+      if (event.target !== dialog) return;
+      const bounds = dialog.getBoundingClientRect();
+      if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
+    });
+    dialog.addEventListener("close", () => trigger.focus({ preventScroll: true }));
+  }
+</script>

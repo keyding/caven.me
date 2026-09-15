@@ -79,3 +79,20 @@ identify which icon the user's browser chrome selected from the screenshot.
 16px/32px ICO and SVG on light and dark backgrounds with a light OS preference.
 Follow-up review against `10502d0`: the sole Standards suggestion (clearer chart
 path variable names) was applied; Spec review reported 0 findings.
+
+## Image presentation and preview
+
+The user requested a layered background and click-to-enlarge behavior. The
+thumbnail now sits on a muted sage/warm-gray gradient with responsive padding,
+rounded corners and a restrained shadow. The screenshot file and its explicit
+sample-data caption remain unchanged.
+
+`ProjectImage.astro` owns the small image interaction: its real image link
+progressively opens a native modal dialog, with localized labels, original-file
+access, visible keyboard focus, Tab/Shift+Tab wrapping, Escape/close/backdrop
+dismissal and focus restoration. The background page is scroll-locked while
+open. Without JavaScript, the image link opens the original file. Reduced motion
+omits the short entrance and thumbnail hover movement.
+
+The browser regression suite covers both languages and desktop/mobile controls,
+original-file fallback, modal containment, dismissal and focus restoration.
