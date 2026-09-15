@@ -1,8 +1,9 @@
 # caven.me
 
-A static Astro portfolio in progress. The homepage currently presents a color-block
-layout for review, without real portfolio content. See [layout review](docs/layout-review.md)
-for browser evidence and the pending approval gate for issue #3.
+A static bilingual Astro portfolio in progress. English is served at `/` and Chinese
+at `/zh/`. The identity and contact slice uses the [approved layout](docs/layout-review.md);
+project, experience, and toolkit entries remain localized placeholders for later slices.
+See [identity review](docs/identity-review.md) for source attribution and visual evidence.
 
 ## Setup
 
@@ -50,10 +51,13 @@ Vite+ linting and formatting.
 Import `src/styles/global.css` from pages (or a shared layout when one exists).
 It loads Tailwind's theme, Preflight reset, and utilities, with class detection
 limited to `src/`. Use complete utility class names in templates; put shared
-theme customizations and custom CSS in this stylesheet.
+theme customizations in this stylesheet.
 
-The layout uses native CSS in the shared stylesheet on top of the existing
-Tailwind reset. No class-merging helper is needed yet. Consider [cn](https://github.com/shadcn-ui/cn) when reusable
+Use Tailwind utilities for layout, typography, colors, responsive rules, and interaction states.
+Custom CSS is reserved for animation choreography (signature masks
+and tooltip transitions). Shared font and color tokens live in `@theme`; repeated
+heading underline utilities are defined once in the template. Use Tailwind responsive prefixes such as `sm:` and `max-sm:` for standard
+breakpoints; use arbitrary breakpoint prefixes only for exceptional widths. No class-merging helper is needed yet. Consider [cn](https://github.com/shadcn-ui/cn) when reusable
 components need conditional classes and caller overrides with conflict resolution.
 
 ## Checks and test boundary
@@ -77,9 +81,12 @@ directives. Temporary `debugger` probes verified both regions are checked.
 a successful lint/format run alone does not validate an Astro template.
 
 The shared Playwright suite observes the **built website through a browser**.
-It runs the homepage check at desktop and phone sizes, verifies a successful
-response, seven visible regions in reading order, three project slots, and no
-horizontal overflow or overlapping regions.
+It runs at desktop and phone sizes and covers layout containment, locale direct access
+and refresh, language switching with stable project fragments, keyboard focus,
+contact destinations, local font loading, reduced motion, JavaScript-free content,
+and the retained signature animation. `.github/workflows/checks.yml` runs static
+checks and this suite on pull requests and pushes to main; deployment remains a
+later slice. Configure branch protection separately when introducing release gates.
 It always builds and starts its own preview on `127.0.0.1:4321`; stop any other
 server on that port first. Future slices should extend this suite at the same
 public boundary. Failure traces are written to ignored `test-results/`.
@@ -92,3 +99,40 @@ server environment sets `ASTRO_PREVIEW_BACKGROUND=1` to keep the preview attache
 so Playwright can own its lifecycle. This behavior was verified against the
 pinned Astro version and should be rechecked on upgrades. For manually started
 background servers, use `pnpm exec vp run dev stop` or `pnpm exec vp run preview stop`.
+
+## Content and assets
+
+Edit `src/data/home.ts` for both languages and shared contact destinations. Route
+files select a locale; `src/components/Home.astro` keeps their markup in sync.
+Language links work as native links without JavaScript; the small enhancement
+preserves valid page fragments when JavaScript is available.
+
+Geist (400/500) and Instrument Serif (400) are bundled from pinned Fontsource
+packages, with local Chinese system fallbacks. They make no external font requests.
+Both packages include their SIL Open Font License. The portrait uses a 360px transparent WebP derived from the retained user-supplied 1440px PNG inside a 120px circular container with a subtle gradient edge. The portrait sits to the left of the greeting and role. The source resume
+and phone number are not distributed. The approved outlined signature and Tianchi illustration
+are reused from #3. `noindex` remains until the discovery/release slice (#9).
+
+Navigation and footer signatures use separate SVG IDs and animate independently.
+X links use the user-provided `cavenasdev` account at `https://x.com/cavenasdev`.
+
+Font loading uses local Fontsource WOFF2 assets requested by CSS when needed.
+Avoid unconditional font preload tags: they produced unused-preload warnings on refresh
+even when all three faces were loaded.
+The three faces use `font-display: block` to reduce refresh-time font swapping;
+slow connections can briefly delay text. No runtime font CDN is used.
+Legacy styling class names are removed; interaction hooks use data attributes,
+while active signature animation classes remain.
+
+### Sharing metadata
+
+`Metadata.astro` renders localized descriptions, canonical and language-alternate URLs,
+Open Graph, X summary cards, and a Person JSON-LD record without client JavaScript.
+The production origin is `https://caven.me` in `astro.config.mjs`. Keep `noindex`
+until the release slice (#9); the manifest uses browser display and adds no service worker.
+
+The shared 1200×630 JPEG card combines the existing Tianchi footer illustration
+with the site's local fonts. Regenerate it with `node scripts/generate-og.mjs`
+after changing the card copy or illustration (requires the project's Playwright
+Chromium installation). The generator uses local inputs and does not change the
+original artwork. Both languages share the artwork, with localized metadata and alt text.

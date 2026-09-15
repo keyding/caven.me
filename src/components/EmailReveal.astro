@@ -1,0 +1,95 @@
+---
+import Email from "../assets/icons/email.svg";
+interface Props { href: string; label: string }
+const { href, label } = Astro.props;
+---
+<a data-email-reveal class="relative max-w-full after:pointer-events-auto after:absolute after:bottom-full after:left-0 after:rounded-lg after:border-b-4 after:border-transparent after:bg-[#292d30] after:bg-clip-padding after:px-2.5 after:py-1.5 after:text-xs after:leading-normal after:whitespace-nowrap after:text-paper after:content-[attr(data-tooltip)]" href={href} aria-label={label} data-tooltip={label === "邮件" ? "点击看看" : "Click to reveal"}>
+  <Email class="size-4.5 shrink-0" aria-hidden="true" />
+  <span class="min-w-0 wrap-anywhere" aria-hidden="true">{label}</span>
+</a>
+
+<style>
+  /* Tooltip visibility and entrance motion stay together with their state selectors. */
+  [data-email-reveal]::after {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(5px) scale(.96);
+    transform-origin: bottom left;
+    transition: opacity 160ms ease, transform 160ms ease, visibility 160ms;
+  }
+  [data-email-reveal][role="button"]:not([data-tooltip-dismissed]):is(:hover, :focus-visible)::after {
+    opacity: 1; visibility: visible; transform: translateY(0) scale(1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-email-reveal]::after { transition: none; transform: none; }
+  }
+</style>
+
+<script>
+  const storageKey = "caven.email-revealed.v1";
+  let savedAddress: string | null = null;
+  try { savedAddress = localStorage.getItem(storageKey); } catch { /* Storage may be disabled. */ }
+  const controls: { link: HTMLAnchorElement; address: string; finish: () => void }[] = [];
+  for (const link of document.querySelectorAll<HTMLAnchorElement>("[data-email-reveal]")) {
+    const text = link.querySelector("span");
+    if (!text) continue;
+    const address = link.getAttribute("href")!.slice(7);
+    const motion = matchMedia("(prefers-reduced-motion: reduce)");
+    const characters = "abcdefghijklmnopqrstuvwxyz0123456789@#$%";
+    let state: "idle" | "animating" | "revealed" = "idle";
+    let frame = 0;
+    link.setAttribute("role", "button");
+    link.setAttribute("aria-description", link.dataset.tooltip!);
+    link.addEventListener("pointerleave", () => { delete link.dataset.tooltipDismissed; });
+    link.addEventListener("blur", () => { delete link.dataset.tooltipDismissed; });
+    const finish = () => {
+      cancelAnimationFrame(frame);
+      text.textContent = address;
+      link.setAttribute("aria-label", address);
+      link.removeAttribute("role");
+      link.removeAttribute("aria-description");
+      state = "revealed";
+    };
+    controls.push({ link, address, finish });
+    if (savedAddress === address) finish();
+    link.addEventListener("click", (event) => {
+      if (state === "revealed") return;
+      event.preventDefault();
+      if (state === "animating") return;
+      state = "animating";
+      try { localStorage.setItem(storageKey, address); } catch { /* In-page sync still works. */ }
+      for (const other of controls) {
+        if (other.link !== link && other.address === address) other.finish();
+      }
+      link.dataset.tooltipDismissed = "";
+      if (motion.matches) { finish(); return; }
+      const start = performance.now();
+      let lastStep = -1;
+      const animate = (now: number) => {
+        const step = Math.floor((now - start) / 40);
+        if (step >= address.length) { finish(); return; }
+        if (step !== lastStep) {
+          text.textContent = [...address].map((character, index) => index < step ? character : characters[Math.floor(Math.random() * characters.length)]).join("");
+          lastStep = step;
+        }
+        frame = requestAnimationFrame(animate);
+      };
+      frame = requestAnimationFrame(animate);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") link.dataset.tooltipDismissed = "";
+    });
+    link.addEventListener("keydown", (event) => {
+      if (event.key === " " && state !== "revealed") {
+        event.preventDefault();
+        link.click();
+      }
+    });
+    motion.addEventListener("change", () => {
+      if (motion.matches && state === "animating") finish();
+    });
+    window.addEventListener("pagehide", () => {
+      if (state === "animating") finish();
+    });
+  }
+</script>
