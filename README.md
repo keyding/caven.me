@@ -109,8 +109,8 @@ preserves valid page fragments when JavaScript is available.
 
 Geist (400/500) and Instrument Serif (400) are bundled from pinned Fontsource
 packages, with local Chinese system fallbacks. They make no external font requests.
-Both packages include their SIL Open Font License. The portrait uses the user-supplied 1440px transparent PNG inside a 120px circular container with a subtle gradient edge. The portrait sits to the left of the greeting and role. The source resume
-and phone number are not distributed. The outlined signature and Tianchi candidate
+Both packages include their SIL Open Font License. The portrait uses a 360px transparent WebP derived from the retained user-supplied 1440px PNG inside a 120px circular container with a subtle gradient edge. The portrait sits to the left of the greeting and role. The source resume
+and phone number are not distributed. The approved outlined signature and Tianchi illustration
 are reused from #3. `noindex` remains until the discovery/release slice (#9).
 
 Navigation and footer signatures use separate SVG IDs and animate independently.

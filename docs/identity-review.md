@@ -13,8 +13,8 @@ frontend architecture, mobile interaction, PWA, SDK, React/TypeScript, team deli
 independent product and open-source experience without adding dates, metrics, or
 employer/project claims. The English and Chinese versions have equivalent meaning.
 The source document was only read, and is not included in this repository.
-The portrait uses Caven's supplied 1440px RGBA PNG with actual transparency. It is
-served unchanged, inside a 120px circular container with a subtle gradient edge, to the left of the greeting
+The portrait derives from Caven's supplied 1440px RGBA PNG. The original is retained;
+a 360px transparent WebP (20.6 KB) is served inside a 120px circular container with a subtle gradient edge, to the left of the greeting
 and role, with the PROFILE label removed. The introduction spans the available text column; the
 previous 58ch cap was removed after the portrait moved out of the right column.
 
@@ -42,10 +42,9 @@ system serif/sans-serif fallbacks, so exact Chinese glyphs vary by platform.
 ## Approval status
 
 The signature reuses the user-selected Bastliga One outline and previously approved
-animation from #3. The Tianchi illustration remains the existing candidate.
-Final signature/artwork approval was requested against the rendered footer during
-this implementation; it is not inferred from the earlier structure approval.
-Until explicitly confirmed, this is an outstanding visual acceptance item for #4.
+animation from #3. On 2026-09-15, Caven explicitly accepted the current version,
+including the final signature and Tianchi artwork, and authorized merging PR #12
+and closing #4. No visual acceptance items remain.
 
 ## Validation
 
@@ -64,7 +63,7 @@ full browser suite on PRs and main. It uploads browser evidence and failure trac
 No deployment or domain configuration is included.
 
 Local result: formatting, lint and Astro/TypeScript checks passed (zero diagnostics);
-the full built-site suite passed **28/28** across desktop and mobile projects.
+the initial built-site suite passed **28/28** across desktop and mobile projects.
 The retained signature snapshot is now captured at a fixed viewport origin, so
 font-driven subpixel page positioning cannot alter its crop. Both updated mobile
 baseline images were visually inspected; original contours are unchanged.
@@ -79,7 +78,7 @@ rule was restored, then the full suite and rendered Experience layout were check
 ## Spec review
 
 The independent review found the same layout regression, now fixed, and the
-outstanding final-artwork approval described above. Identity, routes, contact,
+then-outstanding final-artwork approval, now resolved above. Identity, routes, contact,
 typography, fallback behavior and CI match the slice; no scope creep was identified.
 
 ## Requested refinements
@@ -94,7 +93,7 @@ the removed low-resolution file is no longer shipped.
 
 Both independent review axes found no new issues in these refinements. The
 navigation/independent-animation regression first failed on the old text wordmark
-and passed after the change. The final full suite passed 28/28 and static checks
+and passed after the change. The suite at that stage passed 28/28 and static checks
 passed with zero diagnostics. Signature contour baselines remain unchanged.
 
 ## Greeting and accent refinement
@@ -107,9 +106,8 @@ an independent certification claim. Social contact links no longer show external
 link indicators. Navigation sticks to the viewport top, including over the footer,
 with anchor offsets to keep destinations clear of it.
 
-Location and real-time clock placement is planned below the introduction contacts,
-but is not published until Caven supplies the city/timezone. No location is inferred
-from the development environment.
+Location and time use the user-confirmed Tianjin and Asia/Shanghai settings
+recorded below; no location is inferred from the development environment.
 
 ## Email reveal
 
@@ -121,9 +119,19 @@ becomes a mailto link. Reduced motion reveals immediately; without JavaScript,
 the original mailto link remains available. The clicked control animates while the other contact row reveals immediately.
 The address is stored in localStorage so reloads, locale switches, and later visits
 restore both mail links directly. If storage is unavailable, same-page synchronization
-still works. These behaviors are covered by the browser suite (44 tests).
+still works. These behaviors are covered by the browser suite.
 
 Location is user-confirmed Tianjin, China. The contact row renders local time using
 Asia/Shanghai (UTC+8), independent of the visitor timezone. Browser tests cover
 midnight rollover and both locale labels. Without JavaScript the city and UTC
 offset remain visible.
+
+## Final acceptance validation — 2026-09-15
+
+The completed suite contains 60 browser tests, passing on desktop and mobile.
+Latest PR CI also passed after the OG-card refinement. The final version includes
+responsive identity/contact layouts, local fonts, a stable 88px header, staggered
+opacity entrances, a transparent color-adaptive favicon, localized metadata and a
+1200×630 Tianchi sharing card. The Chinese location reads “中国 · 天津”.
+Search indexing remains disabled until #9, and project/experience content remains
+scoped to the later tickets.
