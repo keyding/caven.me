@@ -96,3 +96,13 @@ omits the short entrance and thumbnail hover movement.
 
 The browser regression suite covers both languages and desktop/mobile controls,
 original-file fallback, modal containment, dismissal and focus restoration.
+
+Validation: all 92 browser tests passed. After converting presentation styles to
+Tailwind per review, Astro checking and the 16 image/project tests passed again;
+formatting and lint also passed. Standards re-review and Spec review both have
+0 outstanding findings. Desktop (1280px) and mobile (390px) browser captures:
+
+- [Framed thumbnail, desktop](pwarelay-evidence/image-frame-desktop.png)
+- [Framed thumbnail, mobile](pwarelay-evidence/image-frame-mobile.png)
+- [Large preview, desktop](pwarelay-evidence/image-preview-desktop.png)
+- [Large preview, mobile](pwarelay-evidence/image-preview-mobile.png)
