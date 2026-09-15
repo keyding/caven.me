@@ -125,3 +125,24 @@ axes reported zero findings. Desktop and mobile visuals were inspected:
 - [Updated desktop thumbnail](pwarelay-evidence/image-polish-desktop.png)
 - [Updated mobile thumbnail](pwarelay-evidence/image-polish-mobile.png)
 - [Updated large preview](pwarelay-evidence/image-polish-preview.png)
+
+## Dark browser tab favicon correction
+
+The user's Chrome reported a dark preference while its tab retained the black
+favicon. Standalone SVG tests did not cover tab icon selection or cached
+rasterization. A fresh minimal Chrome page could render the adaptive SVG white,
+so the exact original cache/selection trigger was not isolated.
+
+The fix removes that ambiguity: explicit light/dark media conditions select
+different static SVG URLs, and the black ICO is eligible only in light mode.
+Neither SVG relies on an internal media query. Icon references use version 4.
+The original user Chrome tab displayed white strokes after reloading the fix.
+
+Regression: `pnpm exec vp run test tests/favicon.test.ts --project=desktop`
+failed both localized candidate-color checks before the fix. All six
+desktop/mobile favicon checks pass afterward, exercising dark/light/dark
+preference changes and actual candidate pixels within the light page. These
+checks cover declared candidates; native Chrome tab appearance was verified
+separately and is not claimed as a headless browser assertion.
+
+Final validation: all 94 browser tests passed; formatting, lint and Astro checking passed.
