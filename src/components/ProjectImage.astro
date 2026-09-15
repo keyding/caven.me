@@ -1,6 +1,7 @@
 ---
 import InformationCircle from "../assets/icons/information-circle.svg";
 import Close from "../assets/icons/close.svg";
+import ExternalLink from "../assets/icons/external-link.svg";
 import type { Project } from "../data/projects";
 import type { Locale } from "../data/home";
 interface Props { image: NonNullable<Project["image"]>; title: string; id: string; locale: Locale }
@@ -17,7 +18,7 @@ const originalLabel = locale === "en" ? "Open original image" : "查看原图";
   <figcaption class="mt-2 flex items-center gap-1.5 text-xs leading-[1.8] text-[#616771]"><InformationCircle class="size-4 shrink-0" aria-hidden="true" />{image.caption[locale]}</figcaption>
   <dialog class="image-preview m-auto w-fit max-w-[calc(100vw-32px)] max-h-[calc(100dvh-32px)] overscroll-contain rounded-[14px] border border-[#ffffff24] bg-[#161a18] p-3 text-[#f1f3f1] shadow-[0_24px_80px_#0006] backdrop:bg-[#101713cc] backdrop:backdrop-blur-[8px] motion-safe:open:animate-[preview-appear_160ms_ease-out]" id={`${id}-image-preview`} aria-labelledby={`${id}-image-caption`}>
     <div class="mb-3 flex items-center justify-between gap-6">
-      <a class="inline-flex min-h-11 items-center px-2 text-[13px] hover:!text-[#f0d98b] focus-visible:!outline-highlight" href={image.src} target="_blank" rel="noopener noreferrer">{originalLabel}<span aria-hidden="true"> ↗</span></a>
+      <a class="inline-flex min-h-11 items-center gap-1.5 px-2 text-[13px] hover:!text-[#f0d98b] focus-visible:!outline-highlight" href={image.src} target="_blank" rel="noopener noreferrer">{originalLabel}<ExternalLink class="size-4 shrink-0" aria-hidden="true" /></a>
       <button class="grid size-11 shrink-0 place-items-center cursor-pointer rounded-lg border border-[#ffffff29] bg-[#ffffff0d] text-inherit hover:bg-[#ffffff24] focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-highlight focus-visible:outline-offset-3" type="button" aria-label={closeLabel} data-image-close autofocus><Close class="size-5" aria-hidden="true" /></button>
     </div>
     <img class="mx-auto block h-auto max-h-[calc(100dvh-170px)] w-auto max-w-full rounded-md object-contain" src={image.src} width={image.width} height={image.height} alt={image.alt[locale]} loading="lazy" decoding="async" />
