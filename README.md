@@ -56,8 +56,8 @@ theme customizations in this stylesheet.
 Use Tailwind utilities for layout, typography, colors, responsive rules, and interaction states.
 Custom CSS is reserved for animation choreography (signature masks, entrance motion,
 and tooltip transitions). Shared font and color tokens live in `@theme`; repeated
-heading underline utilities are defined once in the template. Keep inclusive breakpoint
-boundaries when replacing existing media queries. No class-merging helper is needed yet. Consider [cn](https://github.com/shadcn-ui/cn) when reusable
+heading underline utilities are defined once in the template. Use Tailwind responsive prefixes such as `sm:` and `max-sm:` for standard
+breakpoints; use arbitrary breakpoint prefixes only for exceptional widths. No class-merging helper is needed yet. Consider [cn](https://github.com/shadcn-ui/cn) when reusable
 components need conditional classes and caller overrides with conflict resolution.
 
 ## Checks and test boundary
