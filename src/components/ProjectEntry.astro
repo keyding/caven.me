@@ -19,7 +19,7 @@ const t = home[locale];
   <p class="mb-4 text-xs leading-[1.8] text-[#616771]">{content.role}</p>
   <p class="m-0 text-sm leading-[1.9] text-[#616771]">{content.intro}</p>
   {(project.website || project.source) && (
-    <ul class="mt-4 mb-0 flex list-none flex-wrap gap-x-6 gap-y-2 p-0 text-sm text-[#616771] [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center [&_a]:gap-1.5">
+    <ul class="mt-2 mb-0 flex list-none flex-wrap gap-x-6 gap-y-2 p-0 text-sm text-[#616771] [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center [&_a]:gap-1.5">
       {project.website && <li><a href={project.website} target="_blank" rel="noopener noreferrer"><Globe class="size-4.5 shrink-0" aria-hidden="true" />{new URL(project.website).hostname}</a></li>}
       {project.source && <li><a href={project.source} target="_blank" rel="noopener noreferrer"><Code class="size-4.5 shrink-0" aria-hidden="true" />{t.source}<ExternalLink class="size-3.5 shrink-0" aria-hidden="true" /></a></li>}
     </ul>
