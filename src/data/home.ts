@@ -1,5 +1,5 @@
 // Identity and introduction are derived from Caven's supplied Chinese resume.
-// Project, experience, and toolkit content remain placeholders for issues #5–7.
+// Remaining project, experience, and toolkit placeholders are filled by issues #6–7.
 export const contact = {
   email: "mailto:cavenasdev@gmail.com",
   github: "https://github.com/keyding",

@@ -14,6 +14,8 @@ import GitHub from "../assets/icons/github.svg";
 import X from "../assets/icons/x.svg";
 import VerificationCheck from "../assets/icons/verification-check.svg";
 import Briefcase from "../assets/icons/briefcase.svg";
+import ProjectEntry from "./ProjectEntry.astro";
+import { projects } from "../data/projects";
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = home[locale];
@@ -62,7 +64,8 @@ const underlineClasses = "relative inline-block pb-2 after:absolute after:right-
         <section class="p-8 max-sm:p-6" aria-labelledby="work-title">
           <div class="mb-7 flex flex-wrap items-baseline justify-between gap-3 max-sm:mb-6"><h2 class="font-display text-[30px] leading-[1.2] font-normal in-[:lang(zh-CN)]:leading-[1.4] max-sm:text-[28px]" id="work-title"><span class={underlineClasses}>{t.work}</span></h2><span class="text-[11px] leading-normal tracking-[0.08em] uppercase text-[#535d6c]">{t.project}</span></div>
           <div class="grid grid-cols-1 gap-12 max-sm:gap-10">
-            {[1, 2, 3].map((number) => (
+            {projects.map((project) => <ProjectEntry project={project} locale={locale} />)}
+            {[2, 3].map((number) => (
               <article id={projectIds[number - 1]} class="min-w-0" aria-labelledby={`project-${number}-title`}>
                 <div class="mb-6">
                   <h3 class="mb-4 text-xl leading-[inherit] font-medium" id={`project-${number}-title`}>{t.project} {number}</h3>
