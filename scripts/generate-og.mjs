@@ -29,13 +29,11 @@ try {
     main { position: relative; padding: 48px 64px; }
     .domain { font-size: 20px; letter-spacing: .04em; color: #616771; }
     h1 { margin: 20px 0 14px; font: 88px/1.05 Display; letter-spacing: -.025em; }
-    h1 span { position: relative; }
-    h1 span::after { content: ''; position: absolute; left: 5%; right: 0; bottom: -4px; height: 5px; background: #e5bd48; border-radius: 50%; transform: rotate(-2deg); }
     .role { margin: 20px 0 12px; font-size: 26px; }
     .focus { margin: 0; font-size: 19px; color: #616771; }
   </style></head><body><img src="${art}" alt=""/><main>
     <div class="domain">caven.me</div>
-    <h1>Hello, I’m <span>Caven.</span></h1>
+    <h1>Hello, I’m Caven.</h1>
     <p class="role">Senior Frontend Engineer &amp; Frontend Lead</p>
     <p class="focus">Frontend architecture · PWA · SDKs · Open source</p>
   </main></body></html>`);
