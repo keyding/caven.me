@@ -9,9 +9,10 @@ for (const locale of ["en", "zh"] as const) {
     await expect(project).toBeInViewport();
     await expect(project).toContainText(locale === "en" ? "Independent developer" : "独立开发者");
     await expect(project).toContainText(locale === "en" ? "reusable SDKs" : "可复用的 SDK");
-    await expect(
-      project.getByRole("link", { name: locale === "en" ? "Website" : "网站", exact: true }),
-    ).toHaveAttribute("href", "https://pwarelay.com");
+    await expect(project.getByRole("link", { name: "pwarelay.com", exact: true })).toHaveAttribute(
+      "href",
+      "https://pwarelay.com",
+    );
     await expect(
       project.getByRole("link", { name: locale === "en" ? "Source code" : "源代码", exact: true }),
     ).toHaveCount(0);
@@ -52,7 +53,7 @@ for (const locale of ["en", "zh"] as const) {
     await anchor.focus();
     await page.keyboard.press("Tab");
     const website = project.getByRole("link", {
-      name: locale === "en" ? "Website" : "网站",
+      name: "pwarelay.com",
       exact: true,
     });
     await expect(website).toBeFocused();
@@ -97,9 +98,10 @@ test("PWARelay content and links work without JavaScript", async ({ browser }) =
       "href",
       "#pwarelay",
     );
-    await expect(
-      project.getByRole("link", { name: path === "/" ? "Website" : "网站", exact: true }),
-    ).toHaveAttribute("href", "https://pwarelay.com");
+    await expect(project.getByRole("link", { name: "pwarelay.com", exact: true })).toHaveAttribute(
+      "href",
+      "https://pwarelay.com",
+    );
   }
   await context.close();
 });
