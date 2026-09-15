@@ -3,7 +3,7 @@ import Email from "../assets/icons/email.svg";
 interface Props { href: string; label: string }
 const { href, label } = Astro.props;
 ---
-<a data-email-reveal class="relative max-w-full after:pointer-events-auto after:absolute after:bottom-full after:left-0 after:rounded-lg after:border-b-4 after:border-transparent after:bg-[#292d30] after:bg-clip-padding after:px-2.5 after:py-1.5 after:text-xs after:leading-normal after:whitespace-nowrap after:text-paper after:content-[attr(data-tooltip)]" href={href} aria-label={label} data-tooltip={label === "邮件" ? "点击看看" : "Click to reveal"}>
+<a data-email-reveal class="relative max-w-full before:absolute before:bottom-full before:left-0 before:h-1 before:w-full before:content-[''] after:pointer-events-auto after:absolute after:bottom-full after:left-0 after:rounded-lg after:mb-1 after:bg-[#292d30] after:px-2.5 after:py-1.5 after:text-xs after:leading-normal after:whitespace-nowrap after:text-paper after:content-[attr(data-tooltip)]" href={href} aria-label={label} data-tooltip={label === "邮件" ? "点击看看" : "Click to reveal"}>
   <Email class="size-4.5 shrink-0" aria-hidden="true" />
   <span class="min-w-0 wrap-anywhere" aria-hidden="true">{label}</span>
 </a>
@@ -44,6 +44,7 @@ const { href, label } = Astro.props;
     link.addEventListener("blur", () => { delete link.dataset.tooltipDismissed; });
     const finish = () => {
       cancelAnimationFrame(frame);
+      link.dataset.emailExpanded = "";
       text.textContent = address;
       link.setAttribute("aria-label", address);
       link.removeAttribute("role");
@@ -57,6 +58,7 @@ const { href, label } = Astro.props;
       event.preventDefault();
       if (state === "animating") return;
       state = "animating";
+      link.dataset.emailExpanded = "";
       try { localStorage.setItem(storageKey, address); } catch { /* In-page sync still works. */ }
       for (const other of controls) {
         if (other.link !== link && other.address === address) other.finish();

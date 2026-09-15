@@ -244,12 +244,14 @@ test("Tianjin clock uses Beijing time and advances independently of visitor time
   await page.goto("/zh/");
   const clock = page.locator("[data-local-time]");
   await expect(page.locator("[data-location-time]")).toContainText("中国 · 天津");
+  await expect(page.locator("[data-location-time]")).not.toContainText("UTC+8");
   await expect(clock).toHaveText("23:59");
   await page.clock.runFor(1000);
   await expect(clock).toHaveText("00:00");
   await expect(clock).toHaveAttribute("datetime", /^2026-09-15T16:00:/);
   await page.goto("/");
   await expect(page.locator("[data-location-time]")).toContainText("Tianjin, China");
+  await expect(page.locator("[data-location-time]")).toContainText("UTC+8");
   await expect(clock).toHaveText("00:00");
   await context.close();
 });
@@ -309,5 +311,36 @@ test("email reveal still synchronizes when local storage is unavailable", async 
   await page.locator("footer [data-email-reveal]").click();
   for (const link of await page.locator("[data-email-reveal]").all()) {
     await expect(link).toHaveText("cavenasdev@gmail.com");
+  }
+});
+
+test("mobile expanded email gets its own row while GitHub and X stay together", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const rows = [
+    page.locator("[data-intro-contacts] > div"),
+    page.locator("footer ul").filter({ has: page.locator("[data-email-reveal]") }),
+  ];
+  const positions = async (row: (typeof rows)[number]) =>
+    row.locator("a").evaluateAll((links) => links.map((link) => link.getBoundingClientRect().top));
+  for (const row of rows) {
+    const [email, github, x] = await positions(row);
+    expect(email).toBe(github);
+    expect(github).toBe(x);
+  }
+  await page.locator("[data-introduction] [data-email-reveal]").click();
+  for (const path of [null, "/", "/zh/"]) {
+    if (path) await page.goto(path);
+    for (const row of rows) {
+      const [email, github, x] = await positions(row);
+      expect(github).toBeGreaterThan(email);
+      expect(github).toBe(x);
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
   }
 });

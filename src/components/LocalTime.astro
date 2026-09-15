@@ -3,7 +3,7 @@ import MapPin from "../assets/icons/map-pin.svg";
 interface Props {
   location: string;
   timeZone: string;
-  zoneLabel: string;
+  zoneLabel?: string;
   label: string;
 }
 const { location, timeZone, zoneLabel, label } = Astro.props;
@@ -13,7 +13,7 @@ const { location, timeZone, zoneLabel, label } = Astro.props;
   <span class="flex items-center gap-1.5"><MapPin class="size-4.5 shrink-0" aria-hidden="true" />{location}</span>
   <span class="flex items-center gap-1.5 whitespace-nowrap tabular-nums" aria-label={label}>
     <time data-local-time data-time-zone={timeZone} hidden></time>
-    <span>{zoneLabel}</span>
+    {zoneLabel && <span>{zoneLabel}</span>}
   </span>
 </p>
 
