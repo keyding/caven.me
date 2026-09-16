@@ -21,3 +21,5 @@ Only the chosen variant is retained from each export, preserving its paths and 2
 Current Contrast exports from the same Pikaicons file: email `27985:629`, GitHub `30877:8174`, X `27925:3172`, briefcase `28165:209`, chevron-down `27935:443`, external-link `27946:759`, globe `27925:3043`. Original 28% fill opacity is preserved; color uses currentColor. Translate and code have no Contrast variant and retain Stroke.
 
 Location uses the matching Contrast `map/map-pin` variant `28284:519`.
+
+Project image captions use `information/information-circle`, Contrast `27902:1033`; the preview close button uses `multiple-cross/multiple-cross-cancel-default`, Stroke `24187:9298`. Exported directly from the same Figma file on 2026-09-15 as `information-circle.svg` and `close.svg`, preserving paths and opacity with currentColor.
