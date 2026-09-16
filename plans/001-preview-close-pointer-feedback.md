@@ -29,12 +29,12 @@ The component already implements Escape dismissal, Tab wrapping, backdrop dismis
 
 Only primary pointer presses (mouse left button, touch, pen tip) animate the inner SVG. Keyboard activation must never start this feedback.
 
-| State | Transform | Opacity | Transition |
-| --- | --- | --- | --- |
-| Rest | `scale(1)` | `1` | `0ms` |
-| Pointer held, normal motion | `scale(0.96)` | `1` | `transform 100ms cubic-bezier(0, 0, 0.2, 1)` |
-| Pointer held, reduced motion | `scale(1)` | `0.85` | `opacity 100ms cubic-bezier(0, 0, 0.2, 1)` |
-| Release/cancel/leave | `scale(1)` | `1` | `0ms` |
+| State                        | Transform     | Opacity | Transition                                   |
+| ---------------------------- | ------------- | ------- | -------------------------------------------- |
+| Rest                         | `scale(1)`    | `1`     | `0ms`                                        |
+| Pointer held, normal motion  | `scale(0.96)` | `1`     | `transform 100ms cubic-bezier(0, 0, 0.2, 1)` |
+| Pointer held, reduced motion | `scale(1)`    | `0.85`  | `opacity 100ms cubic-bezier(0, 0, 0.2, 1)`   |
+| Release/cancel/leave         | `scale(1)`    | `1`     | `0ms`                                        |
 
 Delay is always `0ms`; origin is center. A short tap need not reach the full scale: never wait for the animation to finish. Click invokes `dialog.close()` synchronously. No close or focus-return animation is added. No hover animation is added, so hover/pointer media gating is unnecessary; touch must remain eligible for pointer-down feedback.
 
